@@ -27,14 +27,14 @@ const PREVIEW_DIMS: { id: string; name: string; score: number; band: Band }[] =
 
 export function LandingPreview() {
   return (
-    <div className="rounded-md border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+    <div className="ui-card p-4 sm:p-5">
       <div className="flex flex-wrap items-center gap-3">
         <BandBadge band={PREVIEW_BAND} />
         <span className="text-sm text-[var(--muted)]">
           Overall score {PREVIEW_SCORE}
         </span>
       </div>
-      <p className="mt-3 inline-flex items-center gap-2 rounded-md border border-[color-mix(in_srgb,var(--warn)_40%,transparent)] bg-[color-mix(in_srgb,var(--warn)_12%,transparent)] px-2.5 py-1 text-xs text-[var(--warn)]">
+      <p className="mt-3 inline-flex items-center gap-2 rounded-md border border-[color-mix(in_srgb,var(--warn)_40%,transparent)] bg-[color-mix(in_srgb,var(--warn)_12%,transparent)] px-2.5 py-1 text-xs font-medium text-[var(--warn)]">
         HG-09 · ceiling {PREVIEW_BAND}
       </p>
       <div className="mt-4 space-y-2">
@@ -47,7 +47,9 @@ export function LandingPreview() {
               {dim.id}
             </span>
             <div>
-              <p className="text-sm font-medium">{dim.name}</p>
+              <p className="text-sm font-medium text-[var(--foreground)]">
+                {dim.name}
+              </p>
               <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[var(--bg-soft)]">
                 <div
                   className="h-full rounded-full bg-[var(--accent)]"

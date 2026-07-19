@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function AssessPage() {
-  return (
-    <main className="min-h-screen">
-      <AssessmentWizard />
-    </main>
-  );
+  return <AssessmentWizard />;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BandBadge } from "@/components/BandBadge";
 import { reportToJson, reportToMarkdown } from "@/lib/export/report";
 import type { ReadinessReport } from "@/lib/schema/narrative";
@@ -66,7 +66,6 @@ export function ReportView({
   result: ScoringResult;
   onRestart: () => void;
   onBack: () => void;
-  /** When set, skip the narrative API and render immediately. */
   preloadedReport?: ReadinessReport;
   sampleMode?: boolean;
 }) {
@@ -77,8 +76,12 @@ export function ReportView({
     preloadedReport ?? null,
   );
   const [metaNote, setMetaNote] = useState<string | null>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
-  // Stable key so parent re-renders do not retrigger OpenAI calls.
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
   const requestKey = JSON.stringify({
     context: input.context,
     answers: input.answers,
@@ -121,7 +124,6 @@ export function ReportView({
           setState("error");
           return;
         }
-        // Trust server recomputed band, not client preview
         setReport(data.report);
         if (data.meta?.rateLimited) {
           setMetaNote(
@@ -144,37 +146,39 @@ export function ReportView({
     return () => {
       cancelled = true;
     };
-    // result used only for local fallback if the API fails before scoring
     // eslint-disable-next-line react-hooks/exhaustive-deps -- requestKey is the intentional trigger
   }, [requestKey, preloadedReport]);
 
   const view = report ?? scoresOnlyFallback(input, result, "unavailable");
-  const slug = input.context.systemName
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
-    .slice(0, 40) || "assessment";
+  const slug =
+    input.context.systemName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+      .slice(0, 40) || "assessment";
   const filePrefix = sampleMode ? `sample-${slug}` : slug;
 
   return (
-    <div className="report-print-root space-y-8">
-      <header className="space-y-3">
-        <p className="text-sm text-[var(--ink-muted)]">
+    <div className="report-print-root space-y-5">
+      <header className="space-y-2.5">
+        <p className="ui-eyebrow">
           {sampleMode ? "Sample readiness report" : "Readiness report"}
         </p>
-        <h2 className="text-2xl font-semibold tracking-tight">
+        <h2
+          ref={headingRef}
+          tabIndex={-1}
+          className="ui-title text-[1.65rem] outline-none"
+        >
           {view.context.systemName}
         </h2>
-        <p className="text-[var(--ink-muted)]">{view.context.jobToBeDone}</p>
-        <div className="flex flex-wrap items-center gap-3 pt-2">
+        <p className="ui-lead mt-1">{view.context.jobToBeDone}</p>
+        <div className="flex flex-wrap items-center gap-3 pt-1">
           <BandBadge band={view.finalBand} />
-          <span className="text-sm text-[var(--ink-muted)]">
+          <span className="text-sm text-[var(--muted)]">
             Overall score {view.overallScore} · score band {view.scoreBand}
           </span>
         </div>
-        <p className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm text-[var(--ink-muted)]">
-          {view.disclaimer}
-        </p>
+        <p className="ui-card text-sm text-[var(--muted)]">{view.disclaimer}</p>
         <div aria-live="polite" aria-atomic="true">
           {state === "loading" && (
             <p className="text-sm text-[var(--accent)]" role="status">
@@ -190,8 +194,8 @@ export function ReportView({
       </header>
 
       {view.qualityFlags.length > 0 && (
-        <section className="space-y-2" aria-label="Quality flags">
-          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+        <section className="space-y-2" aria-labelledby="quality-flags-heading">
+          <h3 id="quality-flags-heading" className="ui-section-label">
             Quality flags
           </h3>
           <ul className="space-y-1 text-sm text-[var(--warn)]">
@@ -203,57 +207,63 @@ export function ReportView({
       )}
 
       {view.executiveSummary && (
-        <section className="space-y-2">
-          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+        <section className="space-y-2" aria-labelledby="exec-summary-heading">
+          <h3 id="exec-summary-heading" className="ui-section-label">
             Executive summary
           </h3>
-          <p className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-3 text-sm leading-relaxed">
+          <p className="ui-card text-sm leading-relaxed text-[var(--foreground)]">
             {view.executiveSummary}
           </p>
         </section>
       )}
 
       {view.hardGatesApplied.length > 0 && (
-        <section className="space-y-3">
-          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+        <section className="space-y-2" aria-labelledby="hard-gates-heading">
+          <h3 id="hard-gates-heading" className="ui-section-label">
             Hard gates applied
           </h3>
           <ul className="space-y-2">
             {view.hardGatesApplied.map((gate) => (
-              <li
-                key={gate.gateId}
-                className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm"
-              >
+              <li key={gate.gateId} className="ui-card text-sm">
                 <span className="font-medium text-[var(--warn)]">
                   {gate.gateId}
                 </span>
-                <span className="text-[var(--ink-muted)]">
+                <span className="text-[var(--muted)]">
                   {" "}
                   → ceiling {gate.ceiling}
                 </span>
-                <p className="mt-1 text-[var(--ink)]">{gate.reason}</p>
+                <p className="mt-1 text-[var(--foreground)]">{gate.reason}</p>
               </li>
             ))}
           </ul>
         </section>
       )}
 
-      <section className="space-y-3">
-        <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+      <section className="space-y-2" aria-labelledby="dimension-scores-heading">
+        <h3 id="dimension-scores-heading" className="ui-section-label">
           Dimension scores
         </h3>
         <div className="space-y-2">
           {view.dimensions.map((dim) => (
             <div
               key={dim.dimensionId}
-              className="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2"
+              className="ui-card grid grid-cols-[auto_1fr_auto] items-center gap-3"
             >
               <span className="text-xs font-semibold text-[var(--accent)]">
                 {dim.dimensionId}
               </span>
               <div>
-                <p className="text-sm font-medium">{dim.name}</p>
-                <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[var(--bg-soft)]">
+                <p className="text-sm font-medium text-[var(--foreground)]">
+                  {dim.name}
+                </p>
+                <div
+                  className="mt-1 h-1.5 overflow-hidden rounded-full bg-[var(--bg-soft)]"
+                  role="meter"
+                  aria-label={`${dim.name} score`}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={dim.score}
+                >
                   <div
                     className="h-full rounded-full bg-[var(--accent)]"
                     style={{ width: `${dim.score}%` }}
@@ -270,20 +280,19 @@ export function ReportView({
       </section>
 
       {view.dimensionNarratives.length > 0 && (
-        <section className="space-y-3">
-          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+        <section className="space-y-2" aria-labelledby="dimension-notes-heading">
+          <h3 id="dimension-notes-heading" className="ui-section-label">
             Dimension notes
           </h3>
           <ul className="space-y-2">
             {view.dimensionNarratives.map((n) => (
-              <li
-                key={n.dimensionId}
-                className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm"
-              >
+              <li key={n.dimensionId} className="ui-card text-sm">
                 <p className="font-medium text-[var(--accent)]">
                   {n.dimensionId}
                 </p>
-                <p className="mt-1 leading-relaxed">{n.narrative}</p>
+                <p className="mt-1 leading-relaxed text-[var(--foreground)]">
+                  {n.narrative}
+                </p>
               </li>
             ))}
           </ul>
@@ -291,21 +300,18 @@ export function ReportView({
       )}
 
       {view.risks.length > 0 && (
-        <section className="space-y-3">
-          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+        <section className="space-y-2" aria-labelledby="risks-heading">
+          <h3 id="risks-heading" className="ui-section-label">
             Risks
           </h3>
           <ul className="space-y-2">
             {view.risks.map((r) => (
-              <li
-                key={r.id}
-                className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm"
-              >
-                <p className="font-medium">
+              <li key={r.id} className="ui-card text-sm">
+                <p className="font-medium text-[var(--foreground)]">
                   <span className="text-[var(--warn)]">[{r.severity}]</span>{" "}
                   {r.title}
                 </p>
-                <p className="mt-1 text-[var(--ink-muted)]">{r.description}</p>
+                <p className="mt-1 text-[var(--muted)]">{r.description}</p>
               </li>
             ))}
           </ul>
@@ -313,23 +319,20 @@ export function ReportView({
       )}
 
       {view.remediationPlan.length > 0 && (
-        <section className="space-y-3">
-          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+        <section className="space-y-2" aria-labelledby="remediation-heading">
+          <h3 id="remediation-heading" className="ui-section-label">
             Remediation plan
           </h3>
           <ol className="space-y-2">
             {[...view.remediationPlan]
               .sort((a, b) => a.priority - b.priority)
               .map((m) => (
-                <li
-                  key={m.id}
-                  className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm"
-                >
-                  <p className="font-medium">
+                <li key={m.id} className="ui-card text-sm">
+                  <p className="font-medium text-[var(--foreground)]">
                     {m.priority}. {m.title}{" "}
-                    <span className="text-[var(--ink-muted)]">({m.effort})</span>
+                    <span className="text-[var(--muted)]">({m.effort})</span>
                   </p>
-                  <p className="mt-1 text-[var(--ink-muted)]">{m.description}</p>
+                  <p className="mt-1 text-[var(--muted)]">{m.description}</p>
                 </li>
               ))}
           </ol>
@@ -337,33 +340,31 @@ export function ReportView({
       )}
 
       {view.citations.length > 0 && (
-        <section className="space-y-3">
-          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+        <section className="space-y-2" aria-labelledby="citations-heading">
+          <h3 id="citations-heading" className="ui-section-label">
             Citations
           </h3>
-          <ul className="space-y-1 text-sm text-[var(--ink-muted)]">
+          <ul className="space-y-1 text-sm text-[var(--muted)]">
             {view.citations.map((c) => (
               <li key={c.id}>
-                <span className="font-medium text-[var(--ink)]">{c.id}</span> —{" "}
-                {c.title}
+                <span className="font-medium text-[var(--foreground)]">
+                  {c.id}
+                </span>{" "}
+                — {c.title}
               </li>
             ))}
           </ul>
         </section>
       )}
 
-      <section className="text-xs text-[var(--ink-muted)]">
+      <section className="text-xs text-[var(--muted)]">
         {view.context.rubricVersion} · {view.context.corpusVersion} ·{" "}
         {view.model.promptVersion} · narrative={view.model.narrativeStatus}
         {sampleMode ? " · sample" : ""}
       </section>
 
-      <div className="no-print flex flex-wrap gap-3">
-        <button
-          type="button"
-          onClick={onBack}
-          className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
-        >
+      <div className="no-print flex flex-wrap gap-2.5" role="group" aria-label="Report actions">
+        <button type="button" onClick={onBack} className="ui-btn ui-btn-secondary">
           {sampleMode ? "Back home" : "Back to review"}
         </button>
         <button
@@ -375,7 +376,7 @@ export function ReportView({
               "text/markdown;charset=utf-8",
             )
           }
-          className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
+          className="ui-btn ui-btn-secondary"
         >
           Export Markdown
         </button>
@@ -388,22 +389,18 @@ export function ReportView({
               "application/json;charset=utf-8",
             )
           }
-          className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
+          className="ui-btn ui-btn-secondary"
         >
           Export JSON
         </button>
         <button
           type="button"
           onClick={() => window.print()}
-          className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
+          className="ui-btn ui-btn-secondary"
         >
           Print / PDF
         </button>
-        <button
-          type="button"
-          onClick={onRestart}
-          className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-foreground)] hover:brightness-110"
-        >
+        <button type="button" onClick={onRestart} className="ui-btn ui-btn-primary">
           {sampleMode ? "Start your assessment" : "Start over"}
         </button>
       </div>

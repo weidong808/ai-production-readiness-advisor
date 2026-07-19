@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { BandBadge } from "@/components/BandBadge";
 import { ReportView } from "@/components/ReportView";
 import {
@@ -44,6 +44,14 @@ function emptyAnswers(): Record<string, OrdinalChoice | undefined> {
   return {};
 }
 
+function stepHeading(step: Step): string {
+  if (step === "context") return "Context";
+  if (step === "notes") return "Optional notes";
+  if (step === "review") return "Review";
+  if (step === "report") return "Readiness report";
+  return DIMENSION_META[step].name;
+}
+
 export function AssessmentWizard() {
   const [hydrated, setHydrated] = useState(false);
   const [step, setStep] = useState<Step>("context");
@@ -52,12 +60,11 @@ export function AssessmentWizard() {
     emptyAnswers,
   );
   const [freeText, setFreeText] = useState<Record<string, string>>({});
-  // Set when a dimension is opened via "Edit" on the review step, so
-  // Continue returns to review instead of the next dimension.
   const [returnToReview, setReturnToReview] = useState(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const skipStepChangeFocus = useRef(true);
 
   useEffect(() => {
-    // Client-only resume from localStorage (SSR has no window).
     const saved = loadAssessment();
     if (saved) {
       /* eslint-disable react-hooks/set-state-in-effect -- hydrate persisted wizard once on mount */
@@ -88,6 +95,17 @@ export function AssessmentWizard() {
       input,
     });
   }, [hydrated, step, context, answers, freeText]);
+
+  // Move focus to the step heading after navigation (keyboard / screen-reader).
+  useEffect(() => {
+    if (!hydrated) return;
+    if (skipStepChangeFocus.current) {
+      skipStepChangeFocus.current = false;
+      return;
+    }
+    if (step === "report") return;
+    headingRef.current?.focus();
+  }, [step, hydrated]);
 
   const steps: Step[] = [
     "context",
@@ -154,61 +172,76 @@ export function AssessmentWizard() {
 
   if (!hydrated) {
     return (
-      <p className="text-sm text-[var(--ink-muted)]" role="status" aria-live="polite">
-        Loading assessment…
-      </p>
+      <main id="main" className="ui-shell">
+        <p className="text-sm text-[var(--muted)]" role="status" aria-live="polite">
+          Loading assessment…
+        </p>
+      </main>
     );
   }
 
   return (
-    <div id="main" className="mx-auto max-w-3xl px-5 py-8 sm:px-6 sm:py-10">
-      <div className="mb-6 flex items-center justify-end">
+    <main id="main" className="ui-shell">
+      <div className="mb-5 flex items-center justify-between gap-3">
+        <p className="ui-eyebrow">Assessment</p>
         <button
           type="button"
           onClick={restart}
-          className="text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
+          className="ui-btn ui-btn-secondary text-[var(--muted)]"
         >
-          Reset assessment
+          Reset
         </button>
       </div>
 
-      <div
-        className="mb-6"
-        role="progressbar"
-        aria-valuemin={1}
-        aria-valuemax={steps.length}
-        aria-valuenow={stepIndex + 1}
-        aria-label={`Assessment progress, step ${stepIndex + 1} of ${steps.length}`}
-      >
-        <div className="mb-2 flex justify-between text-xs text-[var(--ink-muted)]">
-          <span>
-            Step {stepIndex + 1} of {steps.length}
-          </span>
-          <span>{progress}%</span>
+      {step !== "report" && (
+        <div
+          className="mb-5"
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={steps.length}
+          aria-valuenow={stepIndex + 1}
+          aria-valuetext={`Step ${stepIndex + 1} of ${steps.length}: ${stepHeading(step)}`}
+          aria-label="Assessment progress"
+        >
+          <div className="mb-1.5 flex justify-between text-xs text-[var(--muted)]">
+            <span>
+              Step {stepIndex + 1} of {steps.length}
+            </span>
+            <span>{progress}%</span>
+          </div>
+          <div className="h-1.5 overflow-hidden rounded-full bg-[var(--bg-soft)]">
+            <div
+              className="h-full rounded-full bg-[var(--accent)] transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
         </div>
-        <div className="h-1.5 overflow-hidden rounded-full bg-[var(--bg-soft)]">
-          <div
-            className="h-full rounded-full bg-[var(--accent)] transition-all duration-300"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
+      )}
 
       {step === "context" && (
-        <section className="space-y-6">
+        <section className="space-y-5" aria-labelledby="step-heading">
           <header>
-            <h1 className="text-2xl font-semibold tracking-tight">Context</h1>
-            <p className="mt-2 text-[var(--ink-muted)]">
+            <h1
+              id="step-heading"
+              ref={headingRef}
+              tabIndex={-1}
+              className="ui-title outline-none"
+            >
+              Context
+            </h1>
+            <p className="ui-lead">
               Frame the system so hard gates can apply correctly.
             </p>
           </header>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {CONTEXT_FIELDS.map((field) => (
               <label key={field.id} className="block space-y-1.5">
-                <span className="text-sm font-medium">{field.label}</span>
+                <span className="text-sm font-medium text-[var(--foreground)]">
+                  {field.label}
+                </span>
                 {field.kind === "text" ? (
                   <input
-                    className="w-full rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm outline-none focus:border-[var(--accent)]"
+                    className="ui-field"
                     value={String(
                       context[field.id as keyof AssessmentContext] ?? "",
                     )}
@@ -224,7 +257,7 @@ export function AssessmentWizard() {
                   />
                 ) : (
                   <select
-                    className="w-full rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm outline-none focus:border-[var(--accent)]"
+                    className="ui-field"
                     value={String(
                       context[field.id as keyof AssessmentContext] ?? "",
                     )}
@@ -252,6 +285,7 @@ export function AssessmentWizard() {
             onNext={goNext}
             nextDisabled={!contextValid}
             nextLabel="Continue to dimensions"
+            disabledHint="Enter a system name and job-to-be-done to continue."
           />
         </section>
       )}
@@ -262,6 +296,7 @@ export function AssessmentWizard() {
           dimensionNumber={DIMENSION_IDS.indexOf(step as DimensionId) + 1}
           dimensionCount={DIMENSION_IDS.length}
           answers={answers}
+          headingRef={headingRef}
           onAnswer={(questionId, choice) =>
             setAnswers((prev) => ({ ...prev, [questionId]: choice }))
           }
@@ -272,22 +307,29 @@ export function AssessmentWizard() {
       )}
 
       {step === "notes" && (
-        <section className="space-y-6">
+        <section className="space-y-5" aria-labelledby="step-heading">
           <header>
-            <h1 className="text-2xl font-semibold tracking-tight">
+            <h1
+              id="step-heading"
+              ref={headingRef}
+              tabIndex={-1}
+              className="ui-title outline-none"
+            >
               Optional notes
             </h1>
-            <p className="mt-2 text-[var(--ink-muted)]">
+            <p className="ui-lead">
               Stored only in this browser. Not scored.
             </p>
           </header>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {FREE_TEXT_FIELDS.map((field) => (
               <label key={field.id} className="block space-y-1.5">
-                <span className="text-sm font-medium">{field.label}</span>
+                <span className="text-sm font-medium text-[var(--foreground)]">
+                  {field.label}
+                </span>
                 <textarea
                   rows={3}
-                  className="w-full rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm outline-none focus:border-[var(--accent)]"
+                  className="ui-field"
                   value={freeText[field.id] ?? ""}
                   onChange={(e) =>
                     setFreeText((prev) => ({
@@ -304,19 +346,26 @@ export function AssessmentWizard() {
       )}
 
       {step === "review" && (
-        <section className="space-y-6">
+        <section className="space-y-5" aria-labelledby="step-heading">
           <header>
-            <h1 className="text-2xl font-semibold tracking-tight">Review</h1>
-            <p className="mt-2 text-[var(--ink-muted)]">
+            <h1
+              id="step-heading"
+              ref={headingRef}
+              tabIndex={-1}
+              className="ui-title outline-none"
+            >
+              Review
+            </h1>
+            <p className="ui-lead">
               Preview deterministic scores before opening the full report.
             </p>
           </header>
 
-          <div className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-4 py-3">
-            <p className="text-sm text-[var(--ink-muted)]">Projected band</p>
+          <div className="ui-card">
+            <p className="ui-section-label">Projected band</p>
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <BandBadge band={result.finalBand} />
-              <p className="text-sm text-[var(--ink-muted)]">
+              <p className="text-sm text-[var(--muted)]">
                 Overall {result.overallScore} · {result.hardGatesApplied.length}{" "}
                 hard gate
                 {result.hardGatesApplied.length === 1 ? "" : "s"}
@@ -326,23 +375,18 @@ export function AssessmentWizard() {
 
           {result.hardGatesApplied.length > 0 && (
             <div className="space-y-2" aria-label="Hard gates preview">
-              <p className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
-                Hard gates applied
-              </p>
+              <p className="ui-section-label">Hard gates applied</p>
               <ul className="space-y-2">
                 {result.hardGatesApplied.map((gate) => (
-                  <li
-                    key={gate.gateId}
-                    className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm"
-                  >
+                  <li key={gate.gateId} className="ui-card text-sm">
                     <span className="font-medium text-[var(--warn)]">
                       {gate.gateId}
                     </span>
-                    <span className="text-[var(--ink-muted)]">
+                    <span className="text-[var(--muted)]">
                       {" "}
                       → ceiling {gate.ceiling}
                     </span>
-                    <p className="mt-1">{gate.reason}</p>
+                    <p className="mt-1 text-[var(--foreground)]">{gate.reason}</p>
                   </li>
                 ))}
               </ul>
@@ -350,19 +394,19 @@ export function AssessmentWizard() {
           )}
 
           <div className="space-y-2">
-            <p className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
-              Dimension scores
-            </p>
+            <p className="ui-section-label">Dimension scores</p>
             <ul className="space-y-2">
               {result.dimensions.map((dim) => (
                 <li
                   key={dim.dimensionId}
-                  className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2"
+                  className="ui-card grid grid-cols-[auto_1fr_auto_auto] items-center gap-3"
                 >
                   <span className="text-xs font-semibold text-[var(--accent)]">
                     {dim.dimensionId}
                   </span>
-                  <span className="text-sm">{dim.name}</span>
+                  <span className="text-sm text-[var(--foreground)]">
+                    {dim.name}
+                  </span>
                   <span className="text-sm font-semibold">{dim.score}</span>
                   <button
                     type="button"
@@ -370,7 +414,7 @@ export function AssessmentWizard() {
                       setReturnToReview(true);
                       setStep(dim.dimensionId);
                     }}
-                    className="text-sm text-[var(--ink-muted)] underline-offset-2 hover:text-[var(--ink)] hover:underline"
+                    className="text-sm text-[var(--muted)] underline-offset-2 hover:text-[var(--foreground)] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
                     aria-label={`Edit answers for ${dim.name}`}
                   >
                     Edit
@@ -396,7 +440,7 @@ export function AssessmentWizard() {
           onRestart={restart}
         />
       )}
-    </div>
+    </main>
   );
 }
 
@@ -405,6 +449,7 @@ function DimensionStep({
   dimensionNumber,
   dimensionCount,
   answers,
+  headingRef,
   onAnswer,
   onBack,
   onNext,
@@ -414,6 +459,7 @@ function DimensionStep({
   dimensionNumber: number;
   dimensionCount: number;
   answers: Record<string, OrdinalChoice | undefined>;
+  headingRef: React.RefObject<HTMLHeadingElement | null>;
   onAnswer: (questionId: string, choice: OrdinalChoice) => void;
   onBack: () => void;
   onNext: () => void;
@@ -423,37 +469,37 @@ function DimensionStep({
   const questions = questionsForDimension(dimensionId);
   const answeredCount = questions.filter((q) => answers[q.id]).length;
   const allAnswered = answeredCount === questions.length;
+  const hintId = useId();
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-5" aria-labelledby="step-heading">
       <header>
-        <p className="text-xs font-semibold tracking-[0.16em] text-[var(--accent)] uppercase">
+        <p className="ui-eyebrow">
           {dimensionId} · Dimension {dimensionNumber} of {dimensionCount}
         </p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight">
+        <h1
+          id="step-heading"
+          ref={headingRef}
+          tabIndex={-1}
+          className="ui-title mt-1 outline-none"
+        >
           {meta.name}
         </h1>
-        <p className="mt-2 text-[var(--ink-muted)]">{meta.summary}</p>
+        <p className="ui-lead">{meta.summary}</p>
       </header>
-      <div className="space-y-6">
+      <div className="space-y-5">
         {questions.map((q) => (
           <fieldset key={q.id} className="space-y-2">
-            <legend className="text-sm font-medium">{q.prompt}</legend>
+            <legend className="text-sm font-medium text-[var(--foreground)]">
+              {q.prompt}
+            </legend>
             <div className="space-y-2">
               {q.choices.map((choice) => {
                 const selected = answers[q.id] === choice.value;
                 return (
-                  <label
-                    key={choice.value}
-                    className={`flex cursor-pointer items-start gap-3 rounded-md border px-3 py-2 text-sm transition ${
-                      selected
-                        ? "border-[var(--accent)] bg-[rgba(61,154,139,0.12)]"
-                        : "border-[var(--line)] bg-[var(--bg-elevated)] hover:border-[rgba(61,154,139,0.4)]"
-                    }`}
-                  >
+                  <label key={choice.value} className="ui-choice">
                     <input
                       type="radio"
-                      className="mt-1"
                       name={q.id}
                       checked={selected}
                       onChange={() => onAnswer(q.id, choice.value)}
@@ -472,7 +518,12 @@ function DimensionStep({
         ))}
       </div>
       {!allAnswered && (
-        <p className="text-sm text-[var(--ink-muted)]" role="status">
+        <p
+          id={hintId}
+          className="text-sm text-[var(--muted)]"
+          role="status"
+          aria-live="polite"
+        >
           {answeredCount} of {questions.length} questions answered — answer all
           to continue.
         </p>
@@ -482,6 +533,12 @@ function DimensionStep({
         onNext={onNext}
         nextDisabled={!allAnswered}
         nextLabel={nextLabel}
+        disabledHintId={!allAnswered ? hintId : undefined}
+        disabledHint={
+          !allAnswered
+            ? `Answer all ${questions.length} questions to continue.`
+            : undefined
+        }
       />
     </section>
   );
@@ -492,20 +549,20 @@ function NavButtons({
   onNext,
   nextDisabled,
   nextLabel = "Continue",
+  disabledHint,
+  disabledHintId,
 }: {
   onBack?: () => void;
   onNext: () => void;
   nextDisabled?: boolean;
   nextLabel?: string;
+  disabledHint?: string;
+  disabledHintId?: string;
 }) {
   return (
-    <div className="flex flex-wrap gap-3 pt-2">
+    <div className="flex flex-wrap items-center gap-3 pt-1">
       {onBack && (
-        <button
-          type="button"
-          onClick={onBack}
-          className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
-        >
+        <button type="button" onClick={onBack} className="ui-btn ui-btn-secondary">
           Back
         </button>
       )}
@@ -514,7 +571,9 @@ function NavButtons({
         onClick={onNext}
         disabled={nextDisabled}
         aria-disabled={nextDisabled}
-        className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-foreground)] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+        aria-describedby={nextDisabled ? disabledHintId : undefined}
+        title={nextDisabled ? disabledHint : undefined}
+        className="ui-btn ui-btn-primary"
       >
         {nextLabel}
       </button>

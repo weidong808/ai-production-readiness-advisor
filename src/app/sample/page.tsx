@@ -19,7 +19,7 @@ export default function SamplePage() {
   const result = getSampleScoringResult();
 
   return (
-    <main id="main" className="mx-auto max-w-3xl px-5 py-8 sm:px-6 sm:py-10">
+    <main id="main" className="ui-shell">
       <SampleReportClient input={input} result={result} report={report} />
     </main>
   );

@@ -35,17 +35,10 @@ export default function HomePage() {
           advisory readiness report — not a certification.
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <Link
-            id="main-cta"
-            href="/assess"
-            className="inline-flex items-center justify-center rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-foreground)] transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
-          >
+          <Link id="main-cta" href="/assess" className="ui-btn ui-btn-primary px-5 py-2.5">
             Start assessment
           </Link>
-          <Link
-            href="/sample"
-            className="inline-flex items-center justify-center rounded-md border border-[var(--border)] px-5 py-2.5 text-sm text-[var(--foreground)] transition hover:bg-[var(--card)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
-          >
+          <Link href="/sample" className="ui-btn ui-btn-secondary px-5 py-2.5">
             View sample report
           </Link>
         </div>
