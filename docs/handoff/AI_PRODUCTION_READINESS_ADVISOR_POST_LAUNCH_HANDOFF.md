@@ -52,14 +52,14 @@ Series-consistency and wizard work completed locally, build/lint/tests verified 
 - Wizard: review-step dimension table with Edit-and-return-to-review jumps, hard-gate preview, band badge, "Dimension X of 8" headers, answered-count hints, reset confirmation
 - Home: "How it works" CTA, parent-brand link
 
-**Action:** commit and deploy this before starting new work; it is the baseline for everything below.
+**Action:** ~~commit and deploy baseline~~ **Done 2026-07-19 (commit `eef2b32`, production redeploy — `/about`, OG, footer live).** Narrative key still blocked — see P0.
 
 ## 4. Priorities
 
 ### P0 — restore the narrative (blocker for promotion)
-1. Deploy the 2026-07-19 baseline (§3).
-2. Diagnose and fix `narrative=unavailable` per §2. Most probable fix is a missing Vercel env var — verify, don't assume.
-3. Add a regression check: a lightweight `/api/assess/narrative` health probe path or documented curl probe in `docs/architecture/deploy.md`, run after every deploy.
+1. ~~Deploy the 2026-07-19 baseline (§3).~~ **Done** (`eef2b32` live — `/about`, OG, footer).
+2. **Diagnose and fix `narrative=unavailable` — IN PROGRESS.** Live + local `.env` both fail OpenAI with `401 incorrect API key`. Owner must place a **valid** key in local `.env`, then re-run Vercel env refresh (`docs/architecture/deploy.md`) and redeploy. Do not treat Vercel as missing the var — it has a rejected key.
+3. ~~Post-deploy probe documented~~ in `docs/architecture/deploy.md`. Re-run probe until `narrativeStatus: "ok"`.
 
 ### P1 — trust and first-run experience
 1. **One-click sample report** (§6) — visitors see full output in seconds.
