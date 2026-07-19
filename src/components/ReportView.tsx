@@ -44,6 +44,7 @@ function scoresOnlyFallback(
     remediationPlan: [],
     citations: [],
     disclaimer: "Advisory only. Not a certification, audit, or legal opinion.",
+    qualityFlags: [],
     model: {
       provider: "openai",
       modelId: "local",

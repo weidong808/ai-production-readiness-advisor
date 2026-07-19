@@ -22,7 +22,7 @@
 - [x] Report UI for scores/band  
 - [x] Unit tests for S01–S06  
 
-## M3 — LLM narrative + RAG (current)
+## M3 — LLM narrative + RAG
 
 **Outcome:** Schema-valid narratives with citations.
 
@@ -33,14 +33,16 @@
 - [x] Export Markdown/JSON  
 - [x] OpenAI provider (PD-013) + in-memory cache + rate limit
 
-## M4 — Evals, security, cost guards
+## M4 — Evals, security, cost guards (current)
 
 **Outcome:** CI protects quality and abuse boundaries.
 
-- Narrative mocks S07–S10  
-- Rate limits, caps, cache  
-- Blocklist + disclaimer enforcement  
-- Basic observability logs  
+- [x] Narrative mocks S07–S10 (no live LLM in CI)  
+- [x] Rate limits, body/free-text caps, cache  
+- [x] Blocklist + disclaimer enforcement  
+- [x] Secret redaction helper  
+- [x] Structured logging (no raw answers by default)  
+- [x] Quality flags (e.g. missing citations on critical risks) 
 
 ## M5 — Polish, deploy, portfolio
 

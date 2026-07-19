@@ -6,7 +6,7 @@ Guided assessment tool that helps engineers and architects evaluate whether an A
 |--------|--------|
 | **Series** | [AI in Action](https://weidong-shi.com) · App #3 |
 | **Public roadmap** | [ai-in-action-roadmap](https://github.com/weidong808/ai-in-action-roadmap) |
-| **Status** | M3 — OpenAI narrative + curated corpus RAG |
+| **Status** | M4 — evals, security, and cost guards |
 | **Owner** | Weidong Shi |
 
 ## What this is
@@ -48,8 +48,8 @@ Copy `.env.example` → `.env` and set `OPENAI_API_KEY` when you reach M3 (narra
 |-----------|--------|
 | M1 Discovery | Done (owner approved) |
 | M2 Assessment UX + deterministic scoring | Done |
-| M3 LLM narrative + RAG (OpenAI) | **Runnable** |
-| M4 Evals, security, cost guards | Later |
+| M3 LLM narrative + RAG (OpenAI) | Done |
+| M4 Evals, security, cost guards | **Runnable** |
 | M5 Polish, deploy, portfolio | Later |
 
 Docs index: [docs/README.md](docs/README.md)

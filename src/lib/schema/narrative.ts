@@ -124,6 +124,7 @@ export const readinessReportSchema = z.object({
     }),
   ),
   disclaimer: z.string(),
+  qualityFlags: z.array(z.string()).default([]),
   model: z.object({
     provider: z.string(),
     modelId: z.string(),

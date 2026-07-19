@@ -84,6 +84,15 @@ export function reportToMarkdown(report: ReadinessReport): string {
     lines.push("");
   }
 
+  if (report.qualityFlags?.length) {
+    lines.push("## Quality flags");
+    lines.push("");
+    for (const flag of report.qualityFlags) {
+      lines.push(`- ${flag}`);
+    }
+    lines.push("");
+  }
+
   lines.push("---");
   lines.push(
     `${report.context.rubricVersion} · ${report.context.corpusVersion} · ${report.model.promptVersion} · narrative=${report.model.narrativeStatus}`,

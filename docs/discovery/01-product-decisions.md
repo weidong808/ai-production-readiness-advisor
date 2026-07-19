@@ -19,6 +19,7 @@ Decisions made during discovery. Change deliberately; bump rubric/schema version
 | PD-013 | 2026-07-19 | **OpenAI** as MVP model provider | Owner purchased OpenAI API service | Accepted |
 | PD-014 | 2026-07-19 | M1 discovery approved; proceed to M2 scaffold | Owner: “approved” | Accepted |
 | PD-015 | 2026-07-19 | M3 narrative path enabled with OpenAI + in-repo corpus | Owner: “start m3” | Accepted |
+| PD-016 | 2026-07-19 | M4 hardening (evals S07–S10, redaction, caps, logs) | Owner: “go next” after key rotate | Accepted |
 
 ## Naming
 

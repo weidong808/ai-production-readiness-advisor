@@ -27,13 +27,13 @@ Prioritized for post-discovery. IDs are stable references.
 | B-016 | Citation resolution | Drop unknown IDs |
 | B-017 | Export MD/JSON | Include disclaimer |
 
-## P2 — Hardening (M4)
+## P2 — Hardening (M4) — done
 
 | ID | Item | Notes |
 |----|------|-------|
-| B-020 | Rate limit + body size limits | |
+| B-020 | Rate limit + body size limits | `limits.ts` + rate-limit |
 | B-021 | Response cache | Hash-based |
-| B-022 | Compliance phrase blocklist | S10 |
+| B-022 | Compliance phrase blocklist | S10 scrub + tests |
 | B-023 | Redaction helper (secrets patterns) | Best-effort |
 | B-024 | Unit/integration tests S01–S10 | No live LLM in CI |
 | B-025 | Structured logging | No raw answers by default |

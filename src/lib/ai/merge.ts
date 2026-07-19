@@ -57,6 +57,7 @@ export function buildScoresOnlyReport(args: {
     remediationPlan: [],
     citations: [],
     disclaimer: DISCLAIMER,
+    qualityFlags: [],
     model: {
       provider: "openai",
       modelId: args.modelId,
@@ -64,6 +65,20 @@ export function buildScoresOnlyReport(args: {
       narrativeStatus: args.narrativeStatus,
     },
   };
+}
+
+export function collectQualityFlags(narrative: LlmNarrative): string[] {
+  const flags: string[] = [];
+  for (const risk of narrative.risks) {
+    if (
+      (risk.severity === "critical" || risk.severity === "high") &&
+      risk.citationIds.length === 0
+    ) {
+      flags.push("critical_risk_missing_citations");
+      break;
+    }
+  }
+  return flags;
 }
 
 export function mergeNarrativeReport(args: {
@@ -80,10 +95,11 @@ export function mergeNarrativeReport(args: {
     ...scrubbed.risks.flatMap((r) => r.citationIds),
     ...scrubbed.remediationPlan.flatMap((m) => m.citationIds),
   ];
-  const { citations, unknown } = resolveCitations(citationIds);
+  const { citations } = resolveCitations(citationIds);
 
   const known = new Set(citations.map((c) => c.id));
   const filterIds = (ids: string[]) => ids.filter((id) => known.has(id));
+  const qualityFlags = collectQualityFlags(scrubbed);
 
   return {
     schemaVersion: "report@0.1.0",
@@ -112,14 +128,13 @@ export function mergeNarrativeReport(args: {
     })),
     citations,
     disclaimer: DISCLAIMER,
+    qualityFlags,
     model: {
       provider: "openai",
       modelId: args.modelId,
       promptVersion: PROMPT_VERSION,
       narrativeStatus: "ok",
     },
-    // unknown citations intentionally dropped; available for logging by caller
-    ...(unknown.length ? {} : {}),
   };
 }
 
