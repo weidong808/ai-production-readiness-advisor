@@ -17,6 +17,12 @@ export const SITE_SERIES_TAGLINE =
 export const SITE_CASE_STUDY_URL =
   "https://weidong-shi.com/work/readiness";
 export const SITE_CASE_STUDY_LABEL = "Hub case study";
+export const SITE_INSIGHT_URL =
+  "https://weidong-shi.com/insights/ai-in-action-readiness";
+export const SITE_INSIGHT_LABEL = "Hub insight";
+/** Set after LinkedIn Pulse goes live; omit from UI until non-empty. */
+export const LINKEDIN_ARTICLE_URL = "";
+export const LINKEDIN_ARTICLE_LABEL = "LinkedIn article";
 export const WS_MARK_SRC = "/ws-mark.svg";
 
 export const GITHUB_REPO_URL =

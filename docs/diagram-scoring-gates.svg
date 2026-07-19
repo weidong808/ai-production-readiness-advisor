@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img" aria-labelledby="title desc">
+  <title id="title">Scoring and hard gates</title>
+  <desc id="desc">Context and answers feed eight dimension scores. Hard gates apply ceilings. Final band cannot be widened by the narrative model.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0c0b"/>
+      <stop offset="100%" stop-color="#0e1210"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="720" fill="url(#bg)"/>
+  <text x="56" y="64" fill="#f3f5f4" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="34" font-weight="700">Scoring and hard gates</text>
+  <text x="56" y="104" fill="#9aa7a0" font-family="Segoe UI, sans-serif" font-size="18">Narrative can explain risk - it cannot raise the ceiling</text>
+
+  <rect x="56" y="160" width="240" height="120" rx="14" fill="#151b18" stroke="#3ecf8e" stroke-width="2"/>
+  <text x="80" y="210" fill="#3ecf8e" font-family="ui-monospace, Consolas, monospace" font-size="12" letter-spacing="1">INPUT</text>
+  <text x="80" y="248" fill="#f3f5f4" font-family="Segoe UI, sans-serif" font-size="18">Context + answers</text>
+
+  <path d="M296 220 H340" stroke="#3ecf8e" stroke-width="2"/>
+  <polygon points="340,214 354,220 340,226" fill="#3ecf8e"/>
+
+  <rect x="360" y="160" width="260" height="120" rx="14" fill="#151b18" stroke="#2a3440" stroke-width="2"/>
+  <text x="384" y="210" fill="#3ecf8e" font-family="ui-monospace, Consolas, monospace" font-size="12" letter-spacing="1">SCORE</text>
+  <text x="384" y="248" fill="#f3f5f4" font-family="Segoe UI, sans-serif" font-size="18">8 dimension scores</text>
+
+  <path d="M620 200 H680" stroke="#3ecf8e" stroke-width="2"/>
+  <polygon points="680,194 694,200 680,206" fill="#3ecf8e"/>
+  <path d="M490 280 V340 H680 V360" stroke="#3ecf8e" stroke-width="2" fill="none"/>
+
+  <rect x="700" y="140" width="280" height="100" rx="14" fill="#151b18" stroke="#2a3440" stroke-width="2"/>
+  <text x="724" y="185" fill="#3ecf8e" font-family="ui-monospace, Consolas, monospace" font-size="12" letter-spacing="1">BAND</text>
+  <text x="724" y="220" fill="#f3f5f4" font-family="Segoe UI, sans-serif" font-size="18">Score band</text>
+
+  <rect x="700" y="320" width="280" height="120" rx="14" fill="#151b18" stroke="#d9a13e" stroke-width="2"/>
+  <text x="724" y="370" fill="#d9a13e" font-family="ui-monospace, Consolas, monospace" font-size="12" letter-spacing="1">GATES</text>
+  <text x="724" y="408" fill="#f3f5f4" font-family="Segoe UI, sans-serif" font-size="18">Hard gates HG-01 to HG-10</text>
+
+  <path d="M980 190 H1040" stroke="#3ecf8e" stroke-width="2"/>
+  <path d="M980 380 H1040 V220" stroke="#3ecf8e" stroke-width="2" fill="none"/>
+  <polygon points="1040,214 1054,220 1040,226" fill="#3ecf8e"/>
+
+  <rect x="1060" y="160" width="280" height="140" rx="14" fill="#151b18" stroke="#3ecf8e" stroke-width="2"/>
+  <text x="1084" y="215" fill="#3ecf8e" font-family="ui-monospace, Consolas, monospace" font-size="12" letter-spacing="1">OUTPUT</text>
+  <text x="1084" y="255" fill="#f3f5f4" font-family="Segoe UI, sans-serif" font-size="18">finalBand</text>
+  <text x="1084" y="288" fill="#f3f5f4" font-family="Segoe UI, sans-serif" font-size="18">overallScore</text>
+
+  <rect x="360" y="500" width="680" height="120" rx="14" fill="#152019" stroke="#3ecf8e" stroke-width="1.5"/>
+  <text x="392" y="555" fill="#a8e0c8" font-family="Segoe UI, sans-serif" font-size="20">OpenAI narrative path</text>
+  <text x="392" y="592" fill="#9aa7a0" font-family="Segoe UI, sans-serif" font-size="17">Executive summary · risks · remediation · citations - cannot widen band</text>
+
+  <text x="56" y="680" fill="#6b7780" font-family="ui-monospace, Consolas, monospace" font-size="13">AI in Action · App #3 · advisory only</text>
+</svg>

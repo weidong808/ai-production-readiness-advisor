@@ -9,6 +9,8 @@ Guided assessment tool that helps engineers and architects evaluate whether an A
 | **Status** | Live |
 | **Owner** | Weidong Shi |
 | **Live demo** | https://readiness.weidong-shi.com |
+| **Hub case study** | https://weidong-shi.com/work/readiness |
+| **Hub insight** | https://weidong-shi.com/insights/ai-in-action-readiness |
 | **Vercel alias** | https://ai-production-readiness-advisor.vercel.app |
 | **GitHub** | https://github.com/weidong808/ai-production-readiness-advisor |
 
@@ -85,6 +87,12 @@ See [docs/architecture/deploy.md](docs/architecture/deploy.md).
 | M5 Polish, deploy, portfolio | **Done — live at readiness.weidong-shi.com** |
 
 Docs index: [docs/README.md](docs/README.md)
+
+## Architecture
+
+**One rule:** scores and hard gates are deterministic and recomputed on the server; the model never sets the band.
+
+See [docs/architecture/architecture.md](docs/architecture/architecture.md) (mermaid + diagrams) and [`docs/readiness-architecture.svg`](docs/readiness-architecture.svg).
 
 ## Stack
 

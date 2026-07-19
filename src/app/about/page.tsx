@@ -7,9 +7,13 @@ import {
   APP_SERIES_LABEL,
   APP_TAGLINE,
   GITHUB_REPO_URL,
+  LINKEDIN_ARTICLE_LABEL,
+  LINKEDIN_ARTICLE_URL,
   ROADMAP_URL,
   SITE_CASE_STUDY_LABEL,
   SITE_CASE_STUDY_URL,
+  SITE_INSIGHT_LABEL,
+  SITE_INSIGHT_URL,
   SITE_SERIES_NAME,
   SITE_SERIES_TAGLINE,
 } from "@/lib/brand";
@@ -56,8 +60,12 @@ export default function AboutPage() {
         </p>
         <p>
           Part of <span className="text-[var(--foreground)]">{SITE_SERIES_NAME}</span>{" "}
-          — {SITE_SERIES_TAGLINE.toLowerCase()}. Built by Weidong Shi with
-          Next.js, TypeScript, and Tailwind CSS; deployed on Vercel.
+          — {SITE_SERIES_TAGLINE.toLowerCase()}. Methodology:{" "}
+          <span className="text-[var(--foreground)]">
+            Build → Validate → Improve → Document → Share
+          </span>
+          . Built by Weidong Shi with Next.js, TypeScript, and Tailwind CSS;
+          deployed on Vercel.
         </p>
       </div>
 
@@ -82,6 +90,24 @@ export default function AboutPage() {
         >
           {SITE_CASE_STUDY_LABEL} ↗
         </a>
+        <a
+          href={SITE_INSIGHT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-md border border-[var(--border)] px-5 py-2.5 text-sm hover:bg-[var(--card)]"
+        >
+          {SITE_INSIGHT_LABEL} ↗
+        </a>
+        {LINKEDIN_ARTICLE_URL ? (
+          <a
+            href={LINKEDIN_ARTICLE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-[var(--border)] px-5 py-2.5 text-sm hover:bg-[var(--card)]"
+          >
+            {LINKEDIN_ARTICLE_LABEL} ↗
+          </a>
+        ) : null}
         <a
           href={GITHUB_REPO_URL}
           target="_blank"

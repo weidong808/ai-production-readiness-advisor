@@ -10,6 +10,8 @@ import {
   SITE_BRAND_NAME,
   SITE_CASE_STUDY_LABEL,
   SITE_CASE_STUDY_URL,
+  SITE_INSIGHT_LABEL,
+  SITE_INSIGHT_URL,
   SITE_SERIES_NAME,
   SLEEPCHECK_URL,
 } from "@/lib/brand";
@@ -82,6 +84,16 @@ export function AppFooter() {
                     className="transition-colors hover:text-[var(--foreground)]"
                   >
                     {SITE_CASE_STUDY_LABEL}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={SITE_INSIGHT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-[var(--foreground)]"
+                  >
+                    {SITE_INSIGHT_LABEL}
                   </a>
                 </li>
                 <li>
