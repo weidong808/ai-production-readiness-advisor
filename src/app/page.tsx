@@ -20,11 +20,7 @@ const STEPS = [
 export default function HomePage() {
   return (
     <main id="main" className="relative">
-      <a href="#main-cta" className="skip-link">
-        Skip to start assessment
-      </a>
-
-      <div className="mx-auto max-w-3xl px-5 pt-7 pb-10 sm:px-6 sm:pt-8 sm:pb-12">
+      <div className="mx-auto max-w-5xl px-5 pt-7 pb-10 sm:px-6 sm:pt-8 sm:pb-12">
         <p className="font-mono text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase">
           {APP_SERIES_LABEL}
         </p>

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main" className="mx-auto max-w-2xl px-5 py-8 sm:px-6 sm:py-10">
+    <main id="main" className="mx-auto max-w-3xl px-5 py-8 sm:px-6 sm:py-10">
       <p className="font-mono text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase">
         {APP_SERIES_LABEL}
       </p>

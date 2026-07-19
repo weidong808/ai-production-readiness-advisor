@@ -161,7 +161,7 @@ export function AssessmentWizard() {
   }
 
   return (
-    <div id="main" className="mx-auto max-w-2xl px-5 py-8 sm:px-6 sm:py-10">
+    <div id="main" className="mx-auto max-w-3xl px-5 py-8 sm:px-6 sm:py-10">
       <div className="mb-6 flex items-center justify-end">
         <button
           type="button"

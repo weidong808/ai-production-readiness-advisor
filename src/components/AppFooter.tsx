@@ -19,7 +19,7 @@ export function AppFooter() {
 
   return (
     <footer className="no-print mt-12 border-t border-[var(--border)] pt-8 text-sm text-[var(--muted)]">
-      <div className="mx-auto max-w-3xl px-5 sm:px-6">
+      <div className="mx-auto max-w-5xl px-5 sm:px-6">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-sm">
             <div className="flex items-center gap-2.5">
