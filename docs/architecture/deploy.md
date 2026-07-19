@@ -1,20 +1,20 @@
 # Deploy notes
 
-**Status:** Live on Vercel · custom domain DNS pending  
-**Production (Vercel):** https://ai-production-readiness-advisor.vercel.app  
-**Custom domain (pending DNS):** https://readiness.weidong-shi.com  
+**Status:** Live  
+**Production:** https://readiness.weidong-shi.com  
+**Vercel alias:** https://ai-production-readiness-advisor.vercel.app  
 **GitHub:** https://github.com/weidong808/ai-production-readiness-advisor  
 **Vercel project:** `wshi/ai-production-readiness-advisor`
 
-## Cloudflare DNS (owner action)
+## Cloudflare DNS
 
-Nameservers stay on Cloudflare. Add this record (**DNS only** / grey cloud):
+Configured (**DNS only** / grey cloud):
 
 | Type | Name | Content | Proxy |
 |------|------|---------|-------|
 | A | `readiness` | `76.76.21.21` | DNS only |
 
-Alternative: CNAME `readiness` → `cname.vercel-dns.com` (DNS only).
+Verified: resolves to `76.76.21.21`; `https://readiness.weidong-shi.com` returns 200.
 
 See also hub docs: `weidong-website/docs/cloudflare-dns.md`.
 

@@ -52,8 +52,8 @@
 - [x] README demo script + deploy notes  
 - [x] Light public roadmap note (App #3 positioning)  
 - [x] Deploy to Vercel + GitHub remote  
-- [ ] Cloudflare DNS for `readiness.weidong-shi.com` (owner)  
-- [ ] Hub article / LinkedIn later (after custom domain)
+- [x] Cloudflare DNS for `readiness.weidong-shi.com`  
+- [ ] Hub article / LinkedIn later
 
 ## Dependency rule
 
