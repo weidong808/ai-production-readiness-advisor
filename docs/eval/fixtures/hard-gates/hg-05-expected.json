@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-05",
+  "expect": {
+    "hardGatesMustInclude": ["HG-05"],
+    "hardGatesMustNotInclude": ["HG-06"],
+    "ceiling": "Not Ready",
+    "reason": "Autonomous tools with weak prompt-injection posture",
+    "finalBandMax": "Not Ready"
+  }
+}

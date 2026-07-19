@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-04",
+  "expect": {
+    "hardGatesMustInclude": ["HG-04"],
+    "hardGatesMustNotInclude": ["HG-08"],
+    "ceiling": "Pilot Only",
+    "reason": "Public audience needs stronger evaluation (D3 < 70)",
+    "finalBandMax": "Pilot Only"
+  }
+}

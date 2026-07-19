@@ -1,0 +1,22 @@
+{
+  "scenarioId": "HG-03",
+  "context": {
+    "systemName": "HR chatbot",
+    "jobToBeDone": "Answer employee benefits questions",
+    "audience": "employees",
+    "interactionMode": "assistive",
+    "dataSensitivity": "pii",
+    "blastRadius": "recoverable",
+    "targetEnvironment": "pilot"
+  },
+  "answers": {
+    "D1.Q1": "B", "D1.Q2": "B", "D1.Q3": "B", "D1.Q4": "B",
+    "D2.Q1": "C", "D2.Q2": "D", "D2.Q3": "D", "D2.Q4": "C",
+    "D3.Q1": "C", "D3.Q2": "C", "D3.Q3": "C", "D3.Q4": "C",
+    "D4.Q1": "C", "D4.Q2": "B", "D4.Q3": "B", "D4.Q4": "C",
+    "D5.Q1": "C", "D5.Q2": "C", "D5.Q3": "C", "D5.Q4": "C",
+    "D6.Q1": "C", "D6.Q2": "C", "D6.Q3": "D", "D6.Q4": "C",
+    "D7.Q1": "B", "D7.Q2": "C", "D7.Q3": "C", "D7.Q4": "C",
+    "D8.Q1": "C", "D8.Q2": "C", "D8.Q3": "C", "D8.Q4": "C"
+  }
+}

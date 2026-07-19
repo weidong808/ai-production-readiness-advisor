@@ -109,14 +109,16 @@ Tone rules: advisory framing everywhere; "20+ years" if experience is mentioned;
 - Title format: `AI Production Readiness Advisor — Is your AI feature ready to ship?` (set in layout).
 - For the eventual LinkedIn article, reuse the series format from `Retirement Calculator/LinkedIn-Article-*.md`.
 
-## 9. Hard-gate regression fixtures
+## 9. Hard-gate regression fixtures — DONE 2026-07-19
 
-Existing: `docs/eval/fixtures/s01–s10` + `src/lib/scoring/fixtures.test.ts`, `src/lib/eval/narrative-fixtures.test.ts`. Additions required:
+Existing: `docs/eval/fixtures/s01–s10` + `src/lib/scoring/fixtures.test.ts`, `src/lib/eval/narrative-fixtures.test.ts`.
 
-- One fixture per hard gate (HG-01…HG-0n, see `src/lib/scoring/hard-gates.ts`) asserting: gate fires, band ceiling applied, gate reason text stable.
-- Boundary fixtures: score exactly at each band threshold (`src/lib/scoring/bands.ts`).
-- Injection fixture: free-text containing prompt-injection attempts must not raise the band and must not leak into narrative verbatim (redaction + blocklist paths).
-- CI: all fixtures run in `npm test`; a failing gate fixture blocks deploy.
+**Added:** `docs/eval/fixtures/hard-gates/` + `src/lib/scoring/hard-gates.fixtures.test.ts`:
+
+- One fixture per hard gate (HG-01…HG-10) — gate fires, ceiling + reason text stable, isolations via `hardGatesMustNotInclude` where needed.
+- `bandFromScore` thresholds at 44/45, 69/70, 84/85 + full-assessment landings (`band-not-ready` … `band-ready`).
+- `inj-01`: free-text injection cannot change score, band, or gates on the scoring path (narrative scrub remains in S07/S10).
+- CI: `npm test` (44 tests).
 
 ## 10. Non-functional requirements
 

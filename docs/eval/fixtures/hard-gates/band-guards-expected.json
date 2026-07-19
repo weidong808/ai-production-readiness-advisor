@@ -1,0 +1,7 @@
+{
+  "scenarioId": "BAND-GUARDS",
+  "expect": {
+    "scoreBand": "Production with Guards",
+    "finalBand": "Production with Guards"
+  }
+}

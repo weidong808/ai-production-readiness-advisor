@@ -1,0 +1,7 @@
+{
+  "scenarioId": "BAND-PILOT",
+  "expect": {
+    "scoreBand": "Pilot Only",
+    "finalBand": "Pilot Only"
+  }
+}

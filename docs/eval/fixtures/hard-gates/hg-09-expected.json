@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-09",
+  "expect": {
+    "hardGatesMustInclude": ["HG-09"],
+    "hardGatesMustNotInclude": ["HG-08", "HG-10"],
+    "ceiling": "Production with Guards",
+    "reason": "No clear accountable owner for production AI outputs",
+    "finalBandMax": "Production with Guards"
+  }
+}

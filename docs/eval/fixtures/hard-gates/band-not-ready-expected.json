@@ -1,0 +1,7 @@
+{
+  "scenarioId": "BAND-NOT-READY",
+  "expect": {
+    "scoreBand": "Not Ready",
+    "finalBand": "Not Ready"
+  }
+}

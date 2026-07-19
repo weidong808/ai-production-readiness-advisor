@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-02",
+  "expect": {
+    "hardGatesMustInclude": ["HG-02"],
+    "hardGatesMustNotInclude": ["HG-03"],
+    "ceiling": "Not Ready",
+    "reason": "Regulated data without strong human oversight (D7 < 70)",
+    "finalBandMax": "Not Ready"
+  }
+}

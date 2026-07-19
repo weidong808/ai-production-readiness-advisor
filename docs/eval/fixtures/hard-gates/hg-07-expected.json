@@ -1,0 +1,9 @@
+{
+  "scenarioId": "HG-07",
+  "expect": {
+    "hardGatesMustInclude": ["HG-07"],
+    "ceiling": "Pilot Only",
+    "reason": "This advisor does not green-light safety-critical AI",
+    "finalBandMax": "Pilot Only"
+  }
+}

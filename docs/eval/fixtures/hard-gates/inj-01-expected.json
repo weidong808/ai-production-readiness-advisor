@@ -1,0 +1,8 @@
+{
+  "scenarioId": "INJ-01",
+  "expect": {
+    "finalBand": "Not Ready",
+    "hardGatesMustInclude": ["HG-04", "HG-08"],
+    "freeTextMustNotAffectBand": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-08",
+  "expect": {
+    "hardGatesMustInclude": ["HG-08"],
+    "hardGatesMustNotInclude": ["HG-09", "HG-10"],
+    "ceiling": "Pilot Only",
+    "reason": "No evaluation fixtures while targeting production",
+    "finalBandMax": "Pilot Only"
+  }
+}

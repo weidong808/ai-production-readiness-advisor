@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-06",
+  "expect": {
+    "hardGatesMustInclude": ["HG-06"],
+    "hardGatesMustNotInclude": ["HG-05"],
+    "ceiling": "Not Ready",
+    "reason": "Autonomous tools without adequate tool constraints",
+    "finalBandMax": "Not Ready"
+  }
+}

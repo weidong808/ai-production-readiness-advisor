@@ -1,0 +1,7 @@
+{
+  "scenarioId": "BAND-READY",
+  "expect": {
+    "scoreBand": "Production Ready",
+    "finalBand": "Production Ready"
+  }
+}

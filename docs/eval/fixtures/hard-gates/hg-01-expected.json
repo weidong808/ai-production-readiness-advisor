@@ -1,0 +1,9 @@
+{
+  "scenarioId": "HG-01",
+  "expect": {
+    "hardGatesMustInclude": ["HG-01"],
+    "ceiling": "Pilot Only",
+    "reason": "Cannot claim production readiness with unclear scope or missing system name",
+    "finalBandMax": "Pilot Only"
+  }
+}

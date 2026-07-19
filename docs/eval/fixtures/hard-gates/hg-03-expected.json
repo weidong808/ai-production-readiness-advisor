@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-03",
+  "expect": {
+    "hardGatesMustInclude": ["HG-03"],
+    "hardGatesMustNotInclude": ["HG-08", "HG-09", "HG-10"],
+    "ceiling": "Not Ready",
+    "reason": "Sensitive data with raw PII routinely sent to models",
+    "finalBandMax": "Not Ready"
+  }
+}

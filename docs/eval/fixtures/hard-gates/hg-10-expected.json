@@ -1,0 +1,10 @@
+{
+  "scenarioId": "HG-10",
+  "expect": {
+    "hardGatesMustInclude": ["HG-10"],
+    "hardGatesMustNotInclude": ["HG-08", "HG-09"],
+    "ceiling": "Pilot Only",
+    "reason": "No fallback path while targeting production",
+    "finalBandMax": "Pilot Only"
+  }
+}
