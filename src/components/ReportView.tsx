@@ -59,14 +59,23 @@ export function ReportView({
   result,
   onRestart,
   onBack,
+  preloadedReport,
+  sampleMode = false,
 }: {
   input: AssessmentInput;
   result: ScoringResult;
   onRestart: () => void;
   onBack: () => void;
+  /** When set, skip the narrative API and render immediately. */
+  preloadedReport?: ReadinessReport;
+  sampleMode?: boolean;
 }) {
-  const [state, setState] = useState<LoadState>("idle");
-  const [report, setReport] = useState<ReadinessReport | null>(null);
+  const [state, setState] = useState<LoadState>(
+    preloadedReport ? "done" : "idle",
+  );
+  const [report, setReport] = useState<ReadinessReport | null>(
+    preloadedReport ?? null,
+  );
   const [metaNote, setMetaNote] = useState<string | null>(null);
 
   // Stable key so parent re-renders do not retrigger OpenAI calls.
@@ -77,6 +86,8 @@ export function ReportView({
   });
 
   useEffect(() => {
+    if (preloadedReport) return;
+
     let cancelled = false;
     const snapshotInput = JSON.parse(requestKey) as {
       context: AssessmentInput["context"];
@@ -113,7 +124,9 @@ export function ReportView({
         // Trust server recomputed band, not client preview
         setReport(data.report);
         if (data.meta?.rateLimited) {
-          setMetaNote("Daily narrative limit reached — showing scores only.");
+          setMetaNote(
+            "Narrative rate limit reached (best-effort under serverless) — showing scores only.",
+          );
         } else if (data.report.model.narrativeStatus !== "ok") {
           setMetaNote(
             `Narrative ${data.report.model.narrativeStatus.replace("_", " ")} — scores and band still apply.`,
@@ -133,7 +146,7 @@ export function ReportView({
     };
     // result used only for local fallback if the API fails before scoring
     // eslint-disable-next-line react-hooks/exhaustive-deps -- requestKey is the intentional trigger
-  }, [requestKey]);
+  }, [requestKey, preloadedReport]);
 
   const view = report ?? scoresOnlyFallback(input, result, "unavailable");
   const slug = input.context.systemName
@@ -141,11 +154,14 @@ export function ReportView({
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
     .slice(0, 40) || "assessment";
+  const filePrefix = sampleMode ? `sample-${slug}` : slug;
 
   return (
     <div className="space-y-8">
       <header className="space-y-3">
-        <p className="text-sm text-[var(--ink-muted)]">Readiness report</p>
+        <p className="text-sm text-[var(--ink-muted)]">
+          {sampleMode ? "Sample readiness report" : "Readiness report"}
+        </p>
         <h2 className="text-2xl font-semibold tracking-tight">
           {view.context.systemName}
         </h2>
@@ -339,6 +355,7 @@ export function ReportView({
       <section className="text-xs text-[var(--ink-muted)]">
         {view.context.rubricVersion} · {view.context.corpusVersion} ·{" "}
         {view.model.promptVersion} · narrative={view.model.narrativeStatus}
+        {sampleMode ? " · sample" : ""}
       </section>
 
       <div className="flex flex-wrap gap-3">
@@ -347,13 +364,13 @@ export function ReportView({
           onClick={onBack}
           className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
         >
-          Back to review
+          {sampleMode ? "Back home" : "Back to review"}
         </button>
         <button
           type="button"
           onClick={() =>
             download(
-              `${slug}-readiness.md`,
+              `${filePrefix}-readiness.md`,
               reportToMarkdown(view),
               "text/markdown;charset=utf-8",
             )
@@ -366,7 +383,7 @@ export function ReportView({
           type="button"
           onClick={() =>
             download(
-              `${slug}-readiness.json`,
+              `${filePrefix}-readiness.json`,
               reportToJson(view),
               "application/json;charset=utf-8",
             )
@@ -380,7 +397,7 @@ export function ReportView({
           onClick={onRestart}
           className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#06120f] hover:bg-[var(--accent-strong)]"
         >
-          Start over
+          {sampleMode ? "Start your assessment" : "Start over"}
         </button>
       </div>
     </div>

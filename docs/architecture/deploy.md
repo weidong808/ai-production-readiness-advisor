@@ -25,7 +25,7 @@ See also hub docs: `weidong-website/docs/cloudflare-dns.md`.
 | `OPENAI_API_KEY` | Yes | Set in Vercel dashboard / CLI — server-only |
 | `OPENAI_MODEL` | No | `gpt-4.1-mini` |
 | `AI_NARRATIVE_ENABLED` | No | Default on; `false` for scores-only |
-| `AI_RATE_LIMIT_PER_IP_PER_DAY` | No | Default `10` |
+| `AI_RATE_LIMIT_PER_IP_PER_DAY` | No | Default `10` — **best-effort** in-memory per isolate (see `cost-estimate.md`) |
 | `AI_MAX_OUTPUT_TOKENS` | No | Default `1500` |
 | `AI_MAX_BODY_BYTES` | No | Default `48000` |
 | `AI_MAX_FREE_TEXT_CHARS` | No | Default `4000` |

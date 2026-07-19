@@ -59,12 +59,15 @@ export function AssessmentWizard() {
   const [returnToReview, setReturnToReview] = useState(false);
 
   useEffect(() => {
+    // Client-only resume from localStorage (SSR has no window).
     const saved = loadAssessment();
     if (saved) {
+      /* eslint-disable react-hooks/set-state-in-effect -- hydrate persisted wizard once on mount */
       setContext(saved.input.context);
       setAnswers(saved.input.answers);
       setFreeText(saved.input.freeText ?? {});
       setStep((saved.step as Step) || "context");
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
     setHydrated(true);
   }, []);

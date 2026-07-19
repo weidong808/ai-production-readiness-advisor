@@ -18,6 +18,8 @@ export type NarrativeGenerator = (args: {
   input: AssessmentInput;
   scoring: ReturnType<typeof scoreAssessment>;
   chunks: ReturnType<typeof retrieveChunks>;
+  /** When set, model should fix prior JSON/schema issues (one repair pass). */
+  repairHint?: string;
 }) => Promise<{ text: string; modelId: string }>;
 
 export type PipelineResult = {
@@ -28,11 +30,76 @@ export type PipelineResult = {
     shapeErrors?: string[];
     schemaIssues?: { path: string; message: string }[];
     providerError?: string;
+    /** True when the successful report came from the schema-repair retry. */
+    repaired?: boolean;
   };
 };
 
+type ParseOutcome =
+  | {
+      ok: true;
+      narrative: ReturnType<typeof llmNarrativeSchema.parse>;
+      modelId: string;
+    }
+  | {
+      ok: false;
+      modelId: string;
+      shapeErrors?: string[];
+      schemaIssues?: { path: string; message: string }[];
+      repairHint: string;
+    };
+
+function formatSchemaIssues(
+  issues: { path: string; message: string }[],
+): string {
+  return issues.map((i) => `${i.path || "(root)"}: ${i.message}`).join("; ");
+}
+
+function parseModelText(text: string, modelId: string): ParseOutcome {
+  let raw: unknown;
+  try {
+    raw = extractJsonObject(text);
+  } catch {
+    return {
+      ok: false,
+      modelId,
+      shapeErrors: ["invalid_json"],
+      repairHint:
+        "Your previous response was not valid JSON. Return a single JSON object only, with no markdown fences.",
+    };
+  }
+
+  const shapeErrors = rawNarrativeHasFatalShapeErrors(raw);
+  if (shapeErrors.length) {
+    return {
+      ok: false,
+      modelId,
+      shapeErrors,
+      repairHint: `Your previous JSON failed shape checks: ${shapeErrors.join(", ")}. Fix the structure and return valid JSON matching the schema.`,
+    };
+  }
+
+  const normalized = normalizeLlmNarrative(raw);
+  const narrative = llmNarrativeSchema.safeParse(normalized);
+  if (!narrative.success) {
+    const schemaIssues = narrative.error.issues.slice(0, 8).map((i) => ({
+      path: i.path.join("."),
+      message: i.message,
+    }));
+    return {
+      ok: false,
+      modelId,
+      schemaIssues,
+      repairHint: `Your previous JSON failed schema validation: ${formatSchemaIssues(schemaIssues)}. Fix these fields and return valid JSON only.`,
+    };
+  }
+
+  return { ok: true, narrative: narrative.data, modelId };
+}
+
 /**
  * Deterministic + narrative merge pipeline (mockable generator for CI).
+ * On schema/parse failure, retries once with validation errors in the prompt.
  */
 export async function runNarrativePipeline(args: {
   assessmentId: string;
@@ -47,68 +114,44 @@ export async function runNarrativePipeline(args: {
   const chunks = retrieveChunks(scoring);
 
   try {
-    const { text, modelId } = await args.generate({
+    const first = await args.generate({
       assessmentId: args.assessmentId,
       input,
       scoring,
       chunks,
     });
+    let parsed = parseModelText(first.text, first.modelId);
 
-    let raw: unknown;
-    try {
-      raw = extractJsonObject(text);
-    } catch {
-      return {
-        report: buildScoresOnlyReport({
-          assessmentId: args.assessmentId,
-          createdAt: args.createdAt,
-          input,
-          scoring,
-          narrativeStatus: "schema_failed",
-          modelId,
-        }),
+    let repaired = false;
+    if (!parsed.ok) {
+      const retry = await args.generate({
+        assessmentId: args.assessmentId,
+        input,
         scoring,
-        meta: { redactions, shapeErrors: ["invalid_json"] },
-      };
-    }
-
-    const shapeErrors = rawNarrativeHasFatalShapeErrors(raw);
-    if (shapeErrors.length) {
-      return {
-        report: buildScoresOnlyReport({
-          assessmentId: args.assessmentId,
-          createdAt: args.createdAt,
-          input,
+        chunks,
+        repairHint: parsed.repairHint,
+      });
+      const repairedParse = parseModelText(retry.text, retry.modelId);
+      if (!repairedParse.ok) {
+        return {
+          report: buildScoresOnlyReport({
+            assessmentId: args.assessmentId,
+            createdAt: args.createdAt,
+            input,
+            scoring,
+            narrativeStatus: "schema_failed",
+            modelId: repairedParse.modelId,
+          }),
           scoring,
-          narrativeStatus: "schema_failed",
-          modelId,
-        }),
-        scoring,
-        meta: { redactions, shapeErrors },
-      };
-    }
-
-    const normalized = normalizeLlmNarrative(raw);
-    const narrative = llmNarrativeSchema.safeParse(normalized);
-    if (!narrative.success) {
-      return {
-        report: buildScoresOnlyReport({
-          assessmentId: args.assessmentId,
-          createdAt: args.createdAt,
-          input,
-          scoring,
-          narrativeStatus: "schema_failed",
-          modelId,
-        }),
-        scoring,
-        meta: {
-          redactions,
-          schemaIssues: narrative.error.issues.slice(0, 8).map((i) => ({
-            path: i.path.join("."),
-            message: i.message,
-          })),
-        },
-      };
+          meta: {
+            redactions,
+            shapeErrors: repairedParse.shapeErrors,
+            schemaIssues: repairedParse.schemaIssues,
+          },
+        };
+      }
+      parsed = repairedParse;
+      repaired = true;
     }
 
     return {
@@ -117,11 +160,11 @@ export async function runNarrativePipeline(args: {
         createdAt: args.createdAt,
         input,
         scoring,
-        narrative: narrative.data,
-        modelId,
+        narrative: parsed.narrative,
+        modelId: parsed.modelId,
       }),
       scoring,
-      meta: { redactions },
+      meta: { redactions, repaired: repaired || undefined },
     };
   } catch (err) {
     return {

@@ -36,6 +36,9 @@ export function AppFooter() {
             <Link href="/about" className="hover:text-[var(--ink)]">
               About
             </Link>
+            <Link href="/sample" className="hover:text-[var(--ink)]">
+              Sample report
+            </Link>
             <a
               href={GITHUB_REPO_URL}
               target="_blank"

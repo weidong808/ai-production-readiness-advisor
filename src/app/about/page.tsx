@@ -81,6 +81,12 @@ export default function AboutPage() {
         >
           Start assessment
         </Link>
+        <Link
+          href="/sample"
+          className="rounded-md border border-[var(--line)] px-5 py-3 text-sm hover:bg-[var(--bg-soft)]"
+        >
+          View sample report
+        </Link>
         <a
           href={GITHUB_REPO_URL}
           target="_blank"

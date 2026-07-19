@@ -16,6 +16,7 @@ export async function generateNarrative(args: {
   input: AssessmentInput;
   scoring: ScoringResult;
   chunks: CorpusChunk[];
+  repairHint?: string;
 }): Promise<{ text: string; modelId: string }> {
   const { apiKey, model, maxOutputTokens } = getOpenAIConfig();
   if (!apiKey) {
@@ -27,6 +28,10 @@ export async function generateNarrative(args: {
     baseURL: process.env.OPENAI_BASE_URL || undefined,
   });
 
+  const userContent = args.repairHint
+    ? `${buildUserPrompt(args)}\n\n<<<REPAIR_INSTRUCTIONS>>>\n${args.repairHint}\n<<<END_REPAIR_INSTRUCTIONS>>>`
+    : buildUserPrompt(args);
+
   const completion = await client.chat.completions.create({
     model,
     temperature: 0.3,
@@ -36,7 +41,7 @@ export async function generateNarrative(args: {
       { role: "system", content: SYSTEM_PROMPT },
       {
         role: "user",
-        content: buildUserPrompt(args),
+        content: userContent,
       },
     ],
   });

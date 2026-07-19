@@ -61,11 +61,11 @@ Series-consistency and wizard work completed locally, build/lint/tests verified 
 2. ~~Diagnose and fix `narrative=unavailable`.~~ Root cause: invalid/revoked user key (`401`). Replaced with a valid **service-account** key in local `.env` + Vercel Production; redeployed. Live probe: `narrativeStatus: "ok"`.
 3. ~~Post-deploy probe documented~~ in `docs/architecture/deploy.md`.
 
-### P1 — trust and first-run experience
-1. **One-click sample report** (§6) — visitors see full output in seconds.
-2. **Schema-repair pass**: on `schema_failed`, one retry with the validation errors appended to the prompt (cap: 1 retry, then fall back). Log `narrative_repaired`.
-3. **Rate-limit honesty**: in-memory Map resets per instance/cold start, so "10/day" is neither enforced nor accurate under serverless. Either move to a durable store (Vercel KV) or relabel as best-effort and cap output tokens accordingly. Decide, document in `docs/architecture/cost-estimate.md`.
-4. **Landing-page revision** (§7).
+### P1 — trust and first-run experience — DONE 2026-07-19
+1. ~~**One-click sample report** (§6)~~ — `/sample` + `content/samples/sample-report.json` (Production with Guards / HG-09); landing CTA; exports labeled `sample-...`.
+2. ~~**Schema-repair pass**~~ — one retry with validation errors in prompt; log `narrative_repaired`; then scores-only fallback.
+3. ~~**Rate-limit honesty**~~ — decision: keep in-memory **best-effort** (no KV for MVP); documented in `docs/architecture/cost-estimate.md` (`cost@0.2.0`); UI copy updated.
+4. ~~**Landing-page revision** (§7)~~ — hero CTAs, How it works, What you get preview, trust strip.
 
 ### P2 — series integration and polish
 1. Hub site: add `/work/readiness` page + project entry + (later) insights article to `weidong-website`; then set `SITE_CASE_STUDY_URL` in this repo's `brand.ts` and surface it in footer/about, matching RetireCheck/SleepCheck.

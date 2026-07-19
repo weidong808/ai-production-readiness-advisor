@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "report@0.1.0",
+  "context": {
+    "assessmentId": "00000000-0000-4000-8000-0000000000s1",
+    "createdAt": "2026-07-19T12:00:00.000Z",
+    "rubricVersion": "rubric@0.1.0",
+    "questionsVersion": "questions@0.1.0",
+    "corpusVersion": "corpus@0.1.0",
+    "systemName": "Internal policy Q&A assistant",
+    "jobToBeDone": "Help employees find approved policy answers with citations",
+    "audience": "employees",
+    "interactionMode": "assistive",
+    "dataSensitivity": "internal",
+    "blastRadius": "recoverable",
+    "targetEnvironment": "production"
+  },
+  "overallScore": 86,
+  "scoreBand": "Production Ready",
+  "finalBand": "Production with Guards",
+  "hardGatesApplied": [
+    {
+      "gateId": "HG-09",
+      "ceiling": "Production with Guards",
+      "reason": "No clear accountable owner for production AI outputs"
+    }
+  ],
+  "dimensions": [
+    {
+      "dimensionId": "D1",
+      "name": "Use case & risk fit",
+      "score": 92,
+      "band": "Production Ready",
+      "answers": [
+        {
+          "questionId": "D1.Q1",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D1.Q2",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D1.Q3",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D1.Q4",
+          "choice": "B",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "dimensionId": "D2",
+      "name": "Data & privacy",
+      "score": 92,
+      "band": "Production Ready",
+      "answers": [
+        {
+          "questionId": "D2.Q1",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D2.Q2",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D2.Q3",
+          "choice": "B",
+          "points": 2
+        },
+        {
+          "questionId": "D2.Q4",
+          "choice": "A",
+          "points": 3
+        }
+      ]
+    },
+    {
+      "dimensionId": "D3",
+      "name": "Evaluation quality",
+      "score": 83,
+      "band": "Production with Guards",
+      "answers": [
+        {
+          "questionId": "D3.Q1",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D3.Q2",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D3.Q3",
+          "choice": "B",
+          "points": 2
+        },
+        {
+          "questionId": "D3.Q4",
+          "choice": "B",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "dimensionId": "D4",
+      "name": "Security & abuse",
+      "score": 92,
+      "band": "Production Ready",
+      "answers": [
+        {
+          "questionId": "D4.Q1",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D4.Q2",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D4.Q3",
+          "choice": "B",
+          "points": 2
+        },
+        {
+          "questionId": "D4.Q4",
+          "choice": "A",
+          "points": 3
+        }
+      ]
+    },
+    {
+      "dimensionId": "D5",
+      "name": "Reliability & ops",
+      "score": 83,
+      "band": "Production with Guards",
+      "answers": [
+        {
+          "questionId": "D5.Q1",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D5.Q2",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D5.Q3",
+          "choice": "B",
+          "points": 2
+        },
+        {
+          "questionId": "D5.Q4",
+          "choice": "B",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "dimensionId": "D6",
+      "name": "Observability",
+      "score": 92,
+      "band": "Production Ready",
+      "answers": [
+        {
+          "questionId": "D6.Q1",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D6.Q2",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D6.Q3",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D6.Q4",
+          "choice": "B",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "dimensionId": "D7",
+      "name": "Human oversight",
+      "score": 67,
+      "band": "Pilot Only",
+      "answers": [
+        {
+          "questionId": "D7.Q1",
+          "choice": "C",
+          "points": 1
+        },
+        {
+          "questionId": "D7.Q2",
+          "choice": "B",
+          "points": 2
+        },
+        {
+          "questionId": "D7.Q3",
+          "choice": "B",
+          "points": 2
+        },
+        {
+          "questionId": "D7.Q4",
+          "choice": "A",
+          "points": 3
+        }
+      ]
+    },
+    {
+      "dimensionId": "D8",
+      "name": "Cost & performance",
+      "score": 83,
+      "band": "Production with Guards",
+      "answers": [
+        {
+          "questionId": "D8.Q1",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D8.Q2",
+          "choice": "B",
+          "points": 2
+        },
+        {
+          "questionId": "D8.Q3",
+          "choice": "A",
+          "points": 3
+        },
+        {
+          "questionId": "D8.Q4",
+          "choice": "B",
+          "points": 2
+        }
+      ]
+    }
+  ],
+  "executiveSummary": "This internal policy Q&A assistant scores well on use-case fit, data handling, and security basics, but accountability for AI outputs is still shared across teams. Hard gate HG-09 caps the result at Production with Guards until a named owner is assigned. Treat this as an advisory checklist for the next engineering and governance conversation — not certification.",
+  "dimensionNarratives": [
+    {
+      "dimensionId": "D7",
+      "narrative": "Ownership is the binding constraint: without a single accountable owner for production answers, escalation paths and decision rights stay ambiguous even when tooling looks mature."
+    },
+    {
+      "dimensionId": "D3",
+      "narrative": "Evaluation coverage is good enough for a guarded rollout, but groundedness and regression gates should be tightened before any claim of full production readiness."
+    },
+    {
+      "dimensionId": "D5",
+      "narrative": "Reliability patterns exist, yet fallback and rollback drills should be rehearsed so a model or prompt regression does not strand employees mid-policy lookup."
+    }
+  ],
+  "risks": [
+    {
+      "id": "R1",
+      "severity": "high",
+      "title": "Unclear ownership of AI answers",
+      "description": "When ownership is shared, incorrect or outdated policy answers may lack a clear fixer, reviewer, and escalation path.",
+      "dimensionIds": [
+        "D7"
+      ],
+      "citationIds": [
+        "CORP-HUM-01"
+      ]
+    },
+    {
+      "id": "R2",
+      "severity": "medium",
+      "title": "Eval drift under content change",
+      "description": "Policy corpora change often; without stronger golden-set gates, groundedness can slip quietly after prompt or retrieval updates.",
+      "dimensionIds": [
+        "D3"
+      ],
+      "citationIds": [
+        "CORP-EVAL-01",
+        "CORP-EVAL-02"
+      ]
+    },
+    {
+      "id": "R3",
+      "severity": "medium",
+      "title": "Weak failover for model outages",
+      "description": "Employees may be left without a documented fallback when the model or retrieval path fails during peak policy questions.",
+      "dimensionIds": [
+        "D5"
+      ],
+      "citationIds": [
+        "CORP-OPS-01"
+      ]
+    }
+  ],
+  "remediationPlan": [
+    {
+      "id": "M1",
+      "priority": 1,
+      "title": "Name a single accountable owner",
+      "description": "Assign one role accountable for production AI outputs, with a named backup and an escalation path for disputed answers.",
+      "effort": "S",
+      "dimensionIds": [
+        "D7"
+      ],
+      "citationIds": [
+        "CORP-HUM-01"
+      ]
+    },
+    {
+      "id": "M2",
+      "priority": 2,
+      "title": "Add human review for high-impact answers",
+      "description": "Route answers that change entitlements, leave, or safety-critical policies through a human review queue before they are treated as authoritative.",
+      "effort": "M",
+      "dimensionIds": [
+        "D7"
+      ],
+      "citationIds": [
+        "CORP-HUM-02"
+      ]
+    },
+    {
+      "id": "M3",
+      "priority": 3,
+      "title": "Harden golden-set regression gates",
+      "description": "Expand fixtures for groundedness and schema validity; block prompt deploys that regress the suite.",
+      "effort": "M",
+      "dimensionIds": [
+        "D3"
+      ],
+      "citationIds": [
+        "CORP-EVAL-01",
+        "CORP-EVAL-02"
+      ]
+    },
+    {
+      "id": "M4",
+      "priority": 4,
+      "title": "Document and drill fallbacks",
+      "description": "Publish a fallback path (search index or human helpdesk) and rehearse prompt/model rollback.",
+      "effort": "S",
+      "dimensionIds": [
+        "D5"
+      ],
+      "citationIds": [
+        "CORP-OPS-01",
+        "CORP-OPS-02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "CORP-GEN-01",
+      "title": "Advisory assessments are not certifications",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "chunkId": "CORP-GEN-01",
+      "url": null
+    },
+    {
+      "id": "CORP-HUM-01",
+      "title": "Name an accountable owner for AI outputs",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "chunkId": "CORP-HUM-01",
+      "url": null
+    },
+    {
+      "id": "CORP-HUM-02",
+      "title": "Human review for high-impact actions",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "chunkId": "CORP-HUM-02",
+      "url": null
+    },
+    {
+      "id": "CORP-EVAL-01",
+      "title": "Golden sets and regression gates",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "chunkId": "CORP-EVAL-01",
+      "url": null
+    },
+    {
+      "id": "CORP-EVAL-02",
+      "title": "Measure groundedness and schema validity",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "chunkId": "CORP-EVAL-02",
+      "url": null
+    },
+    {
+      "id": "CORP-OPS-01",
+      "title": "Plan fallbacks when the model fails",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "chunkId": "CORP-OPS-01",
+      "url": null
+    },
+    {
+      "id": "CORP-OPS-02",
+      "title": "Make prompt and model rollback easy",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "chunkId": "CORP-OPS-02",
+      "url": null
+    }
+  ],
+  "disclaimer": "Advisory only. Not a certification, audit, or legal opinion.",
+  "qualityFlags": [],
+  "model": {
+    "provider": "openai",
+    "modelId": "sample-pregenerated",
+    "promptVersion": "narrative@0.1.0",
+    "narrativeStatus": "ok"
+  }
+}

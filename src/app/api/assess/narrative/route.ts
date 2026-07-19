@@ -145,6 +145,15 @@ export async function POST(req: Request) {
     setCachedNarrative(cacheKey, result.report);
   }
 
+  if (result.meta.repaired && result.report.model.narrativeStatus === "ok") {
+    logEvent({
+      event: "narrative_repaired",
+      assessmentId,
+      finalBand: result.report.finalBand,
+      latencyMs: Date.now() - started,
+    });
+  }
+
   logEvent({
     event: `narrative_${result.report.model.narrativeStatus}`,
     assessmentId,
@@ -155,6 +164,7 @@ export async function POST(req: Request) {
     shapeErrors: result.meta.shapeErrors,
     schemaIssues: result.meta.schemaIssues,
     providerError: result.meta.providerError,
+    repaired: result.meta.repaired || false,
     corpusVersion: CORPUS_VERSION,
     promptVersion: PROMPT_VERSION,
     latencyMs: Date.now() - started,
@@ -168,6 +178,8 @@ export async function POST(req: Request) {
       redactions: result.meta.redactions,
       qualityFlags: result.report.qualityFlags,
       providerError: result.meta.providerError,
+      repaired: result.meta.repaired || false,
+      rateLimitMode: "best_effort_in_memory",
     },
   });
 }
