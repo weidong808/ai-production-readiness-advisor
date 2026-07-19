@@ -157,7 +157,7 @@ export function ReportView({
   const filePrefix = sampleMode ? `sample-${slug}` : slug;
 
   return (
-    <div className="space-y-8">
+    <div className="report-print-root space-y-8">
       <header className="space-y-3">
         <p className="text-sm text-[var(--ink-muted)]">
           {sampleMode ? "Sample readiness report" : "Readiness report"}
@@ -358,7 +358,7 @@ export function ReportView({
         {sampleMode ? " · sample" : ""}
       </section>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="no-print flex flex-wrap gap-3">
         <button
           type="button"
           onClick={onBack}
@@ -391,6 +391,13 @@ export function ReportView({
           className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
         >
           Export JSON
+        </button>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="rounded-md border border-[var(--line)] px-4 py-2 text-sm hover:bg-[var(--bg-soft)]"
+        >
+          Print / PDF
         </button>
         <button
           type="button"

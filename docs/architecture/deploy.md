@@ -4,7 +4,8 @@
 **Production:** https://readiness.weidong-shi.com  
 **Vercel alias:** https://ai-production-readiness-advisor.vercel.app  
 **GitHub:** https://github.com/weidong808/ai-production-readiness-advisor  
-**Vercel project:** `wshi/ai-production-readiness-advisor`
+**Vercel project:** `wshi/ai-production-readiness-advisor`  
+**Hub case study:** https://weidong-shi.com/work/readiness
 
 ## Cloudflare DNS
 

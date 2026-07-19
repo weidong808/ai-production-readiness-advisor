@@ -67,11 +67,11 @@ Series-consistency and wizard work completed locally, build/lint/tests verified 
 3. ~~**Rate-limit honesty**~~ — decision: keep in-memory **best-effort** (no KV for MVP); documented in `docs/architecture/cost-estimate.md` (`cost@0.2.0`); UI copy updated.
 4. ~~**Landing-page revision** (§7)~~ — hero CTAs, How it works, What you get preview, trust strip.
 
-### P2 — series integration and polish
-1. Hub site: add `/work/readiness` page + project entry + (later) insights article to `weidong-website`; then set `SITE_CASE_STUDY_URL` in this repo's `brand.ts` and surface it in footer/about, matching RetireCheck/SleepCheck.
-2. OG image polish + LinkedIn share validation (§8).
-3. Export enhancements: PDF export (client-side print stylesheet is acceptable), shareable summary card.
-4. Accessibility audit pass (§10.5).
+### P2 — series integration and polish — DONE 2026-07-19 (insight article deferred)
+1. ~~Hub `/work/readiness` + project entry~~ in `weidong-website`; ~~`SITE_CASE_STUDY_URL`~~ → `https://weidong-shi.com/work/readiness` in footer/about. Insights article left for a later LinkedIn package.
+2. ~~OG~~ — static `public/og.png` (edge `opengraph-image.tsx` removed for cold-start reliability). Validate with LinkedIn Post Inspector after hub deploy.
+3. ~~Print / PDF~~ — `window.print()` + print stylesheet on report view. Shareable summary card deferred.
+4. ~~A11y baseline~~ — skip links, `aria-live` report states, focus rings, print-safe chrome; full keyboard audit remains ongoing.
 
 ## 5. OpenAI narrative contract (preserve exactly)
 

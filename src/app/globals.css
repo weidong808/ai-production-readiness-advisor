@@ -103,3 +103,25 @@ body {
 .hero-grid {
   animation: grid-drift 28s linear infinite;
 }
+
+@media print {
+  body {
+    background: white !important;
+    color: #111 !important;
+  }
+
+  .skip-link,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  .report-print-root {
+    color: #111;
+  }
+
+  .report-print-root a {
+    color: #111;
+    text-decoration: none;
+  }
+}

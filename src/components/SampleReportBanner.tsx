@@ -4,7 +4,7 @@ export function SampleReportBanner() {
   return (
     <div
       role="status"
-      className="rounded-md border border-[var(--accent)]/40 bg-[rgba(61,154,139,0.12)] px-4 py-3 text-sm leading-relaxed"
+      className="no-print rounded-md border border-[var(--accent)]/40 bg-[rgba(61,154,139,0.12)] px-4 py-3 text-sm leading-relaxed"
     >
       <p className="font-medium text-[var(--ink)]">Sample assessment</p>
       <p className="mt-1 text-[var(--ink-muted)]">

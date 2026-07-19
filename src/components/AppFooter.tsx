@@ -6,6 +6,8 @@ import {
   GITHUB_REPO_URL,
   RETIRECHECK_URL,
   ROADMAP_URL,
+  SITE_CASE_STUDY_LABEL,
+  SITE_CASE_STUDY_URL,
   SITE_SERIES_NAME,
   SLEEPCHECK_URL,
 } from "@/lib/brand";
@@ -39,6 +41,14 @@ export function AppFooter() {
             <Link href="/sample" className="hover:text-[var(--ink)]">
               Sample report
             </Link>
+            <a
+              href={SITE_CASE_STUDY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--ink)]"
+            >
+              {SITE_CASE_STUDY_LABEL}
+            </a>
             <a
               href={GITHUB_REPO_URL}
               target="_blank"

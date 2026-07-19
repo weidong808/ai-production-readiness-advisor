@@ -9,6 +9,8 @@ import {
   APP_TAGLINE,
   GITHUB_REPO_URL,
   ROADMAP_URL,
+  SITE_CASE_STUDY_LABEL,
+  SITE_CASE_STUDY_URL,
   SITE_SERIES_NAME,
   SITE_SERIES_TAGLINE,
 } from "@/lib/brand";
@@ -87,6 +89,14 @@ export default function AboutPage() {
         >
           View sample report
         </Link>
+        <a
+          href={SITE_CASE_STUDY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-md border border-[var(--line)] px-5 py-3 text-sm hover:bg-[var(--bg-soft)]"
+        >
+          {SITE_CASE_STUDY_LABEL} ↗
+        </a>
         <a
           href={GITHUB_REPO_URL}
           target="_blank"
