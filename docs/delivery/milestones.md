@@ -53,7 +53,8 @@
 - [x] Light public roadmap note (App #3 positioning)  
 - [x] Deploy to Vercel + GitHub remote  
 - [x] Cloudflare DNS for `readiness.weidong-shi.com`  
-- [ ] Hub article / LinkedIn later
+- [x] Hub case study + insight (`/work/readiness`, `/insights/ai-in-action-readiness`)  
+- [x] LinkedIn draft package (publish when ready)
 
 ## Dependency rule
 

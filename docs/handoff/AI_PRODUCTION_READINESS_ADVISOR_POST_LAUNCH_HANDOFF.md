@@ -18,7 +18,7 @@ Checked against production at https://readiness.weidong-shi.com:
 1. **Live deployment is stale.** Production still serves the pre-consistency build: old `<title>` without tagline, no Open Graph / Twitter metadata, no footer, no `/about` page, no ws-mark. The 2026-07-19 local working tree (see §3) has all of this — **it has not been deployed**. First deploy closes most cosmetic gaps at once.
 2. **`narrative=unavailable` defect (P0, reported by owner).** Reports on production render with `narrative=unavailable` in the report footer and the fallback note "Narrative unavailable — scores and band still apply." Scores and bands are correct (deterministic engine is server-side and independent), but the OpenAI advisory narrative — the app's differentiator — never appears. **Live probe 2026-07-19 (Cursor):** `POST /api/assess/narrative` returned `narrativeStatus: "unavailable"` with `meta.providerError: "status_401:invalid_api_key:msg"`. So Production has an `OPENAI_API_KEY` present but **rejected by OpenAI** (rotated/stale key). Prefer re-setting the current local `.env` key into Vercel Production and redeploying over assuming the var is missing.
 3. **Landing page undersells the output.** No preview of what a report looks like; a visitor must invest ~10 minutes before seeing any value.
-4. **Hub gap:** weidong-shi.com has `/work/retirecheck` and `/work/sleepcheck` pages plus insights articles, but nothing for App #3. Sibling apps cross-link to a case study; this app has no case-study URL to link to.
+4. ~~**Hub gap**~~ — **Closed:** `/work/readiness` case study + `/insights/ai-in-action-readiness`; app `SITE_CASE_STUDY_URL` / `SITE_INSIGHT_URL` wired. LinkedIn package drafted (publish when ready).
 
 ## 2. `narrative=unavailable` — diagnosis map (do this before any code change)
 
@@ -67,11 +67,12 @@ Series-consistency and wizard work completed locally, build/lint/tests verified 
 3. ~~**Rate-limit honesty**~~ — decision: keep in-memory **best-effort** (no KV for MVP); documented in `docs/architecture/cost-estimate.md` (`cost@0.2.0`); UI copy updated.
 4. ~~**Landing-page revision** (§7)~~ — hero CTAs, How it works, What you get preview, trust strip.
 
-### P2 — series integration and polish — DONE 2026-07-19 (insight article deferred)
-1. ~~Hub `/work/readiness` + project entry~~ in `weidong-website`; ~~`SITE_CASE_STUDY_URL`~~ → `https://weidong-shi.com/work/readiness` in footer/about. Insights article left for a later LinkedIn package.
+### P2 — series integration and polish — DONE 2026-07-19
+1. ~~Hub `/work/readiness` + project entry~~; ~~insight `/insights/ai-in-action-readiness`~~; ~~`SITE_CASE_STUDY_URL` / `SITE_INSIGHT_URL`~~ in footer/about. LinkedIn draft package ready (feed + Pulse); publish + URL backfill when owner ships.
 2. ~~OG~~ — static `public/og.png` (edge `opengraph-image.tsx` removed for cold-start reliability). Validate with LinkedIn Post Inspector after hub deploy.
 3. ~~Print / PDF~~ — `window.print()` + print stylesheet on report view. Shareable summary card deferred.
-4. ~~A11y baseline~~ — skip links, `aria-live` report states, focus rings, print-safe chrome; full keyboard audit remains ongoing.
+4. ~~A11y baseline~~ — skip links, `aria-live` report states, focus rings, print-safe chrome; assess/report keyboard + theme polish shipped.
+5. ~~Architecture diagrams~~ — mermaid + SVG/PNG in `docs/`; synced to hub.
 
 ## 5. OpenAI narrative contract (preserve exactly)
 
