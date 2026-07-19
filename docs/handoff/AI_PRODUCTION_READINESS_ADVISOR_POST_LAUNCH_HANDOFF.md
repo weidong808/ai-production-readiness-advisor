@@ -56,10 +56,10 @@ Series-consistency and wizard work completed locally, build/lint/tests verified 
 
 ## 4. Priorities
 
-### P0 — restore the narrative (blocker for promotion)
+### P0 — restore the narrative (blocker for promotion) — DONE 2026-07-19
 1. ~~Deploy the 2026-07-19 baseline (§3).~~ **Done** (`eef2b32` live — `/about`, OG, footer).
-2. **Diagnose and fix `narrative=unavailable` — IN PROGRESS.** Live + local `.env` both fail OpenAI with `401 incorrect API key`. Owner must place a **valid** key in local `.env`, then re-run Vercel env refresh (`docs/architecture/deploy.md`) and redeploy. Do not treat Vercel as missing the var — it has a rejected key.
-3. ~~Post-deploy probe documented~~ in `docs/architecture/deploy.md`. Re-run probe until `narrativeStatus: "ok"`.
+2. ~~Diagnose and fix `narrative=unavailable`.~~ Root cause: invalid/revoked user key (`401`). Replaced with a valid **service-account** key in local `.env` + Vercel Production; redeployed. Live probe: `narrativeStatus: "ok"`.
+3. ~~Post-deploy probe documented~~ in `docs/architecture/deploy.md`.
 
 ### P1 — trust and first-run experience
 1. **One-click sample report** (§6) — visitors see full output in seconds.
