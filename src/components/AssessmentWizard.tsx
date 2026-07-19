@@ -130,12 +130,14 @@ export function AssessmentWizard() {
 
   if (!hydrated) {
     return (
-      <p className="text-sm text-[var(--ink-muted)]">Loading assessment…</p>
+      <p className="text-sm text-[var(--ink-muted)]" role="status" aria-live="polite">
+        Loading assessment…
+      </p>
     );
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-10">
+    <div id="main" className="mx-auto max-w-2xl px-6 py-10">
       <div className="mb-8 flex items-center justify-between gap-4">
         <Link
           href="/"
@@ -148,11 +150,18 @@ export function AssessmentWizard() {
           onClick={restart}
           className="text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]"
         >
-          Reset
+          Reset assessment
         </button>
       </div>
 
-      <div className="mb-8">
+      <div
+        className="mb-8"
+        role="progressbar"
+        aria-valuemin={1}
+        aria-valuemax={steps.length}
+        aria-valuenow={stepIndex + 1}
+        aria-label={`Assessment progress, step ${stepIndex + 1} of ${steps.length}`}
+      >
         <div className="mb-2 flex justify-between text-xs text-[var(--ink-muted)]">
           <span>
             Step {stepIndex + 1} of {steps.length}
@@ -186,6 +195,8 @@ export function AssessmentWizard() {
                       context[field.id as keyof AssessmentContext] ?? "",
                     )}
                     placeholder={field.placeholder}
+                    required={field.required}
+                    aria-required={field.required}
                     onChange={(e) =>
                       setContext((prev) => ({
                         ...prev,
@@ -199,6 +210,8 @@ export function AssessmentWizard() {
                     value={String(
                       context[field.id as keyof AssessmentContext] ?? "",
                     )}
+                    required={field.required}
+                    aria-required={field.required}
                     onChange={(e) =>
                       setContext((prev) => ({
                         ...prev,
@@ -402,14 +415,15 @@ function NavButtons({
           Back
         </button>
       )}
-      <button
-        type="button"
-        onClick={onNext}
-        disabled={nextDisabled}
-        className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#06120f] hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        {nextLabel}
-      </button>
+        <button
+          type="button"
+          onClick={onNext}
+          disabled={nextDisabled}
+          aria-disabled={nextDisabled}
+          className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#06120f] hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {nextLabel}
+        </button>
     </div>
   );
 }

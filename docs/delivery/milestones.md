@@ -33,7 +33,7 @@
 - [x] Export Markdown/JSON  
 - [x] OpenAI provider (PD-013) + in-memory cache + rate limit
 
-## M4 — Evals, security, cost guards (current)
+## M4 — Evals, security, cost guards
 
 **Outcome:** CI protects quality and abuse boundaries.
 
@@ -42,17 +42,17 @@
 - [x] Blocklist + disclaimer enforcement  
 - [x] Secret redaction helper  
 - [x] Structured logging (no raw answers by default)  
-- [x] Quality flags (e.g. missing citations on critical risks) 
+- [x] Quality flags (e.g. missing citations on critical risks)  
 
-## M5 — Polish, deploy, portfolio
+## M5 — Polish, deploy, portfolio (current)
 
 **Outcome:** Public demo + case-study materials.
 
-- A11y / responsive polish  
-- Deploy subdomain  
-- README screenshots + architecture link  
-- Light public roadmap note (App #3 positioning)  
-- Hub article / LinkedIn later (after live demo)  
+- [x] A11y / responsive polish (focus, skip links, progressbar, live regions)  
+- [x] README demo script + deploy notes  
+- [x] Light public roadmap note (App #3 positioning)  
+- [ ] Deploy subdomain (`readiness.weidong-shi.com` proposed)  
+- [ ] Hub article / LinkedIn later (after live demo)
 
 ## Dependency rule
 

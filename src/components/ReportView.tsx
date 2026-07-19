@@ -159,15 +159,32 @@ export function ReportView({
         <p className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm text-[var(--ink-muted)]">
           {view.disclaimer}
         </p>
-        {state === "loading" && (
-          <p className="text-sm text-[var(--accent)]">
-            Generating advisory narrative…
-          </p>
-        )}
-        {metaNote && (
-          <p className="text-sm text-[var(--warn)]">{metaNote}</p>
-        )}
+        <div aria-live="polite" aria-atomic="true">
+          {state === "loading" && (
+            <p className="text-sm text-[var(--accent)]" role="status">
+              Generating advisory narrative…
+            </p>
+          )}
+          {metaNote && (
+            <p className="text-sm text-[var(--warn)]" role="status">
+              {metaNote}
+            </p>
+          )}
+        </div>
       </header>
+
+      {view.qualityFlags.length > 0 && (
+        <section className="space-y-2" aria-label="Quality flags">
+          <h3 className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+            Quality flags
+          </h3>
+          <ul className="space-y-1 text-sm text-[var(--warn)]">
+            {view.qualityFlags.map((flag) => (
+              <li key={flag}>{flag.split("_").join(" ")}</li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {view.executiveSummary && (
         <section className="space-y-2">

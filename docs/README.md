@@ -14,6 +14,7 @@
 | Fixtures | [eval/fixtures/](eval/fixtures/) |
 | Architecture | [architecture/architecture.md](architecture/architecture.md) |
 | Cost estimate | [architecture/cost-estimate.md](architecture/cost-estimate.md) |
+| Deploy notes | [architecture/deploy.md](architecture/deploy.md) |
 | Milestones | [delivery/milestones.md](delivery/milestones.md) |
 | Backlog | [delivery/implementation-backlog.md](delivery/implementation-backlog.md) |
 | Acceptance | [delivery/acceptance-criteria.md](delivery/acceptance-criteria.md) |

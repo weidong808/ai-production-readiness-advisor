@@ -1,22 +1,24 @@
 # AI Production Readiness Advisor
 
-Guided assessment tool that helps engineers and architects evaluate whether an AI feature or system is ready for production — with structured scores, hard gates, and (next) evidence-backed narrative remediation.
+Guided assessment tool that helps engineers and architects evaluate whether an AI feature or system is ready for production — with structured scores, hard gates, and an evidence-backed advisory narrative.
 
 | | |
 |--------|--------|
 | **Series** | [AI in Action](https://weidong-shi.com) · App #3 |
 | **Public roadmap** | [ai-in-action-roadmap](https://github.com/weidong808/ai-in-action-roadmap) |
-| **Status** | M4 — evals, security, and cost guards |
+| **Status** | M5 — polish / deploy-ready locally |
 | **Owner** | Weidong Shi |
+| **Proposed URL** | `readiness.weidong-shi.com` (TBD) |
 
 ## What this is
 
 An educational portfolio application that demonstrates:
 
-- Structured AI product assessment (deterministic scoring + upcoming LLM narrative)
+- Structured AI product assessment (deterministic scoring + LLM narrative)
 - Hard-gated readiness bands
-- Evaluation fixtures for scoring correctness
-- Cost and privacy discipline for LLM features (M3+)
+- Curated corpus retrieval + citation hygiene
+- Evaluation fixtures for scoring and narrative safety
+- Cost and privacy discipline for LLM features
 
 **Philosophy:** Build → Validate → Improve → Document → Share
 
@@ -26,40 +28,68 @@ An educational portfolio application that demonstrates:
 - Not legal, security, or regulatory advice
 - Not a commercial product catalog entry
 
-## Local development
+## Demo script (local)
+
+1. Copy env and install:
 
 ```bash
+cp .env.example .env
+# put OPENAI_API_KEY in .env only
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000), then **Start assessment**.
+2. Open the app (port may be `3001` if `3000` is busy):  
+   [http://localhost:3000](http://localhost:3000) → **Start assessment**
+
+3. Happy path (~10–15 min):
+   - Context: internal assistive tool, production target  
+   - Answer dimensions mostly **A/B**  
+   - Review projected band → open full report  
+   - Confirm executive summary, risks, remediation, citations  
+   - Export Markdown / JSON (both include the advisory disclaimer)
+
+4. Guardrail path (optional):
+   - Use a public chatbot + weak evaluation answers  
+   - Expect hard gate **HG-04** and band ≤ **Pilot Only**  
+   - Free-text injection attempts must not raise the band
+
+5. Quality checks:
 
 ```bash
-npm test    # S01–S06 scoring fixtures
+npm test    # S01–S10 fixtures (no live LLM)
 npm run build
 ```
 
-Copy `.env.example` → `.env` and set `OPENAI_API_KEY` when you reach M3 (narrative). Not required for the scores-only MVP.
+## Configuration
+
+| Variable | Purpose |
+|----------|---------|
+| `OPENAI_API_KEY` | Server-only narrative generation |
+| `OPENAI_MODEL` | Default `gpt-4.1-mini` |
+| `AI_NARRATIVE_ENABLED=false` | Scores-only mode |
+| `AI_RATE_LIMIT_PER_IP_PER_DAY` | Default `10` |
+
+See [docs/architecture/deploy.md](docs/architecture/deploy.md).
 
 ## Current phase
 
 | Milestone | Status |
 |-----------|--------|
-| M1 Discovery | Done (owner approved) |
+| M1 Discovery | Done |
 | M2 Assessment UX + deterministic scoring | Done |
 | M3 LLM narrative + RAG (OpenAI) | Done |
-| M4 Evals, security, cost guards | **Runnable** |
-| M5 Polish, deploy, portfolio | Later |
+| M4 Evals, security, cost guards | Done |
+| M5 Polish, deploy, portfolio | **Local polish done · public deploy TBD** |
 
 Docs index: [docs/README.md](docs/README.md)
 
 ## Stack
 
 - Next.js App Router + TypeScript + Tailwind CSS v4
-- Zod for input shapes
-- Vitest for scoring fixtures
-- OpenAI planned for narrative (M3)
+- Zod for input / narrative shapes
+- Vitest for scoring + narrative fixtures
+- OpenAI for advisory narrative
 
 ## License
 

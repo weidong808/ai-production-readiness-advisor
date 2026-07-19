@@ -42,12 +42,12 @@ Prioritized for post-discovery. IDs are stable references.
 
 | ID | Item | Notes |
 |----|------|-------|
-| B-030 | Landing page (brand + one CTA) | Portfolio-quality |
-| B-031 | Empty/error/degraded states | |
-| B-032 | A11y pass | Keyboard, contrast, labels |
-| B-033 | Deploy + custom domain | |
-| B-034 | README demo script | |
-| B-035 | Public roadmap one-pager update | Separate PR in roadmap repo |
+| B-030 | Landing page (brand + one CTA) | Done |
+| B-031 | Empty/error/degraded states | Done (aria-live + quality flags) |
+| B-032 | A11y pass | Done for MVP wizard/report |
+| B-033 | Deploy + custom domain | Prepared — owner deploy TBD |
+| B-034 | README demo script | Done |
+| B-035 | Public roadmap one-pager update | Drafted in `ai-in-action-roadmap` |
 
 ## Explicitly not in backlog (MVP)
 
