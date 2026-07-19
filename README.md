@@ -6,9 +6,11 @@ Guided assessment tool that helps engineers and architects evaluate whether an A
 |--------|--------|
 | **Series** | [AI in Action](https://weidong-shi.com) · App #3 |
 | **Public roadmap** | [ai-in-action-roadmap](https://github.com/weidong808/ai-in-action-roadmap) |
-| **Status** | M5 — polish / deploy-ready locally |
+| **Status** | Live on Vercel · custom domain DNS pending |
 | **Owner** | Weidong Shi |
-| **Proposed URL** | `readiness.weidong-shi.com` (TBD) |
+| **Live demo** | https://ai-production-readiness-advisor.vercel.app |
+| **Custom domain** | https://readiness.weidong-shi.com (add Cloudflare DNS) |
+| **GitHub** | https://github.com/weidong808/ai-production-readiness-advisor |
 
 ## What this is
 
@@ -80,7 +82,7 @@ See [docs/architecture/deploy.md](docs/architecture/deploy.md).
 | M2 Assessment UX + deterministic scoring | Done |
 | M3 LLM narrative + RAG (OpenAI) | Done |
 | M4 Evals, security, cost guards | Done |
-| M5 Polish, deploy, portfolio | **Local polish done · public deploy TBD** |
+| M5 Polish, deploy, portfolio | **Live on Vercel · DNS for custom domain TBD** |
 
 Docs index: [docs/README.md](docs/README.md)
 

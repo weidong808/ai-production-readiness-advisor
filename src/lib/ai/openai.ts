@@ -30,7 +30,7 @@ export async function generateNarrative(args: {
   const completion = await client.chat.completions.create({
     model,
     temperature: 0.3,
-    max_tokens: maxOutputTokens,
+    max_completion_tokens: maxOutputTokens,
     response_format: { type: "json_object" },
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
@@ -46,4 +46,22 @@ export async function generateNarrative(args: {
     throw new Error("Empty model response");
   }
   return { text, modelId: completion.model || model };
+}
+
+/** Safe, non-secret provider error summary for logs/meta. */
+export function summarizeProviderError(err: unknown): string {
+  if (!err || typeof err !== "object") return "provider_error";
+  const e = err as {
+    status?: number;
+    code?: string;
+    type?: string;
+    message?: string;
+    error?: { code?: string; type?: string; message?: string };
+  };
+  const code = e.code || e.error?.code || e.type || e.error?.type;
+  const status = e.status;
+  const message = (e.error?.message || e.message || "").slice(0, 160);
+  return [status && `status_${status}`, code, message && "msg"]
+    .filter(Boolean)
+    .join(":") || "provider_error";
 }

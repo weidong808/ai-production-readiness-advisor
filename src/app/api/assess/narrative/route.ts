@@ -154,6 +154,7 @@ export async function POST(req: Request) {
     redactions: result.meta.redactions,
     shapeErrors: result.meta.shapeErrors,
     schemaIssues: result.meta.schemaIssues,
+    providerError: result.meta.providerError,
     corpusVersion: CORPUS_VERSION,
     promptVersion: PROMPT_VERSION,
     latencyMs: Date.now() - started,
@@ -166,6 +167,7 @@ export async function POST(req: Request) {
       limit: limit.limit,
       redactions: result.meta.redactions,
       qualityFlags: result.report.qualityFlags,
+      providerError: result.meta.providerError,
     },
   });
 }

@@ -4,6 +4,7 @@ import {
   mergeNarrativeReport,
 } from "@/lib/ai/merge";
 import { normalizeLlmNarrative } from "@/lib/ai/normalize";
+import { summarizeProviderError } from "@/lib/ai/openai";
 import { rawNarrativeHasFatalShapeErrors } from "@/lib/ai/raw-shape";
 import { retrieveChunks } from "@/lib/corpus/retrieve";
 import { llmNarrativeSchema } from "@/lib/schema/narrative";
@@ -26,6 +27,7 @@ export type PipelineResult = {
     redactions: string[];
     shapeErrors?: string[];
     schemaIssues?: { path: string; message: string }[];
+    providerError?: string;
   };
 };
 
@@ -121,7 +123,7 @@ export async function runNarrativePipeline(args: {
       scoring,
       meta: { redactions },
     };
-  } catch {
+  } catch (err) {
     return {
       report: buildScoresOnlyReport({
         assessmentId: args.assessmentId,
@@ -132,7 +134,7 @@ export async function runNarrativePipeline(args: {
         modelId: args.modelIdFallback,
       }),
       scoring,
-      meta: { redactions },
+      meta: { redactions, providerError: summarizeProviderError(err) },
     };
   }
 }

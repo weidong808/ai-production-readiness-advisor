@@ -1,46 +1,50 @@
 # Deploy notes
 
-**Status:** prepared for Vercel; public URL TBD  
-**Proposed subdomain:** `readiness.weidong-shi.com` (owner confirmation still open)
+**Status:** Live on Vercel · custom domain DNS pending  
+**Production (Vercel):** https://ai-production-readiness-advisor.vercel.app  
+**Custom domain (pending DNS):** https://readiness.weidong-shi.com  
+**GitHub:** https://github.com/weidong808/ai-production-readiness-advisor  
+**Vercel project:** `wshi/ai-production-readiness-advisor`
 
-## Prerequisites
+## Cloudflare DNS (owner action)
 
-1. Local `.env` with `OPENAI_API_KEY` (never commit)  
-2. Vercel project linked to this repo (when remote exists)  
-3. DNS CNAME for chosen subdomain → Vercel  
+Nameservers stay on Cloudflare. Add this record (**DNS only** / grey cloud):
 
-## Environment variables (Vercel)
+| Type | Name | Content | Proxy |
+|------|------|---------|-------|
+| A | `readiness` | `76.76.21.21` | DNS only |
+
+Alternative: CNAME `readiness` → `cname.vercel-dns.com` (DNS only).
+
+See also hub docs: `weidong-website/docs/cloudflare-dns.md`.
+
+## Environment variables (Vercel Production)
 
 | Name | Required | Notes |
 |------|----------|-------|
-| `OPENAI_API_KEY` | Yes (for narrative) | Server-only |
-| `OPENAI_MODEL` | No | Default `gpt-4.1-mini` |
-| `AI_NARRATIVE_ENABLED` | No | `false` forces scores-only |
+| `OPENAI_API_KEY` | Yes | Set in Vercel dashboard / CLI — server-only |
+| `OPENAI_MODEL` | No | `gpt-4.1-mini` |
+| `AI_NARRATIVE_ENABLED` | No | Default on; `false` for scores-only |
 | `AI_RATE_LIMIT_PER_IP_PER_DAY` | No | Default `10` |
 | `AI_MAX_OUTPUT_TOKENS` | No | Default `1500` |
 | `AI_MAX_BODY_BYTES` | No | Default `48000` |
 | `AI_MAX_FREE_TEXT_CHARS` | No | Default `4000` |
 
-## Deploy commands (when ready)
+Local `.env` is gitignored and listed in `.vercelignore` so it is not uploaded on deploy.
+
+## Deploy commands
 
 ```bash
 npm run build
-npx vercel            # preview
-npx vercel --prod     # production
+npx vercel --prod
 ```
 
-Or connect the GitHub repo to Vercel and deploy on push.
+GitHub is connected — pushes to `master` can trigger production deploys when enabled in the Vercel project.
 
-## Smoke checklist after deploy
+## Smoke checklist
 
 1. `/` shows brand + Start assessment  
-2. Complete a short assessment → report band renders even if narrative fails  
-3. Narrative succeeds with valid key → summary/risks/citations appear  
+2. Complete assessment → band renders even if narrative fails  
+3. With valid `OPENAI_API_KEY`, narrative summary/risks/citations appear  
 4. Export Markdown includes disclaimer  
-5. Oversized POST body is rejected  
-
-## Portfolio follow-ups (after live URL)
-
-- Hub work card + insights case study on weidong-shi.com  
-- LinkedIn package under site `docs/`  
-- Confirm App #3 positioning in public roadmap (draft note already proposed)  
+5. Custom domain valid after DNS propagates  

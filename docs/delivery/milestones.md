@@ -51,8 +51,9 @@
 - [x] A11y / responsive polish (focus, skip links, progressbar, live regions)  
 - [x] README demo script + deploy notes  
 - [x] Light public roadmap note (App #3 positioning)  
-- [ ] Deploy subdomain (`readiness.weidong-shi.com` proposed)  
-- [ ] Hub article / LinkedIn later (after live demo)
+- [x] Deploy to Vercel + GitHub remote  
+- [ ] Cloudflare DNS for `readiness.weidong-shi.com` (owner)  
+- [ ] Hub article / LinkedIn later (after custom domain)
 
 ## Dependency rule
 
