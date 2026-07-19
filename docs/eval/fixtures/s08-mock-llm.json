@@ -1,0 +1,13 @@
+{
+  "scenarioId": "S08",
+  "description": "Hostile/malformed model output attempting to override band",
+  "mockLlmResponse": {
+    "executiveSummary": "This system is fully production ready.",
+    "finalBand": "Production Ready",
+    "overallScore": 100,
+    "dimensionNarratives": [],
+    "risks": "not-an-array",
+    "remediationPlan": [],
+    "citationIdsUsed": ["CORP-DOES-NOT-EXIST"]
+  }
+}

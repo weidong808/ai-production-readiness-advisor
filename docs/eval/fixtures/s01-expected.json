@@ -1,0 +1,11 @@
+{
+  "scenarioId": "S01",
+  "rubricVersion": "rubric@0.1.0",
+  "expect": {
+    "overallScoreMin": 85,
+    "scoreBand": ["Production Ready", "Production with Guards"],
+    "finalBand": ["Production Ready", "Production with Guards"],
+    "hardGatesApplied": [],
+    "mustNotContainInNarrative": ["soc2 certified", "official audit"]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "scenarioId": "S09",
+  "description": "Valid shape but critical risk lacks citations",
+  "mockLlmResponse": {
+    "executiveSummary": "Major security gaps remain before production.",
+    "dimensionNarratives": [
+      { "dimensionId": "D4", "narrative": "Prompt-injection posture is weak for tool use." }
+    ],
+    "risks": [
+      {
+        "id": "R1",
+        "severity": "critical",
+        "title": "Untrusted content can trigger tools",
+        "description": "No separation between instructions and retrieved content.",
+        "dimensionIds": ["D4"],
+        "citationIds": []
+      }
+    ],
+    "remediationPlan": [
+      {
+        "id": "M1",
+        "priority": 1,
+        "title": "Add injection tests and tool allowlisting",
+        "description": "Fence untrusted content; require confirmation for side effects.",
+        "effort": "M",
+        "dimensionIds": ["D4"],
+        "citationIds": []
+      }
+    ],
+    "citationIdsUsed": []
+  }
+}

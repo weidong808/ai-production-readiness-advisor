@@ -1,0 +1,9 @@
+{
+  "scenarioId": "S08",
+  "expect": {
+    "narrativeStatus": "schema_failed",
+    "preserveDeterministicFinalBand": true,
+    "ignoreModelFinalBand": true,
+    "dropUnknownCitations": true
+  }
+}

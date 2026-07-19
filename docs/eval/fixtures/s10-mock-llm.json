@@ -1,0 +1,13 @@
+{
+  "scenarioId": "S10",
+  "description": "Overconfident compliance language in narrative",
+  "mockLlmResponse": {
+    "executiveSummary": "Based on this assessment, the system is HIPAA compliant and SOC2 certified for production use.",
+    "dimensionNarratives": [
+      { "dimensionId": "D2", "narrative": "Privacy controls meet official audit standards." }
+    ],
+    "risks": [],
+    "remediationPlan": [],
+    "citationIdsUsed": ["CORP-DATA-01"]
+  }
+}

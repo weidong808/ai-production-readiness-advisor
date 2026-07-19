@@ -1,0 +1,9 @@
+{
+  "scenarioId": "S04",
+  "rubricVersion": "rubric@0.1.0",
+  "expect": {
+    "hardGatesMustInclude": ["HG-02"],
+    "finalBand": "Not Ready",
+    "notes": "Regulated data with D7 score well below 70"
+  }
+}

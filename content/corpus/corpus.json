@@ -1,0 +1,185 @@
+{
+  "version": "corpus@0.1.0",
+  "chunks": [
+    {
+      "id": "CORP-GEN-01",
+      "dimensionIds": [],
+      "tags": ["advisory", "limits", "disclaimer"],
+      "title": "Advisory assessments are not certifications",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Checklists and scored advisors help teams structure a go/no-go conversation. They do not replace formal audits, legal review, or compliance certifications. Treat the readiness band as a decision aid: document remaining risks, name an owner, and keep human accountability for production outcomes."
+    },
+    {
+      "id": "CORP-USE-01",
+      "dimensionIds": ["D1"],
+      "tags": ["success-metrics", "use-case"],
+      "title": "Define success metrics before model selection",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Write the job-to-be-done and how you will know the AI is helping. Prefer measurable outcomes (task success rate, time saved, escalation rate) over vague quality vibes. If you cannot define failure, you cannot evaluate readiness. Revisit whether a deterministic workflow would be safer or cheaper before committing to a generative path."
+    },
+    {
+      "id": "CORP-USE-02",
+      "dimensionIds": ["D1"],
+      "tags": ["misuse", "dual-use"],
+      "title": "List misuse and dual-use cases early",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Brainstorm how the system could be abused, jailbroken, or applied outside the intended audience. Assign an owner for each material misuse scenario and decide whether product constraints, monitoring, or policy can reduce risk. Unexamined dual-use is a common reason pilots stall after the first incident."
+    },
+    {
+      "id": "CORP-DATA-01",
+      "dimensionIds": ["D2"],
+      "tags": ["pii", "minimization"],
+      "title": "Minimize data sent to models",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Send the least sensitive fields required for the task. Prefer redaction, tokenization, or summarization before inference. Avoid pasting entire tickets, medical notes, or HR files into prompts when a narrower context window would suffice. Document what leaves the trust boundary on each call."
+    },
+    {
+      "id": "CORP-DATA-02",
+      "dimensionIds": ["D2"],
+      "tags": ["retention", "logs"],
+      "title": "Define prompt and log retention",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Prompts and completions often contain personal or confidential data. Set retention periods, access controls, and deletion paths for AI logs. Default to not storing raw user content longer than needed for debugging. Separate operational metrics from full transcript storage."
+    },
+    {
+      "id": "CORP-DATA-03",
+      "dimensionIds": ["D2"],
+      "tags": ["provider", "training"],
+      "title": "Know provider training and data-use settings",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Confirm whether prompts may be used to train provider models. Prefer contractual zero-retention or enterprise settings for internal and regulated workloads. Document the chosen setting in your architecture notes so future changes are intentional."
+    },
+    {
+      "id": "CORP-EVAL-01",
+      "dimensionIds": ["D3"],
+      "tags": ["fixtures", "regression"],
+      "title": "Golden sets and regression gates",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Maintain a versioned fixture set for critical behaviors: refusals, schema validity, citation requirements, and high-risk edge cases. Run fixtures before prompt or model changes. A production target without fixtures is a pilot in disguise."
+    },
+    {
+      "id": "CORP-EVAL-02",
+      "dimensionIds": ["D3"],
+      "tags": ["groundedness", "schema"],
+      "title": "Measure groundedness and schema validity",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "For RAG and structured outputs, automate checks that claims cite allowed sources and that JSON matches the contract. Spot checks help early; CI gates keep quality from drifting as prompts evolve."
+    },
+    {
+      "id": "CORP-EVAL-03",
+      "dimensionIds": ["D3"],
+      "tags": ["feedback", "online"],
+      "title": "Close the online feedback loop",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "After launch, capture thumbs-down, escalations, and sampled reviews. Route failures to an owner with enough context to reproduce. Online signals should feed the golden set so regressions get caught offline next time."
+    },
+    {
+      "id": "CORP-SEC-01",
+      "dimensionIds": ["D4"],
+      "tags": ["prompt-injection", "owasp"],
+      "title": "Prompt injection basics for builders",
+      "source": "AI Production Readiness Advisor — educational notes (aligned with OWASP LLM risk themes)",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "text": "Treat user content and retrieved documents as untrusted. Separate system instructions from user data with clear delimiters. Do not let the model freely invent tool calls against privileged systems. Test injection attempts as part of release gates, especially for agents."
+    },
+    {
+      "id": "CORP-SEC-02",
+      "dimensionIds": ["D4"],
+      "tags": ["tools", "least-privilege"],
+      "title": "Least privilege for tool-calling agents",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Allowlist tools, scope credentials tightly, and require human confirmation for side effects (deploy, email, spend, delete). Log tool invocations with actor and arguments. Broad tool access plus weak injection posture is a common Not Ready combination."
+    },
+    {
+      "id": "CORP-SEC-03",
+      "dimensionIds": ["D4"],
+      "tags": ["untrusted-content", "fencing"],
+      "title": "Separate instructions from untrusted content",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "When prompts include emails, tickets, or web pages, fence that material and instruct the model to treat it as data only. Never concatenate untrusted text into the system prompt. Prefer structured fields over free-form paste for consequential workflows."
+    },
+    {
+      "id": "CORP-OPS-01",
+      "dimensionIds": ["D5"],
+      "tags": ["fallback", "degrade"],
+      "title": "Plan fallbacks when the model fails",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Define what users see when the provider is down, slow, or returns invalid output. Graceful degrade might mean deterministic scores only, cached answers, or a human queue. Retries alone are not a fallback strategy."
+    },
+    {
+      "id": "CORP-OPS-02",
+      "dimensionIds": ["D5"],
+      "tags": ["rollback", "versioning"],
+      "title": "Make prompt and model rollback easy",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Version prompts and model ids. Keep a known-good configuration you can restore quickly after a bad release. Feature flags beat emergency redeploys when narrative quality regresses."
+    },
+    {
+      "id": "CORP-OBS-01",
+      "dimensionIds": ["D6"],
+      "tags": ["tracing", "observability"],
+      "title": "Trace AI requests end-to-end",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Propagate a request id across the app, retrieval, and model call. Record model id, prompt version, latency, and validation outcome. Without traces, production incidents become anecdotes."
+    },
+    {
+      "id": "CORP-OBS-02",
+      "dimensionIds": ["D6"],
+      "tags": ["logging", "privacy"],
+      "title": "Privacy-safe AI logging",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Default logs should omit raw prompts that may contain secrets or PII. Log hashes, sizes, statuses, and sampled redacted excerpts under controlled access. Over-logging is a privacy incident waiting to happen."
+    },
+    {
+      "id": "CORP-HUM-01",
+      "dimensionIds": ["D7"],
+      "tags": ["ownership", "accountability"],
+      "title": "Name an accountable owner for AI outputs",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Production AI needs a human owner who can pause the feature, answer incidents, and decide remediations. “The model decided” is not an operating model. Publish the owner in runbooks."
+    },
+    {
+      "id": "CORP-HUM-02",
+      "dimensionIds": ["D7"],
+      "tags": ["human-review", "escalation"],
+      "title": "Human review for high-impact actions",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "When outputs can move money, change access, or affect regulated decisions, require human confirmation or sampling review. Document escalation paths for harmful or wrong answers. Communicate uncertainty to users instead of overconfident UX."
+    },
+    {
+      "id": "CORP-COST-01",
+      "dimensionIds": ["D8"],
+      "tags": ["budget", "caps"],
+      "title": "Enforce cost and token budgets",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Set per-request and per-user caps. Prefer smaller models for routine tasks and reserve stronger models for hard cases. Monitor spend with alerts before a demo traffic spike becomes a bill shock."
+    },
+    {
+      "id": "CORP-COST-02",
+      "dimensionIds": ["D8"],
+      "tags": ["caching", "performance"],
+      "title": "Cache safely where inputs repeat",
+      "source": "AI Production Readiness Advisor — educational notes",
+      "url": null,
+      "text": "Cache narrative or classification results when inputs and corpus versions are identical and the output is not personalized secrets. Pair caching with latency budgets so UX stays predictable under load."
+    }
+  ]
+}

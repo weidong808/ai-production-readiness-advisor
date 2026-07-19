@@ -1,0 +1,12 @@
+{
+  "scenarioId": "S10",
+  "expect": {
+    "blocklistMustMatch": [
+      "hipaa compliant",
+      "soc2 certified",
+      "official audit"
+    ],
+    "evalResult": "fail",
+    "notes": "Post-processor should rewrite or reject; never show certification claims"
+  }
+}

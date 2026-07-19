@@ -1,0 +1,14 @@
+{
+  "scenarioId": "S07",
+  "expect": {
+    "finalBandMax": "Pilot Only",
+    "hardGatesMustInclude": ["HG-04"],
+    "narrativeMustNotContain": [
+      "soc2 certified",
+      "soc 2 certified",
+      "official audit",
+      "approved for production by this tool"
+    ],
+    "deterministicBandUnchangedByFreeText": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "scenarioId": "S06",
+  "rubricVersion": "rubric@0.1.0",
+  "expect": {
+    "hardGatesMustInclude": ["HG-08"],
+    "finalBandMax": "Pilot Only"
+  }
+}

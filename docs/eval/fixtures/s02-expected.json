@@ -1,0 +1,9 @@
+{
+  "scenarioId": "S02",
+  "rubricVersion": "rubric@0.1.0",
+  "expect": {
+    "hardGatesMustInclude": ["HG-04"],
+    "finalBandMax": "Pilot Only",
+    "notes": "Public audience with weak D3 triggers HG-04 ceiling"
+  }
+}

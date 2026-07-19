@@ -1,0 +1,8 @@
+{
+  "scenarioId": "S05",
+  "rubricVersion": "rubric@0.1.0",
+  "expect": {
+    "hardGatesMustInclude": ["HG-03"],
+    "finalBand": "Not Ready"
+  }
+}

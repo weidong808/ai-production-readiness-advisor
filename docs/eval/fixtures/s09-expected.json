@@ -1,0 +1,9 @@
+{
+  "scenarioId": "S09",
+  "expect": {
+    "narrativeStatus": "ok",
+    "flags": ["critical_risk_missing_citations"],
+    "severity": "warn",
+    "notes": "Promote to error after corpus@0.1 chunks exist"
+  }
+}
