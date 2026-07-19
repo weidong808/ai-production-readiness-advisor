@@ -1,12 +1,15 @@
 import type { Band } from "@/lib/scoring/types";
 
+/** Theme-aware badges — colors come from CSS variables so light/dark both read. */
 const STYLES: Record<Band, string> = {
-  "Not Ready": "bg-[rgba(196,92,92,0.2)] text-[#f0b4b4] border-[rgba(196,92,92,0.45)]",
-  "Pilot Only": "bg-[rgba(212,160,23,0.18)] text-[#f0d48a] border-[rgba(212,160,23,0.45)]",
+  "Not Ready":
+    "bg-[color-mix(in_srgb,var(--danger)_16%,transparent)] text-[var(--danger)] border-[color-mix(in_srgb,var(--danger)_40%,transparent)]",
+  "Pilot Only":
+    "bg-[color-mix(in_srgb,var(--warn)_16%,transparent)] text-[var(--warn)] border-[color-mix(in_srgb,var(--warn)_40%,transparent)]",
   "Production with Guards":
-    "bg-[rgba(62,207,142,0.16)] text-[#a8efc8] border-[rgba(62,207,142,0.4)]",
+    "bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] text-[var(--accent)] border-[color-mix(in_srgb,var(--accent)_40%,transparent)]",
   "Production Ready":
-    "bg-[rgba(62,207,142,0.22)] text-[#c4f5d8] border-[rgba(62,207,142,0.5)]",
+    "bg-[color-mix(in_srgb,var(--accent)_20%,transparent)] text-[var(--accent)] border-[color-mix(in_srgb,var(--accent)_50%,transparent)]",
 };
 
 export function BandBadge({ band }: { band: Band }) {

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Analytics } from "@/components/Analytics";
 import { AppFooter } from "@/components/AppFooter";
 import { AppHeader } from "@/components/AppHeader";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import {
   APP_DESCRIPTION,
   APP_NAME,
@@ -61,7 +62,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0c0b",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f7f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0c0b" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -74,16 +78,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${instrument.variable}`}
     >
       <body className="flex min-h-screen flex-col antialiased">
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <AppHeader />
-        <div className="flex-1">{children}</div>
-        <AppFooter />
-        <Analytics />
+        <ThemeProvider>
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <AppHeader />
+          <div className="flex-1">{children}</div>
+          <AppFooter />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

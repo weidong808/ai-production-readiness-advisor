@@ -34,7 +34,7 @@ export function LandingPreview() {
           Overall score {PREVIEW_SCORE}
         </span>
       </div>
-      <p className="mt-3 inline-flex items-center gap-2 rounded-md border border-[var(--warn)]/40 bg-[rgba(212,160,23,0.12)] px-2.5 py-1 text-xs text-[var(--warn)]">
+      <p className="mt-3 inline-flex items-center gap-2 rounded-md border border-[color-mix(in_srgb,var(--warn)_40%,transparent)] bg-[color-mix(in_srgb,var(--warn)_12%,transparent)] px-2.5 py-1 text-xs text-[var(--warn)]">
         HG-09 · ceiling {PREVIEW_BAND}
       </p>
       <div className="mt-4 space-y-2">
