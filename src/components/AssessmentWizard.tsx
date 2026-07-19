@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BandBadge } from "@/components/BandBadge";
 import { ReportView } from "@/components/ReportView";
+import { APP_NAME } from "@/lib/brand";
 import {
   CONTEXT_FIELDS,
   DIMENSION_META,
@@ -52,6 +54,9 @@ export function AssessmentWizard() {
     emptyAnswers,
   );
   const [freeText, setFreeText] = useState<Record<string, string>>({});
+  // Set when a dimension is opened via "Edit" on the review step, so
+  // Continue returns to review instead of the next dimension.
+  const [returnToReview, setReturnToReview] = useState(false);
 
   useEffect(() => {
     const saved = loadAssessment();
@@ -111,16 +116,34 @@ export function AssessmentWizard() {
     context.jobToBeDone.trim().length > 0;
 
   function goNext() {
+    if (returnToReview) {
+      setReturnToReview(false);
+      setStep("review");
+      return;
+    }
     const idx = steps.indexOf(step);
     if (idx < steps.length - 1) setStep(steps[idx + 1]!);
   }
 
   function goBack() {
+    if (returnToReview) {
+      setReturnToReview(false);
+      setStep("review");
+      return;
+    }
     const idx = steps.indexOf(step);
     if (idx > 0) setStep(steps[idx - 1]!);
   }
 
   function restart() {
+    if (
+      typeof window !== "undefined" &&
+      !window.confirm(
+        "Reset the assessment? All answers in this browser will be cleared.",
+      )
+    ) {
+      return;
+    }
     clearAssessment();
     setContext(DEFAULT_CONTEXT);
     setAnswers(emptyAnswers());
@@ -143,7 +166,7 @@ export function AssessmentWizard() {
           href="/"
           className="text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]"
         >
-          ← AI Production Readiness Advisor
+          ← {APP_NAME}
         </Link>
         <button
           type="button"
@@ -241,12 +264,15 @@ export function AssessmentWizard() {
       {DIMENSION_IDS.includes(step as DimensionId) && (
         <DimensionStep
           dimensionId={step as DimensionId}
+          dimensionNumber={DIMENSION_IDS.indexOf(step as DimensionId) + 1}
+          dimensionCount={DIMENSION_IDS.length}
           answers={answers}
           onAnswer={(questionId, choice) =>
             setAnswers((prev) => ({ ...prev, [questionId]: choice }))
           }
           onBack={goBack}
           onNext={goNext}
+          nextLabel={returnToReview ? "Return to review" : "Continue"}
         />
       )}
 
@@ -290,15 +316,75 @@ export function AssessmentWizard() {
               Preview deterministic scores before opening the full report.
             </p>
           </header>
+
           <div className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-4 py-3">
             <p className="text-sm text-[var(--ink-muted)]">Projected band</p>
-            <p className="mt-1 text-xl font-semibold">{result.finalBand}</p>
-            <p className="mt-1 text-sm text-[var(--ink-muted)]">
-              Overall {result.overallScore} · {result.hardGatesApplied.length}{" "}
-              hard gate
-              {result.hardGatesApplied.length === 1 ? "" : "s"}
-            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <BandBadge band={result.finalBand} />
+              <p className="text-sm text-[var(--ink-muted)]">
+                Overall {result.overallScore} · {result.hardGatesApplied.length}{" "}
+                hard gate
+                {result.hardGatesApplied.length === 1 ? "" : "s"}
+              </p>
+            </div>
           </div>
+
+          {result.hardGatesApplied.length > 0 && (
+            <div className="space-y-2" aria-label="Hard gates preview">
+              <p className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+                Hard gates applied
+              </p>
+              <ul className="space-y-2">
+                {result.hardGatesApplied.map((gate) => (
+                  <li
+                    key={gate.gateId}
+                    className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-sm"
+                  >
+                    <span className="font-medium text-[var(--warn)]">
+                      {gate.gateId}
+                    </span>
+                    <span className="text-[var(--ink-muted)]">
+                      {" "}
+                      → ceiling {gate.ceiling}
+                    </span>
+                    <p className="mt-1">{gate.reason}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className="space-y-2">
+            <p className="text-sm font-semibold tracking-wide text-[var(--ink-muted)] uppercase">
+              Dimension scores
+            </p>
+            <ul className="space-y-2">
+              {result.dimensions.map((dim) => (
+                <li
+                  key={dim.dimensionId}
+                  className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 rounded-md border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2"
+                >
+                  <span className="text-xs font-semibold text-[var(--accent)]">
+                    {dim.dimensionId}
+                  </span>
+                  <span className="text-sm">{dim.name}</span>
+                  <span className="text-sm font-semibold">{dim.score}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setReturnToReview(true);
+                      setStep(dim.dimensionId);
+                    }}
+                    className="text-sm text-[var(--ink-muted)] underline-offset-2 hover:text-[var(--ink)] hover:underline"
+                    aria-label={`Edit answers for ${dim.name}`}
+                  >
+                    Edit
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <NavButtons
             onBack={goBack}
             onNext={() => setStep("report")}
@@ -321,26 +407,33 @@ export function AssessmentWizard() {
 
 function DimensionStep({
   dimensionId,
+  dimensionNumber,
+  dimensionCount,
   answers,
   onAnswer,
   onBack,
   onNext,
+  nextLabel = "Continue",
 }: {
   dimensionId: DimensionId;
+  dimensionNumber: number;
+  dimensionCount: number;
   answers: Record<string, OrdinalChoice | undefined>;
   onAnswer: (questionId: string, choice: OrdinalChoice) => void;
   onBack: () => void;
   onNext: () => void;
+  nextLabel?: string;
 }) {
   const meta = DIMENSION_META[dimensionId];
   const questions = questionsForDimension(dimensionId);
-  const allAnswered = questions.every((q) => answers[q.id]);
+  const answeredCount = questions.filter((q) => answers[q.id]).length;
+  const allAnswered = answeredCount === questions.length;
 
   return (
     <section className="space-y-6">
       <header>
         <p className="text-xs font-semibold tracking-[0.16em] text-[var(--accent)] uppercase">
-          {dimensionId}
+          {dimensionId} · Dimension {dimensionNumber} of {dimensionCount}
         </p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">
           {meta.name}
@@ -383,11 +476,17 @@ function DimensionStep({
           </fieldset>
         ))}
       </div>
+      {!allAnswered && (
+        <p className="text-sm text-[var(--ink-muted)]" role="status">
+          {answeredCount} of {questions.length} questions answered — answer all
+          to continue.
+        </p>
+      )}
       <NavButtons
         onBack={onBack}
         onNext={onNext}
         nextDisabled={!allAnswered}
-        nextLabel="Continue"
+        nextLabel={nextLabel}
       />
     </section>
   );
@@ -415,15 +514,15 @@ function NavButtons({
           Back
         </button>
       )}
-        <button
-          type="button"
-          onClick={onNext}
-          disabled={nextDisabled}
-          aria-disabled={nextDisabled}
-          className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#06120f] hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          {nextLabel}
-        </button>
+      <button
+        type="button"
+        onClick={onNext}
+        disabled={nextDisabled}
+        aria-disabled={nextDisabled}
+        className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#06120f] hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        {nextLabel}
+      </button>
     </div>
   );
 }

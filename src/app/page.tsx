@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { SiteHomeLink } from "@/components/SiteHomeLink";
+import { APP_NAME, APP_SERIES_LABEL } from "@/lib/brand";
 
 export default function HomePage() {
   return (
-    <main id="main" className="relative min-h-screen overflow-hidden">
+    <main id="main" className="relative overflow-hidden">
       <a href="#main-cta" className="skip-link">
         Skip to start assessment
       </a>
@@ -18,15 +20,22 @@ export default function HomePage() {
         }}
       />
 
-      <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col justify-center px-6 py-16">
-        <p className="hero-rise mb-4 text-sm tracking-[0.2em] text-[var(--accent)] uppercase">
-          AI in Action · App #3
-        </p>
+      <div className="relative mx-auto flex min-h-[calc(100vh-16rem)] max-w-3xl flex-col justify-center px-6 py-16">
+        <div className="hero-rise mb-4 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm tracking-[0.2em] text-[var(--accent)] uppercase">
+            {APP_SERIES_LABEL}
+          </p>
+          <SiteHomeLink
+            variant="compact"
+            markSize={18}
+            className="text-sm text-[var(--ink-muted)]"
+          />
+        </div>
         <h1
           className="hero-rise text-4xl leading-tight font-semibold tracking-tight sm:text-5xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          AI Production Readiness Advisor
+          {APP_NAME}
         </h1>
         <p className="hero-rise-delay mt-5 max-w-xl text-lg text-[var(--ink-muted)]">
           A guided assessment that scores eight dimensions, applies hard gates,
@@ -40,6 +49,12 @@ export default function HomePage() {
             className="inline-flex items-center justify-center rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#06120f] transition hover:bg-[var(--accent-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
           >
             Start assessment
+          </Link>
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center rounded-md border border-[var(--line)] px-5 py-3 text-sm transition hover:bg-[var(--bg-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
+          >
+            How it works
           </Link>
           <p className="text-sm text-[var(--ink-muted)]">
             Deterministic scores · OpenAI advisory narrative

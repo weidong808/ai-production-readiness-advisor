@@ -1,0 +1,26 @@
+export const APP_NAME = "AI Production Readiness Advisor";
+export const APP_TAGLINE = "Is your AI feature ready to ship?";
+export const APP_DESCRIPTION =
+  "Guided assessment for whether an AI feature is ready for production — structured scores across eight dimensions, hard gates, and an evidence-backed advisory report. Advisory only, not a certification.";
+export const APP_URL = "https://readiness.weidong-shi.com";
+export const APP_SERIES_LABEL = "AI in Action · App #3";
+
+/** Personal site hub that links to this app and other projects. */
+export const SITE_HOME_URL = "https://weidong-shi.com";
+export const SITE_HOME_LABEL = "weidong-shi.com";
+export const SITE_BRAND_NAME = "Weidong Shi";
+export const SITE_SERIES_NAME = "AI in Action";
+export const SITE_SERIES_TAGLINE =
+  "Personal production case studies in AI-assisted engineering";
+export const WS_MARK_SRC = "/ws-mark.svg";
+
+export const GITHUB_REPO_URL =
+  "https://github.com/weidong808/ai-production-readiness-advisor";
+export const ROADMAP_URL = "https://github.com/weidong808/ai-in-action-roadmap";
+
+/** Sibling apps in the series. */
+export const RETIRECHECK_URL = "https://retirecheck.weidong-shi.com";
+export const SLEEPCHECK_URL = "https://sleepcheck.weidong-shi.com";
+
+export const ADVISORY_DISCLAIMER =
+  "Advisory only — not a certification, audit, or legal opinion.";
