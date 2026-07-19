@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SampleReportClient } from "@/components/SampleReportClient";
-import { SiteHomeLink } from "@/components/SiteHomeLink";
 import { APP_NAME } from "@/lib/brand";
 import {
   getSampleAssessmentInput,
@@ -21,20 +19,7 @@ export default function SamplePage() {
   const result = getSampleScoringResult();
 
   return (
-    <main id="main" className="mx-auto max-w-2xl px-6 py-12">
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-        <Link
-          href="/"
-          className="text-sm text-[var(--ink-muted)] transition-colors hover:text-[var(--ink)]"
-        >
-          ← Back to {APP_NAME}
-        </Link>
-        <SiteHomeLink
-          variant="compact"
-          markSize={18}
-          className="text-sm text-[var(--ink-muted)]"
-        />
-      </div>
+    <main id="main" className="mx-auto max-w-2xl px-5 py-8 sm:px-6 sm:py-10">
       <SampleReportClient input={input} result={result} report={report} />
     </main>
   );

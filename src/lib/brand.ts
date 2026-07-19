@@ -1,4 +1,6 @@
 export const APP_NAME = "AI Production Readiness Advisor";
+/** Compact header label on small screens. */
+export const APP_SHORT_NAME = "Readiness Advisor";
 export const APP_TAGLINE = "Is your AI feature ready to ship?";
 export const APP_DESCRIPTION =
   "Guided assessment for whether an AI feature is ready for production — structured scores across eight dimensions, hard gates, and an evidence-backed advisory report. Advisory only, not a certification.";

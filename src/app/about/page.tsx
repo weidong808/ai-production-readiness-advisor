@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteHomeLink } from "@/components/SiteHomeLink";
 import {
   ADVISORY_DISCLAIMER,
   APP_DESCRIPTION,
@@ -22,33 +21,19 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main" className="mx-auto max-w-2xl px-6 py-12">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <Link
-          href="/"
-          className="text-sm text-[var(--ink-muted)] transition-colors hover:text-[var(--ink)]"
-        >
-          ← Back to {APP_NAME}
-        </Link>
-        <SiteHomeLink
-          variant="compact"
-          markSize={18}
-          className="text-sm text-[var(--ink-muted)]"
-        />
-      </div>
-
-      <p className="mt-10 text-sm tracking-[0.2em] text-[var(--accent)] uppercase">
+    <main id="main" className="mx-auto max-w-2xl px-5 py-8 sm:px-6 sm:py-10">
+      <p className="font-mono text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase">
         {APP_SERIES_LABEL}
       </p>
       <h1
-        className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl"
+        className="mt-2 text-3xl tracking-tight text-[var(--foreground)] sm:text-4xl"
         style={{ fontFamily: "var(--font-display)" }}
       >
         {APP_TAGLINE}
       </h1>
 
-      <div className="mt-8 space-y-5 text-base leading-relaxed text-[var(--ink-muted)]">
-        <p className="text-[var(--ink)]/90">{APP_DESCRIPTION}</p>
+      <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--muted)]">
+        <p className="text-[var(--foreground)]/90">{APP_DESCRIPTION}</p>
         <p>
           The assessment walks through system context and eight readiness
           dimensions — use-case fit, data &amp; privacy, evaluation quality,
@@ -64,28 +49,28 @@ export default function AboutPage() {
           model training.
         </p>
         <p>
-          <span className="text-[var(--ink)]">Disclaimer:</span>{" "}
+          <span className="text-[var(--foreground)]">Disclaimer:</span>{" "}
           {ADVISORY_DISCLAIMER} Use the report as a structured conversation
           starter with your engineering, security, and compliance teams — not
           as sign-off.
         </p>
         <p>
-          Part of <span className="text-[var(--ink)]">{SITE_SERIES_NAME}</span>{" "}
+          Part of <span className="text-[var(--foreground)]">{SITE_SERIES_NAME}</span>{" "}
           — {SITE_SERIES_TAGLINE.toLowerCase()}. Built by Weidong Shi with
           Next.js, TypeScript, and Tailwind CSS; deployed on Vercel.
         </p>
       </div>
 
-      <div className="mt-10 flex flex-wrap gap-3">
+      <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/assess"
-          className="rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#06120f] transition hover:bg-[var(--accent-strong)]"
+          className="rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-foreground)] transition hover:brightness-110"
         >
           Start assessment
         </Link>
         <Link
           href="/sample"
-          className="rounded-md border border-[var(--line)] px-5 py-3 text-sm hover:bg-[var(--bg-soft)]"
+          className="rounded-md border border-[var(--border)] px-5 py-2.5 text-sm hover:bg-[var(--card)]"
         >
           View sample report
         </Link>
@@ -93,7 +78,7 @@ export default function AboutPage() {
           href={SITE_CASE_STUDY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-md border border-[var(--line)] px-5 py-3 text-sm hover:bg-[var(--bg-soft)]"
+          className="rounded-md border border-[var(--border)] px-5 py-2.5 text-sm hover:bg-[var(--card)]"
         >
           {SITE_CASE_STUDY_LABEL} ↗
         </a>
@@ -101,7 +86,7 @@ export default function AboutPage() {
           href={GITHUB_REPO_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-md border border-[var(--line)] px-5 py-3 text-sm hover:bg-[var(--bg-soft)]"
+          className="rounded-md border border-[var(--border)] px-5 py-2.5 text-sm hover:bg-[var(--card)]"
         >
           Source on GitHub ↗
         </a>
@@ -109,7 +94,7 @@ export default function AboutPage() {
           href={ROADMAP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-md border border-[var(--line)] px-5 py-3 text-sm hover:bg-[var(--bg-soft)]"
+          className="rounded-md border border-[var(--border)] px-5 py-2.5 text-sm hover:bg-[var(--card)]"
         >
           Series roadmap ↗
         </a>

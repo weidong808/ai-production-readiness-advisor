@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BandBadge } from "@/components/BandBadge";
 import { ReportView } from "@/components/ReportView";
-import { APP_NAME } from "@/lib/brand";
 import {
   CONTEXT_FIELDS,
   DIMENSION_META,
@@ -163,25 +161,19 @@ export function AssessmentWizard() {
   }
 
   return (
-    <div id="main" className="mx-auto max-w-2xl px-6 py-10">
-      <div className="mb-8 flex items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]"
-        >
-          ← {APP_NAME}
-        </Link>
+    <div id="main" className="mx-auto max-w-2xl px-5 py-8 sm:px-6 sm:py-10">
+      <div className="mb-6 flex items-center justify-end">
         <button
           type="button"
           onClick={restart}
-          className="text-sm text-[var(--ink-muted)] hover:text-[var(--ink)]"
+          className="text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
         >
           Reset assessment
         </button>
       </div>
 
       <div
-        className="mb-8"
+        className="mb-6"
         role="progressbar"
         aria-valuemin={1}
         aria-valuemax={steps.length}
@@ -522,7 +514,7 @@ function NavButtons({
         onClick={onNext}
         disabled={nextDisabled}
         aria-disabled={nextDisabled}
-        className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#06120f] hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-40"
+        className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-foreground)] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {nextLabel}
       </button>

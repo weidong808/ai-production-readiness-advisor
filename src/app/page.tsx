@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { LandingPreview } from "@/components/LandingPreview";
-import { SiteHomeLink } from "@/components/SiteHomeLink";
-import { APP_NAME, APP_SERIES_LABEL } from "@/lib/brand";
+import { APP_NAME, APP_SERIES_LABEL, APP_TAGLINE } from "@/lib/brand";
 
 const STEPS = [
   {
@@ -20,87 +19,72 @@ const STEPS = [
 
 export default function HomePage() {
   return (
-    <main id="main" className="relative overflow-hidden">
+    <main id="main" className="relative">
       <a href="#main-cta" className="skip-link">
         Skip to start assessment
       </a>
-      <div
-        aria-hidden
-        className="hero-grid pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(232,238,244,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(232,238,244,0.04) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent)",
-        }}
-      />
 
-      <div className="relative mx-auto max-w-3xl px-6 py-16">
-        <div className="flex min-h-[min(70vh,36rem)] flex-col justify-center">
-          <div className="hero-rise mb-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm tracking-[0.2em] text-[var(--accent)] uppercase">
-              {APP_SERIES_LABEL}
-            </p>
-            <SiteHomeLink
-              variant="compact"
-              markSize={18}
-              className="text-sm text-[var(--ink-muted)]"
-            />
-          </div>
-          <h1
-            className="hero-rise text-4xl leading-tight font-semibold tracking-tight sm:text-5xl"
-            style={{ fontFamily: "var(--font-display)" }}
+      <div className="mx-auto max-w-3xl px-5 pt-7 pb-10 sm:px-6 sm:pt-8 sm:pb-12">
+        <p className="font-mono text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase">
+          {APP_SERIES_LABEL}
+        </p>
+        <h1
+          className="mt-2 text-3xl leading-tight tracking-tight text-[var(--foreground)] sm:text-4xl"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          {APP_TAGLINE}
+        </h1>
+        <p className="mt-3 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+          {APP_NAME} scores eight dimensions, applies hard gates, and returns an
+          advisory readiness report — not a certification.
+        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link
+            id="main-cta"
+            href="/assess"
+            className="inline-flex items-center justify-center rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-foreground)] transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
           >
-            {APP_NAME}
-          </h1>
-          <p className="hero-rise-delay mt-5 max-w-xl text-lg text-[var(--ink-muted)]">
-            A guided assessment that scores eight dimensions, applies hard gates,
-            and tells you whether an AI feature is ready to ship — advisory, not
-            certification.
-          </p>
-          <div className="hero-rise-delay mt-10 flex flex-wrap items-center gap-4">
-            <Link
-              id="main-cta"
-              href="/assess"
-              className="inline-flex items-center justify-center rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#06120f] transition hover:bg-[var(--accent-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
-            >
-              Start assessment
-            </Link>
-            <Link
-              href="/sample"
-              className="inline-flex items-center justify-center rounded-md border border-[var(--line)] px-5 py-3 text-sm transition hover:bg-[var(--bg-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
-            >
-              View sample report
-            </Link>
-          </div>
+            Start assessment
+          </Link>
+          <Link
+            href="/sample"
+            className="inline-flex items-center justify-center rounded-md border border-[var(--border)] px-5 py-2.5 text-sm text-[var(--foreground)] transition hover:bg-[var(--card)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
+          >
+            View sample report
+          </Link>
         </div>
 
-        <section className="mt-8 space-y-6 border-t border-[var(--line)] pt-14">
-          <div>
-            <h2 className="text-xl font-semibold tracking-tight">How it works</h2>
-            <p className="mt-2 text-sm text-[var(--ink-muted)]">
-              Three steps from context to an actionable readiness report.
-            </p>
-          </div>
-          <ol className="grid gap-4 sm:grid-cols-3">
+        <section className="mt-10 border-t border-[var(--border)] pt-8">
+          <h2 className="text-lg font-semibold tracking-tight text-[var(--foreground)]">
+            How it works
+          </h2>
+          <p className="mt-1.5 text-sm text-[var(--muted)]">
+            Three steps from context to an actionable readiness report.
+          </p>
+          <ol className="mt-5 grid gap-5 sm:grid-cols-3 sm:gap-4">
             {STEPS.map((step, i) => (
-              <li key={step.title} className="space-y-2">
-                <p className="text-xs font-semibold tracking-wide text-[var(--accent)] uppercase">
+              <li key={step.title} className="space-y-1.5">
+                <p className="font-mono text-[10px] font-semibold tracking-[0.14em] text-[var(--accent)] uppercase">
                   Step {i + 1}
                 </p>
-                <p className="font-medium">{step.title}</p>
-                <p className="text-sm text-[var(--ink-muted)]">{step.detail}</p>
+                <p className="text-sm font-medium text-[var(--foreground)]">
+                  {step.title}
+                </p>
+                <p className="text-sm leading-relaxed text-[var(--muted)]">
+                  {step.detail}
+                </p>
               </li>
             ))}
           </ol>
         </section>
 
-        <section className="mt-14 space-y-6">
-          <div className="flex flex-wrap items-end justify-between gap-3">
+        <section className="mt-10 space-y-4">
+          <div className="flex flex-wrap items-end justify-between gap-2">
             <div>
-              <h2 className="text-xl font-semibold tracking-tight">What you get</h2>
-              <p className="mt-2 text-sm text-[var(--ink-muted)]">
+              <h2 className="text-lg font-semibold tracking-tight text-[var(--foreground)]">
+                What you get
+              </h2>
+              <p className="mt-1.5 text-sm text-[var(--muted)]">
                 Band, hard gates, dimension scores, risks, and remediation.
               </p>
             </div>
@@ -114,7 +98,7 @@ export default function HomePage() {
           <LandingPreview />
         </section>
 
-        <p className="mt-14 text-center text-sm text-[var(--ink-muted)]">
+        <p className="mt-8 text-center text-xs text-[var(--muted)] sm:text-sm">
           Deterministic scoring · answers stay in your browser · advisory, not
           certification
         </p>

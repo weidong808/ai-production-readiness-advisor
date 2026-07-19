@@ -402,7 +402,7 @@ export function ReportView({
         <button
           type="button"
           onClick={onRestart}
-          className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#06120f] hover:bg-[var(--accent-strong)]"
+          className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-foreground)] hover:brightness-110"
         >
           {sampleMode ? "Start your assessment" : "Start over"}
         </button>

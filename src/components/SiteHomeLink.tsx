@@ -25,7 +25,7 @@ export function SiteHomeLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${SITE_HOME_LABEL} — ${SITE_SERIES_NAME}`}
-      className={`inline-flex items-center gap-2 transition-colors hover:text-[var(--ink)] ${className}`}
+      className={`inline-flex items-center gap-2 transition-colors hover:text-[var(--foreground)] ${className}`}
     >
       <Image
         src={WS_MARK_SRC}
@@ -39,7 +39,7 @@ export function SiteHomeLink({
       <span className="inline-flex min-w-0 flex-col leading-tight">
         <span>{SITE_HOME_LABEL}</span>
         {variant === "full" ? (
-          <span className="mt-0.5 font-mono text-[10px] tracking-[0.14em] text-[var(--ink-muted)] uppercase">
+          <span className="mt-0.5 font-mono text-[10px] tracking-[0.14em] text-[var(--muted)] uppercase">
             {SITE_SERIES_NAME}
           </span>
         ) : null}

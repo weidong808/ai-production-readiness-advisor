@@ -27,10 +27,10 @@ const PREVIEW_DIMS: { id: string; name: string; score: number; band: Band }[] =
 
 export function LandingPreview() {
   return (
-    <div className="rounded-md border border-[var(--line)] bg-[var(--bg-elevated)]/80 p-5">
+    <div className="rounded-md border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
       <div className="flex flex-wrap items-center gap-3">
         <BandBadge band={PREVIEW_BAND} />
-        <span className="text-sm text-[var(--ink-muted)]">
+        <span className="text-sm text-[var(--muted)]">
           Overall score {PREVIEW_SCORE}
         </span>
       </div>
