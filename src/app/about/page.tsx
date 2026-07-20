@@ -6,6 +6,7 @@ import {
   APP_NAME,
   APP_SERIES_LABEL,
   APP_TAGLINE,
+  APP_TRUST_LINE,
   GITHUB_REPO_URL,
   LINKEDIN_ARTICLE_LABEL,
   LINKEDIN_ARTICLE_URL,
@@ -38,13 +39,15 @@ export default function AboutPage() {
 
       <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--muted)]">
         <p className="text-[var(--foreground)]/90">{APP_DESCRIPTION}</p>
+        <p className="text-[var(--foreground)]">{APP_TRUST_LINE}</p>
         <p>
           The assessment walks through system context and eight readiness
-          dimensions — use-case fit, data &amp; privacy, evaluation quality,
-          safety guardrails, reliability, observability, cost controls, and
-          governance. Scoring is deterministic; an OpenAI-generated narrative
-          adds an executive summary, risks, and a remediation plan with
-          citations from a curated reference corpus.
+          dimensions — use-case &amp; risk fit, data &amp; privacy, evaluation
+          quality, security &amp; abuse, reliability &amp; ops, observability,
+          human oversight, and cost &amp; performance. Scoring is deterministic
+          with hard gates the model can&apos;t talk its way past; an
+          OpenAI-generated narrative adds an executive summary, risks, and a
+          remediation plan with citations from a curated reference corpus.
         </p>
         <p>
           Your answers stay in this browser. Answers are sent to the server

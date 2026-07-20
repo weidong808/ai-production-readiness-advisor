@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { LandingPreview } from "@/components/LandingPreview";
-import { APP_NAME, APP_SERIES_LABEL, APP_TAGLINE } from "@/lib/brand";
+import {
+  APP_NAME,
+  APP_SERIES_LABEL,
+  APP_TAGLINE,
+  APP_TRUST_LINE,
+} from "@/lib/brand";
 
 const STEPS = [
   {
@@ -9,11 +14,13 @@ const STEPS = [
   },
   {
     title: "Answer 8 dimensions",
-    detail: "Ordinal A–D choices across use case, data, evals, safety, and more.",
+    detail:
+      "Use-case & risk fit, data & privacy, evaluation, security, reliability, observability, oversight, and cost.",
   },
   {
     title: "Get band, gates, risks, remediation",
-    detail: "Deterministic scores plus an advisory narrative with citations.",
+    detail:
+      "Deterministic scores and hard gates — plus an OpenAI advisory narrative.",
   },
 ] as const;
 
@@ -31,8 +38,13 @@ export default function HomePage() {
           {APP_TAGLINE}
         </h1>
         <p className="mt-3 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-          {APP_NAME} scores eight dimensions, applies hard gates, and returns an
-          advisory readiness report — not a certification.
+          {APP_NAME} asks whether your AI system is actually ready for
+          production — eight dimensions, deterministic scores, and hard gates
+          the model can&apos;t talk its way past. Advisory only, not a
+          certification.
+        </p>
+        <p className="mt-2 max-w-xl text-sm text-[var(--muted)]">
+          {APP_TRUST_LINE}
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <Link id="main-cta" href="/assess" className="ui-btn ui-btn-primary px-5 py-2.5">

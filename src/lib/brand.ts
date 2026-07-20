@@ -3,9 +3,12 @@ export const APP_NAME = "AI Production Readiness Advisor";
 export const APP_SHORT_NAME = "Readiness Advisor";
 export const APP_TAGLINE = "Is your AI feature ready to ship?";
 export const APP_DESCRIPTION =
-  "Guided assessment for whether an AI feature is ready for production — structured scores across eight dimensions, hard gates, and an evidence-backed advisory report. Advisory only, not a certification.";
+  "Guided assessment for whether an AI feature is ready for production — eight dimensions, deterministic scores, hard gates the model can't talk its way past, and an OpenAI advisory narrative. Advisory only, not a certification.";
 export const APP_URL = "https://readiness.weidong-shi.com";
 export const APP_SERIES_LABEL = "AI in Action · App #3";
+/** Shared launch line — model vs architecture. */
+export const APP_TRUST_LINE =
+  "The model creates capability. Architecture creates trust.";
 
 /** Personal site hub that links to this app and other projects. */
 export const SITE_HOME_URL = "https://weidong-shi.com";

@@ -31,7 +31,7 @@ Context feeds **hard gates** (see rubric), not the average score alone.
 
 ---
 
-## D1 — Use case & risk fit
+## D1 — Use-case & risk fit
 
 | ID | Prompt | Choices (A→D) |
 |----|--------|----------------|

@@ -36,7 +36,7 @@
 ```json
 {
   "dimensionId": "D1",
-  "name": "Use case & risk fit",
+  "name": "Use-case & risk fit",
   "score": 0,
   "band": "Not Ready",
   "answers": [

@@ -19,7 +19,7 @@ const PREVIEW_DIMS: { id: string; name: string; score: number; band: Band }[] =
     },
     {
       id: "D1",
-      name: "Use case & risk fit",
+      name: "Use-case & risk fit",
       score: 92,
       band: "Production Ready",
     },

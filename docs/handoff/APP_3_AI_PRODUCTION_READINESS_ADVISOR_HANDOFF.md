@@ -88,7 +88,7 @@ Strategic positioning (portfolio):
 
 | ID | Dimension | Focus |
 |----|-----------|--------|
-| D1 | Use case & risk fit | Clarity of job-to-be-done, misuse, blast radius |
+| D1 | Use-case & risk fit | Clarity of job-to-be-done, misuse, blast radius |
 | D2 | Data & privacy | Training/inference data, PII, retention, residency |
 | D3 | Evaluation quality | Offline/online evals, golden sets, regression gates |
 | D4 | Security & abuse | Prompt injection, tool misuse, authz, supply chain |

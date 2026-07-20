@@ -27,7 +27,7 @@
   "dimensions": [
     {
       "dimensionId": "D1",
-      "name": "Use case & risk fit",
+      "name": "Use-case & risk fit",
       "score": 92,
       "band": "Production Ready",
       "answers": [

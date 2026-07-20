@@ -36,7 +36,7 @@ export const DIMENSION_META: Record<
   { name: string; summary: string }
 > = {
   D1: {
-    name: "Use case & risk fit",
+    name: "Use-case & risk fit",
     summary: "Clarity of job-to-be-done, misuse, and blast radius fit",
   },
   D2: {
