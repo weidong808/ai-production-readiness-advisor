@@ -63,11 +63,11 @@ export function AppHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-md px-2.5 py-1.5 transition-colors ${
+                className={
                   active
-                    ? "text-[var(--foreground)]"
-                    : "text-[var(--muted)] hover:text-[var(--foreground)]"
-                }`}
+                    ? "rounded-md px-2.5 py-1.5 font-medium text-[var(--foreground)] shadow-[inset_0_-2px_0_0_var(--accent)]"
+                    : "rounded-md px-2.5 py-1.5 text-[var(--muted)] transition-colors duration-160 hover:text-[var(--foreground)]"
+                }
               >
                 {item.label}
               </Link>
