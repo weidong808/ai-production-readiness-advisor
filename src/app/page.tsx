@@ -32,25 +32,26 @@ export default function HomePage() {
   return (
     <main id="main" className="relative">
       <div className="mx-auto max-w-5xl px-5 pt-7 pb-10 sm:px-6 sm:pt-8 sm:pb-12">
-        <p className="font-mono text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase">
+        <p className="ra-rise font-mono text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase">
           {APP_SERIES_LABEL}
         </p>
         <h1
-          className="mt-2 text-3xl leading-tight tracking-tight text-[var(--foreground)] sm:text-4xl"
+          className="ra-rise-delay mt-2 text-3xl leading-tight tracking-tight text-[var(--foreground)] sm:text-4xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          {APP_TAGLINE}
+          {APP_NAME}
         </h1>
-        <p className="mt-3 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-          {APP_NAME} asks whether your AI system is actually ready for
-          production — eight dimensions, deterministic scores, and hard gates
-          the model can&apos;t talk its way past. Advisory only, not a
-          certification.
+        <p className="ra-rise-delay mt-2 max-w-xl text-lg leading-snug text-[var(--foreground)]/90 sm:text-xl">
+          {APP_TAGLINE}
         </p>
-        <p className="mt-2 max-w-xl text-sm text-[var(--muted)]">
+        <p className="ra-rise-delay-2 mt-3 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+          Eight dimensions, deterministic scores, and hard gates the model
+          can&apos;t talk its way past. Advisory only, not a certification.
+        </p>
+        <p className="ra-rise-delay-2 mt-2 max-w-xl text-sm text-[var(--muted)]">
           {APP_TRUST_LINE}
         </p>
-        <div className="mt-6 flex flex-wrap items-center gap-3">
+        <div className="ra-rise-delay-2 mt-6 flex flex-wrap items-center gap-3">
           <Link id="main-cta" href="/assess" className="ui-btn ui-btn-primary px-5 py-2.5">
             Start assessment
           </Link>
