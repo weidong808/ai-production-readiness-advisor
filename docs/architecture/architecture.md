@@ -55,7 +55,7 @@ flowchart LR
 
 *One rule: scores and hard gates are deterministic and recomputed on the server; the model never sets the band.*
 
-Source diagram: [`../readiness-architecture.svg`](../readiness-architecture.svg)
+Source diagram: [`../readiness-architecture.svg`](../readiness-architecture.svg) · PNG: [`../readiness-architecture.png`](../readiness-architecture.png)
 
 ```mermaid
 flowchart TB

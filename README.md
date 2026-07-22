@@ -2,6 +2,8 @@
 
 Guided assessment tool that helps engineers and architects evaluate whether an AI feature or system is ready for production — with structured scores, hard gates, and an evidence-backed advisory narrative.
 
+[![CI](https://github.com/weidong808/ai-production-readiness-advisor/actions/workflows/ci.yml/badge.svg)](https://github.com/weidong808/ai-production-readiness-advisor/actions/workflows/ci.yml)
+
 | | |
 |--------|--------|
 | **Series** | [AI in Action](https://weidong-shi.com) · App #3 |
@@ -15,6 +17,10 @@ Guided assessment tool that helps engineers and architects evaluate whether an A
 | **Vercel alias** | https://ai-production-readiness-advisor.vercel.app |
 | **GitHub** | https://github.com/weidong808/ai-production-readiness-advisor |
 
+![Sample Production with Guards report](docs/sample-report.png)
+
+*Cold-start sample report — band, hard gates, and dimension scores (zero OpenAI cost).*
+
 ## What this is
 
 An educational portfolio application that demonstrates:
@@ -27,11 +33,25 @@ An educational portfolio application that demonstrates:
 
 **Philosophy:** Build → Validate → Improve → Document → Share
 
+**One rule:** scores and hard gates are deterministic and recomputed on the server; the model never sets the band.
+
 ## What this is not
 
 - Not a compliance certification or audit substitute
 - Not legal, security, or regulatory advice
 - Not a commercial product catalog entry
+
+## Architecture
+
+![Reference architecture](docs/readiness-architecture.png)
+
+*Browser-held answers → server recompute → optional OpenAI narrative → merged advisory report.*
+
+Supporting diagrams:
+
+- [Scoring & hard gates](docs/diagram-scoring-gates.png) · [SVG](docs/diagram-scoring-gates.svg)
+- [Engineer / AI Assistant](docs/diagram-human-ai.png) · [SVG](docs/diagram-human-ai.svg)
+- Full write-up: [docs/architecture/architecture.md](docs/architecture/architecture.md)
 
 ## Demo script (local)
 
@@ -62,7 +82,8 @@ npm run dev
 5. Quality checks:
 
 ```bash
-npm test    # S01–S10 fixtures (no live LLM)
+npm test        # scoring + hard-gate fixtures (no live LLM)
+npm run typecheck
 npm run build
 ```
 
@@ -89,18 +110,13 @@ See [docs/architecture/deploy.md](docs/architecture/deploy.md).
 
 Docs index: [docs/README.md](docs/README.md)
 
-## Architecture
-
-**One rule:** scores and hard gates are deterministic and recomputed on the server; the model never sets the band.
-
-See [docs/architecture/architecture.md](docs/architecture/architecture.md) (mermaid + diagrams) and [`docs/readiness-architecture.svg`](docs/readiness-architecture.svg).
-
 ## Stack
 
 - Next.js App Router + TypeScript + Tailwind CSS v4
 - Zod for input / narrative shapes
 - Vitest for scoring + narrative fixtures
 - OpenAI for advisory narrative
+- CI: lint · typecheck · test · build (GitHub Actions)
 
 ## License
 
