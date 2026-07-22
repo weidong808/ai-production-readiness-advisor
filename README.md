@@ -9,6 +9,7 @@ Guided assessment tool that helps engineers and architects evaluate whether an A
 | **Status** | Live |
 | **Owner** | Weidong Shi |
 | **Live demo** | https://readiness.weidong-shi.com |
+| **Privacy** | https://readiness.weidong-shi.com/privacy |
 | **Hub case study** | https://weidong-shi.com/work/readiness |
 | **Hub insight** | https://weidong-shi.com/insights/ai-in-action-readiness |
 | **Vercel alias** | https://ai-production-readiness-advisor.vercel.app |

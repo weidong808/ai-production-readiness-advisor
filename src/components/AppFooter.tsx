@@ -70,6 +70,14 @@ export function AppFooter() {
                 </li>
                 <li>
                   <Link
+                    href="/privacy"
+                    className="transition-colors hover:text-[var(--foreground)]"
+                  >
+                    Privacy
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/sample"
                     className="transition-colors hover:text-[var(--foreground)]"
                   >

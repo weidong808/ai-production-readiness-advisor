@@ -59,7 +59,14 @@ export default function AboutPage() {
           <span className="text-[var(--foreground)]">Disclaimer:</span>{" "}
           {ADVISORY_DISCLAIMER} Use the report as a structured conversation
           starter with your engineering, security, and compliance teams — not
-          as sign-off.
+          as sign-off.{" "}
+          <Link
+            href="/privacy"
+            className="text-[var(--accent)] underline-offset-2 hover:underline"
+          >
+            Privacy
+          </Link>
+          .
         </p>
         <p>
           Part of <span className="text-[var(--foreground)]">{SITE_SERIES_NAME}</span>{" "}
