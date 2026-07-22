@@ -381,9 +381,17 @@ body > * {
 }
 
 /* Stronger badge text on light for contrast */
+:root .band-badge--pilot {
+  color: #8a5206;
+}
+
 :root .band-badge--guards,
 :root .band-badge--ready {
   color: #0a5c48;
+}
+
+.dark .band-badge--pilot {
+  color: #e8c078;
 }
 
 .dark .band-badge--guards,

@@ -411,7 +411,7 @@
       "url": null
     }
   ],
-  "disclaimer": "Advisory only. Not a certification, audit, or legal opinion.",
+  "disclaimer": "Advisory only — not a certification, audit, or legal opinion.",
   "qualityFlags": [],
   "model": {
     "provider": "openai",

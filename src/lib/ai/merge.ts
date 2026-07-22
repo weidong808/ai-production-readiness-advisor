@@ -1,11 +1,11 @@
 import { CORPUS_VERSION, resolveCitations } from "@/lib/corpus/load";
 import { PROMPT_VERSION } from "@/lib/ai/prompt";
+import { ADVISORY_DISCLAIMER } from "@/lib/brand";
 import type { LlmNarrative, ReadinessReport } from "@/lib/schema/narrative";
 import { scrubBlocklist } from "@/lib/security/blocklist";
 import type { AssessmentInput, ScoringResult } from "@/lib/scoring/types";
 
-const DISCLAIMER =
-  "Advisory only. Not a certification, audit, or legal opinion.";
+const DISCLAIMER = ADVISORY_DISCLAIMER;
 
 function scrubNarrative(n: LlmNarrative): LlmNarrative {
   return {

@@ -3,7 +3,7 @@
 ## Identity
 
 - Product: **AI Production Readiness Advisor** (AI in Action App #3)
-- Domain (planned): TBD subdomain under `weidong-shi.com`
+- Domain: [readiness.weidong-shi.com](https://readiness.weidong-shi.com)
 - Series: AI in Action — personal lab / professional portfolio
 - Philosophy: **Build → Validate → Improve → Document → Share**
 - Public north star: https://github.com/weidong808/ai-in-action-roadmap

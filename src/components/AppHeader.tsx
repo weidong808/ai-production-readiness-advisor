@@ -61,6 +61,7 @@ export function AppHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={`rounded-md px-2.5 py-1.5 transition-colors ${
                   active
                     ? "text-[var(--foreground)]"
@@ -74,7 +75,7 @@ export function AppHeader() {
           <SiteHomeLink
             variant="compact"
             markSize={18}
-            className="ml-1 hidden text-[var(--muted)] sm:inline-flex"
+            className="ml-1 text-[var(--muted)]"
           />
           <ThemeToggle />
         </nav>

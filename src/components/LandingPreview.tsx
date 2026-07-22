@@ -52,6 +52,11 @@ export function LandingPreview() {
               </p>
               <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[var(--bg-soft)]">
                 <div
+                  role="meter"
+                  aria-label={`${dim.name} score`}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={dim.score}
                   className="h-full rounded-full bg-[var(--accent)]"
                   style={{ width: `${dim.score}%` }}
                 />

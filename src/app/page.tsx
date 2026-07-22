@@ -5,6 +5,10 @@ import {
   APP_SERIES_LABEL,
   APP_TAGLINE,
   APP_TRUST_LINE,
+  SITE_CASE_STUDY_LABEL,
+  SITE_CASE_STUDY_URL,
+  SITE_INSIGHT_LABEL,
+  SITE_INSIGHT_URL,
 } from "@/lib/brand";
 
 const STEPS = [
@@ -54,6 +58,24 @@ export default function HomePage() {
             View sample report
           </Link>
         </div>
+        <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--muted)]">
+          <a
+            href={SITE_CASE_STUDY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[var(--accent)] underline-offset-2 hover:underline"
+          >
+            {SITE_CASE_STUDY_LABEL}
+          </a>
+          <a
+            href={SITE_INSIGHT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[var(--accent)] underline-offset-2 hover:underline"
+          >
+            {SITE_INSIGHT_LABEL}
+          </a>
+        </p>
 
         <section className="mt-10 border-t border-[var(--border)] pt-8">
           <h2 className="text-lg font-semibold tracking-tight text-[var(--foreground)]">

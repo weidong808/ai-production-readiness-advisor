@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BandBadge } from "@/components/BandBadge";
+import { ADVISORY_DISCLAIMER } from "@/lib/brand";
 import { reportToJson, reportToMarkdown } from "@/lib/export/report";
 import type { ReadinessReport } from "@/lib/schema/narrative";
 import type { AssessmentInput, ScoringResult } from "@/lib/scoring/types";
@@ -43,7 +44,7 @@ function scoresOnlyFallback(
     risks: [],
     remediationPlan: [],
     citations: [],
-    disclaimer: "Advisory only. Not a certification, audit, or legal opinion.",
+    disclaimer: ADVISORY_DISCLAIMER,
     qualityFlags: [],
     model: {
       provider: "openai",

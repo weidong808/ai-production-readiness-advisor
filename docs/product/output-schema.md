@@ -112,7 +112,7 @@
   "risks": [],
   "remediationPlan": [],
   "citations": [],
-  "disclaimer": "Advisory only. Not a certification, audit, or legal opinion.",
+  "disclaimer": "Advisory only — not a certification, audit, or legal opinion.",
   "model": {
     "provider": "string",
     "modelId": "string",
