@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LandingPreview } from "@/components/LandingPreview";
+import { SeriesAppsStrip } from "@/components/SeriesAppsStrip";
 import {
   APP_NAME,
   APP_SERIES_LABEL,
@@ -77,6 +78,8 @@ export default function HomePage() {
             {SITE_INSIGHT_LABEL}
           </a>
         </p>
+
+        <SeriesAppsStrip className="mt-8" />
 
         <section className="mt-10 border-t border-[var(--border)] pt-8">
           <h2 className="text-lg font-semibold tracking-tight text-[var(--foreground)]">

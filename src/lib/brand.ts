@@ -35,6 +35,7 @@ export const ROADMAP_URL = "https://github.com/weidong808/ai-in-action-roadmap";
 /** Sibling apps in the series. */
 export const RETIRECHECK_URL = "https://retirecheck.weidong-shi.com";
 export const SLEEPCHECK_URL = "https://sleepcheck.weidong-shi.com";
+export const HABITCHECK_URL = "https://habitcheck.weidong-shi.com";
 
 export const ADVISORY_DISCLAIMER =
   "Advisory only — not a certification, audit, or legal opinion.";

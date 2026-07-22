@@ -5,6 +5,7 @@ import {
   ADVISORY_DISCLAIMER,
   APP_NAME,
   GITHUB_REPO_URL,
+  HABITCHECK_URL,
   RETIRECHECK_URL,
   ROADMAP_URL,
   SITE_BRAND_NAME,
@@ -149,6 +150,16 @@ export function AppFooter() {
                     className="transition-colors hover:text-[var(--foreground)]"
                   >
                     SleepCheck
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={HABITCHECK_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-[var(--foreground)]"
+                  >
+                    HabitCheck
                   </a>
                 </li>
               </ul>
