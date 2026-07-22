@@ -12,12 +12,40 @@ import {
   SITE_SERIES_NAME,
 } from "@/lib/brand";
 
-const NAV = [
-  { href: "/assess", label: "Assess" },
-  { href: "/sample", label: "Sample" },
-  { href: "/about", label: "About" },
-  { href: "/privacy", label: "Privacy" },
-] as const;
+const NAV: {
+  href: string;
+  label: string;
+  /** Return true when this primary tab should look active. */
+  isActive: (pathname: string) => boolean;
+}[] = [
+  // Landing `/` is the Assess product home; wizard lives at `/assess`.
+  {
+    href: "/assess",
+    label: "Assess",
+    isActive: (pathname) =>
+      pathname === "/" ||
+      pathname === "/assess" ||
+      pathname.startsWith("/assess/"),
+  },
+  {
+    href: "/sample",
+    label: "Sample",
+    isActive: (pathname) =>
+      pathname === "/sample" || pathname.startsWith("/sample/"),
+  },
+  {
+    href: "/about",
+    label: "About",
+    isActive: (pathname) =>
+      pathname === "/about" || pathname.startsWith("/about/"),
+  },
+  {
+    href: "/privacy",
+    label: "Privacy",
+    isActive: (pathname) =>
+      pathname === "/privacy" || pathname.startsWith("/privacy/"),
+  },
+];
 
 export function AppHeader() {
   const pathname = usePathname();
@@ -57,17 +85,13 @@ export function AppHeader() {
           aria-label="Primary"
         >
           {NAV.map((item) => {
-            const active = pathname.startsWith(item.href);
+            const active = item.isActive(pathname);
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={
-                  active
-                    ? "rounded-md px-2.5 py-1.5 font-medium text-[var(--foreground)] shadow-[inset_0_-2px_0_0_var(--accent)]"
-                    : "rounded-md px-2.5 py-1.5 text-[var(--muted)] transition-colors duration-160 hover:text-[var(--foreground)]"
-                }
+                className={active ? "app-nav-link app-nav-link--active" : "app-nav-link"}
               >
                 {item.label}
               </Link>
