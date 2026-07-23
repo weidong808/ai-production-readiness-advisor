@@ -77,6 +77,7 @@ export function ReportView({
     preloadedReport ?? null,
   );
   const [metaNote, setMetaNote] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -367,6 +368,27 @@ export function ReportView({
       <div className="no-print flex flex-wrap gap-2.5" role="group" aria-label="Report actions">
         <button type="button" onClick={onBack} className="ui-btn ui-btn-secondary">
           {sampleMode ? "Back home" : "Back to review"}
+        </button>
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(reportToMarkdown(view));
+              setCopied(true);
+              window.setTimeout(() => setCopied(false), 2000);
+            } catch {
+              // Clipboard unavailable (e.g. insecure context) — fall back to download.
+              download(
+                `${filePrefix}-readiness.md`,
+                reportToMarkdown(view),
+                "text/markdown;charset=utf-8",
+              );
+            }
+          }}
+          className="ui-btn ui-btn-secondary"
+          aria-live="polite"
+        >
+          {copied ? "Copied ✓" : "Copy Markdown"}
         </button>
         <button
           type="button"
