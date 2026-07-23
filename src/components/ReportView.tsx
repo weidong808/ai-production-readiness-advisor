@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BandBadge } from "@/components/BandBadge";
+import { ScoreRadar } from "@/components/ScoreRadar";
 import { ADVISORY_DISCLAIMER } from "@/lib/brand";
 import { reportToJson, reportToMarkdown } from "@/lib/export/report";
 import type { ReadinessReport } from "@/lib/schema/narrative";
@@ -245,6 +246,9 @@ export function ReportView({
         <h3 id="dimension-scores-heading" className="ui-section-label">
           Dimension scores
         </h3>
+        <div className="ui-card flex justify-center py-4">
+          <ScoreRadar dimensions={view.dimensions} />
+        </div>
         <div className="space-y-2">
           {view.dimensions.map((dim) => (
             <div
