@@ -6,6 +6,8 @@ import {
   APP_NAME,
   GITHUB_REPO_URL,
   HABITCHECK_URL,
+  LINKEDIN_ARTICLE_LABEL,
+  LINKEDIN_ARTICLE_URL,
   RETIRECHECK_URL,
   ROADMAP_URL,
   SITE_BRAND_NAME,
@@ -105,6 +107,18 @@ export function AppFooter() {
                     {SITE_INSIGHT_LABEL}
                   </a>
                 </li>
+                {LINKEDIN_ARTICLE_URL ? (
+                  <li>
+                    <a
+                      href={LINKEDIN_ARTICLE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-[var(--foreground)]"
+                    >
+                      {LINKEDIN_ARTICLE_LABEL}
+                    </a>
+                  </li>
+                ) : null}
                 <li>
                   <a
                     href={GITHUB_REPO_URL}

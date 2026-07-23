@@ -14,6 +14,7 @@ Guided assessment tool that helps engineers and architects evaluate whether an A
 | **Privacy** | https://readiness.weidong-shi.com/privacy |
 | **Hub case study** | https://weidong-shi.com/work/readiness |
 | **Hub insight** | https://weidong-shi.com/insights/ai-in-action-readiness |
+| **LinkedIn** | https://www.linkedin.com/posts/weidong-shi_is-your-ai-system-ready-for-production-activity-7486042640698732544-yEwZ |
 | **Vercel alias** | https://ai-production-readiness-advisor.vercel.app |
 | **GitHub** | https://github.com/weidong808/ai-production-readiness-advisor |
 

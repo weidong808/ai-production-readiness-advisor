@@ -54,7 +54,7 @@
 - [x] Deploy to Vercel + GitHub remote  
 - [x] Cloudflare DNS for `readiness.weidong-shi.com`  
 - [x] Hub case study + insight (`/work/readiness`, `/insights/ai-in-action-readiness`)  
-- [x] LinkedIn draft package (publish when ready)
+- [x] LinkedIn #3 feed post published (URL backfilled in app + hub)
 
 ## Dependency rule
 

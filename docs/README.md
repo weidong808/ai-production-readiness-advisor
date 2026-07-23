@@ -20,4 +20,4 @@
 | Backlog | [delivery/implementation-backlog.md](delivery/implementation-backlog.md) |
 | Acceptance | [delivery/acceptance-criteria.md](delivery/acceptance-criteria.md) |
 
-**Status:** Live — hub case study + insight drafted; LinkedIn package ready to publish.
+**Status:** Live — hub case study + insight live; LinkedIn #3 feed post published.

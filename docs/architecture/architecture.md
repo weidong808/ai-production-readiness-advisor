@@ -8,6 +8,7 @@ The live product is the demonstration; the engineering process — intent, bound
 - **Live:** https://readiness.weidong-shi.com  
 - **Hub case study:** https://weidong-shi.com/work/readiness  
 - **Hub insight:** https://weidong-shi.com/insights/ai-in-action-readiness  
+- **LinkedIn (AI in Action #3):** https://www.linkedin.com/posts/weidong-shi_is-your-ai-system-ready-for-production-activity-7486042640698732544-yEwZ  
 - **Source:** https://github.com/weidong808/ai-production-readiness-advisor  
 - **Series roadmap:** https://github.com/weidong808/ai-in-action-roadmap  
 
@@ -223,6 +224,7 @@ Same series thesis, domain-appropriate architecture.
 - Sample report: https://readiness.weidong-shi.com/sample  
 - Hub case study: https://weidong-shi.com/work/readiness  
 - Hub insight: https://weidong-shi.com/insights/ai-in-action-readiness  
+- LinkedIn (AI in Action #3): https://www.linkedin.com/posts/weidong-shi_is-your-ai-system-ready-for-production-activity-7486042640698732544-yEwZ  
 - SleepCheck: https://sleepcheck.weidong-shi.com  
 - RetireCheck: https://retirecheck.weidong-shi.com  
 - Roadmap: https://github.com/weidong808/ai-in-action-roadmap  
