@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BandBadge } from "@/components/BandBadge";
+import { ScoreRadar } from "@/components/ScoreRadar";
 import { ADVISORY_DISCLAIMER } from "@/lib/brand";
 import { reportToJson, reportToMarkdown } from "@/lib/export/report";
 import type { ReadinessReport } from "@/lib/schema/narrative";
@@ -77,6 +78,7 @@ export function ReportView({
     preloadedReport ?? null,
   );
   const [metaNote, setMetaNote] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -244,6 +246,9 @@ export function ReportView({
         <h3 id="dimension-scores-heading" className="ui-section-label">
           Dimension scores
         </h3>
+        <div className="ui-card flex justify-center py-4">
+          <ScoreRadar dimensions={view.dimensions} />
+        </div>
         <div className="space-y-2">
           {view.dimensions.map((dim) => (
             <div
@@ -367,6 +372,27 @@ export function ReportView({
       <div className="no-print flex flex-wrap gap-2.5" role="group" aria-label="Report actions">
         <button type="button" onClick={onBack} className="ui-btn ui-btn-secondary">
           {sampleMode ? "Back home" : "Back to review"}
+        </button>
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(reportToMarkdown(view));
+              setCopied(true);
+              window.setTimeout(() => setCopied(false), 2000);
+            } catch {
+              // Clipboard unavailable (e.g. insecure context) — fall back to download.
+              download(
+                `${filePrefix}-readiness.md`,
+                reportToMarkdown(view),
+                "text/markdown;charset=utf-8",
+              );
+            }
+          }}
+          className="ui-btn ui-btn-secondary"
+          aria-live="polite"
+        >
+          {copied ? "Copied ✓" : "Copy Markdown"}
         </button>
         <button
           type="button"
