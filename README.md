@@ -93,7 +93,7 @@ npm run build
 | Variable | Purpose |
 |----------|---------|
 | `OPENAI_API_KEY` | Server-only narrative generation |
-| `OPENAI_MODEL` | Default `gpt-4.1-mini` |
+| `OPENAI_MODEL` | Default `gpt-4o-mini` |
 | `AI_NARRATIVE_ENABLED=false` | Scores-only mode |
 | `AI_RATE_LIMIT_PER_IP_PER_DAY` | Default `10` |
 

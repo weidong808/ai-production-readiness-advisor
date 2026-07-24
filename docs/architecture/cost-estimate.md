@@ -34,7 +34,7 @@ Hosting (Vercel hobby/pro) dominates at low volume; model cost dominates if the 
 | Max output tokens | 1,500 | `AI_MAX_OUTPUT_TOKENS` |
 | Rate limit | **Best-effort** 10 / IP / day | In-memory Map per serverless isolate — **not** a durable global quota (see below) |
 | Response cache | 1 hour in-memory | Hash(context + answers + corpus + prompt + model) |
-| Model tier | Default `gpt-4.1-mini` | Stronger model only if evals fail |
+| Model tier | Default `gpt-4o-mini` | Stronger model only if evals fail |
 | Kill switch | Env flag | Scores-only mode |
 | Schema repair | 1 retry | Then fall back to scores-only |
 
