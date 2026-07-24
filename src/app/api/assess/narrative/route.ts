@@ -16,6 +16,8 @@ import { narrativeRequestSchema } from "@/lib/schema/narrative";
 import { scoreAssessment } from "@/lib/scoring/score";
 
 export const runtime = "nodejs";
+// Allow enough time for the LLM narrative call to complete on Vercel.
+export const maxDuration = 30;
 
 function clientIp(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for");

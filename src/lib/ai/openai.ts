@@ -5,7 +5,7 @@ import type { AssessmentInput, ScoringResult } from "@/lib/scoring/types";
 
 export function getOpenAIConfig() {
   const apiKey = process.env.OPENAI_API_KEY?.trim();
-  const model = process.env.OPENAI_MODEL?.trim() || "gpt-4.1-mini";
+  const model = process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini";
   const enabled = process.env.AI_NARRATIVE_ENABLED !== "false";
   const maxOutputTokens = Number(process.env.AI_MAX_OUTPUT_TOKENS || 1500);
   return { apiKey, model, enabled, maxOutputTokens };
