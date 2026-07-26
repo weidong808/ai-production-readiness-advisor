@@ -178,7 +178,8 @@ export function ReportView({
         <div className="flex flex-wrap items-center gap-3 pt-1">
           <BandBadge band={view.finalBand} />
           <span className="text-sm text-[var(--muted)]">
-            Overall score {view.overallScore} · score band {view.scoreBand}
+            Overall score <span className="tabular">{view.overallScore}</span> ·
+            score band {view.scoreBand}
           </span>
         </div>
         <p className="ui-card text-sm text-[var(--muted)]">{view.disclaimer}</p>
@@ -271,13 +272,13 @@ export function ReportView({
                   aria-valuenow={dim.score}
                 >
                   <div
-                    className="h-full rounded-full bg-[var(--accent)]"
+                    className="h-full rounded-full bg-[var(--accent)] transition-[width] duration-[var(--dur-slow)] ease-[var(--ease)] motion-reduce:transition-none"
                     style={{ width: `${dim.score}%` }}
                   />
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-sm font-semibold">{dim.score}</p>
+                <p className="tabular text-sm font-semibold">{dim.score}</p>
                 <BandBadge band={dim.band} />
               </div>
             </div>
@@ -286,7 +287,10 @@ export function ReportView({
       </section>
 
       {view.dimensionNarratives.length > 0 && (
-        <section className="space-y-2" aria-labelledby="dimension-notes-heading">
+        <section
+          className="space-y-2"
+          aria-labelledby="dimension-notes-heading"
+        >
           <h3 id="dimension-notes-heading" className="ui-section-label">
             Dimension notes
           </h3>
@@ -369,8 +373,16 @@ export function ReportView({
         {sampleMode ? " · sample" : ""}
       </section>
 
-      <div className="no-print flex flex-wrap gap-2.5" role="group" aria-label="Report actions">
-        <button type="button" onClick={onBack} className="ui-btn ui-btn-secondary">
+      <div
+        className="no-print flex flex-wrap gap-2.5"
+        role="group"
+        aria-label="Report actions"
+      >
+        <button
+          type="button"
+          onClick={onBack}
+          className="ui-btn ui-btn-secondary"
+        >
           {sampleMode ? "Back home" : "Back to review"}
         </button>
         <button
@@ -427,7 +439,11 @@ export function ReportView({
         >
           Print / PDF
         </button>
-        <button type="button" onClick={onRestart} className="ui-btn ui-btn-primary">
+        <button
+          type="button"
+          onClick={onRestart}
+          className="ui-btn ui-btn-primary"
+        >
           {sampleMode ? "Start your assessment" : "Start over"}
         </button>
       </div>

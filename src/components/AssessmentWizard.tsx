@@ -23,12 +23,7 @@ import type {
 } from "@/lib/scoring/types";
 import { DIMENSION_IDS } from "@/lib/scoring/types";
 
-type Step =
-  | "context"
-  | DimensionId
-  | "notes"
-  | "review"
-  | "report";
+type Step = "context" | DimensionId | "notes" | "review" | "report";
 
 const DEFAULT_CONTEXT: AssessmentContext = {
   systemName: "",
@@ -56,9 +51,8 @@ export function AssessmentWizard() {
   const [hydrated, setHydrated] = useState(false);
   const [step, setStep] = useState<Step>("context");
   const [context, setContext] = useState<AssessmentContext>(DEFAULT_CONTEXT);
-  const [answers, setAnswers] = useState<Record<string, OrdinalChoice | undefined>>(
-    emptyAnswers,
-  );
+  const [answers, setAnswers] =
+    useState<Record<string, OrdinalChoice | undefined>>(emptyAnswers);
   const [freeText, setFreeText] = useState<Record<string, string>>({});
   const [returnToReview, setReturnToReview] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -82,8 +76,8 @@ export function AssessmentWizard() {
     const input: AssessmentInput = {
       context,
       answers: Object.fromEntries(
-        Object.entries(answers).filter((entry): entry is [string, OrdinalChoice] =>
-          Boolean(entry[1]),
+        Object.entries(answers).filter(
+          (entry): entry is [string, OrdinalChoice] => Boolean(entry[1]),
         ),
       ),
       freeText,
@@ -121,8 +115,8 @@ export function AssessmentWizard() {
   const input: AssessmentInput = {
     context,
     answers: Object.fromEntries(
-      Object.entries(answers).filter((entry): entry is [string, OrdinalChoice] =>
-        Boolean(entry[1]),
+      Object.entries(answers).filter(
+        (entry): entry is [string, OrdinalChoice] => Boolean(entry[1]),
       ),
     ),
     freeText,
@@ -173,7 +167,11 @@ export function AssessmentWizard() {
   if (!hydrated) {
     return (
       <main id="main" className="ui-shell">
-        <p className="text-sm text-[var(--muted)]" role="status" aria-live="polite">
+        <p
+          className="text-sm text-[var(--muted)]"
+          role="status"
+          aria-live="polite"
+        >
           Loading assessment…
         </p>
       </main>
@@ -317,9 +315,7 @@ export function AssessmentWizard() {
             >
               Optional notes
             </h1>
-            <p className="ui-lead">
-              Stored only in this browser. Not scored.
-            </p>
+            <p className="ui-lead">Stored only in this browser. Not scored.</p>
           </header>
           <div className="space-y-3">
             {FREE_TEXT_FIELDS.map((field) => (
@@ -366,7 +362,10 @@ export function AssessmentWizard() {
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <BandBadge band={result.finalBand} />
               <p className="text-sm text-[var(--muted)]">
-                Overall {result.overallScore} · {result.hardGatesApplied.length}{" "}
+                Overall <span className="tabular">{result.overallScore}</span> ·{" "}
+                <span className="tabular">
+                  {result.hardGatesApplied.length}
+                </span>{" "}
                 hard gate
                 {result.hardGatesApplied.length === 1 ? "" : "s"}
               </p>
@@ -386,7 +385,9 @@ export function AssessmentWizard() {
                       {" "}
                       → ceiling {gate.ceiling}
                     </span>
-                    <p className="mt-1 text-[var(--foreground)]">{gate.reason}</p>
+                    <p className="mt-1 text-[var(--foreground)]">
+                      {gate.reason}
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -407,7 +408,9 @@ export function AssessmentWizard() {
                   <span className="text-sm text-[var(--foreground)]">
                     {dim.name}
                   </span>
-                  <span className="text-sm font-semibold">{dim.score}</span>
+                  <span className="tabular text-sm font-semibold">
+                    {dim.score}
+                  </span>
                   <button
                     type="button"
                     onClick={() => {
@@ -562,7 +565,11 @@ function NavButtons({
   return (
     <div className="flex flex-wrap items-center gap-3 pt-1">
       {onBack && (
-        <button type="button" onClick={onBack} className="ui-btn ui-btn-secondary">
+        <button
+          type="button"
+          onClick={onBack}
+          className="ui-btn ui-btn-secondary"
+        >
           Back
         </button>
       )}
