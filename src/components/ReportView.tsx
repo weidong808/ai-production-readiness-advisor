@@ -185,9 +185,12 @@ export function ReportView({
         <p className="ui-card text-sm text-[var(--muted)]">{view.disclaimer}</p>
         <div aria-live="polite" aria-atomic="true">
           {state === "loading" && (
-            <p className="text-sm text-[var(--accent)]" role="status">
-              Generating advisory narrative…
-            </p>
+            <>
+              <p className="sr-only" role="status">
+                Generating advisory narrative…
+              </p>
+              <NarrativeSkeleton />
+            </>
           )}
           {metaNote && (
             <p className="text-sm text-[var(--warn)]" role="status">
@@ -446,6 +449,31 @@ export function ReportView({
         >
           {sampleMode ? "Start your assessment" : "Start over"}
         </button>
+      </div>
+    </div>
+  );
+}
+
+/** Loading placeholder that mirrors the narrative sections (no layout shift). */
+function NarrativeSkeleton() {
+  return (
+    <div className="mt-2 space-y-5" aria-hidden>
+      <div className="space-y-2">
+        <div className="skeleton h-3 w-40" />
+        <div className="ui-card space-y-2">
+          <div className="skeleton h-3.5 w-full" />
+          <div className="skeleton h-3.5 w-full" />
+          <div className="skeleton h-3.5 w-3/4" />
+        </div>
+      </div>
+      <div className="space-y-2">
+        <div className="skeleton h-3 w-32" />
+        {[0, 1].map((i) => (
+          <div key={i} className="ui-card space-y-2">
+            <div className="skeleton h-3.5 w-1/3" />
+            <div className="skeleton h-3.5 w-full" />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -582,3 +582,28 @@ body > * {
     transform: none;
   }
 }
+
+/* Skeleton — loading placeholder that matches final layout (no CLS) */
+@keyframes skeleton-shimmer {
+  100% {
+    background-position: -200% 0;
+  }
+}
+.skeleton {
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(
+        90deg,
+        var(--bg-soft) 0%,
+        color-mix(in srgb, var(--bg-soft) 55%, var(--card)) 50%,
+        var(--bg-soft) 100%
+      )
+      var(--card);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s var(--ease) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
