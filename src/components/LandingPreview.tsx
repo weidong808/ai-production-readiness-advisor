@@ -62,7 +62,7 @@ export function LandingPreview() {
                 />
               </div>
             </div>
-            <span className="text-sm font-semibold">{dim.score}</span>
+            <span className="tabular text-sm font-semibold">{dim.score}</span>
           </div>
         ))}
       </div>

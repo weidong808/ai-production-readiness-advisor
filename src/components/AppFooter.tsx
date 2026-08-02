@@ -4,6 +4,7 @@ import { SiteHomeLink } from "@/components/SiteHomeLink";
 import {
   ADVISORY_DISCLAIMER,
   APP_NAME,
+  APP_TAGLINE,
   GITHUB_REPO_URL,
   HABITCHECK_URL,
   LINKEDIN_ARTICLE_LABEL,
@@ -43,6 +44,7 @@ export function AppFooter() {
                 {APP_NAME}
               </span>
             </div>
+            <p className="mt-1.5 text-[var(--foreground)]/85">{APP_TAGLINE}</p>
             <p className="mt-3 text-xs leading-relaxed">
               Structured readiness scores with hard gates and an advisory
               narrative. Advisory only — not certification. Part of{" "}

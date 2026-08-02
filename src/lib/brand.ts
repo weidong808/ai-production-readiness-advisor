@@ -1,7 +1,12 @@
 export const APP_NAME = "AI Production Readiness Advisor";
 /** Compact header label on small screens. */
 export const APP_SHORT_NAME = "Readiness Advisor";
-export const APP_TAGLINE = "Is your AI feature ready to ship?";
+/** Short chrome / meta tagline — aligns with hub collage label. */
+export const APP_TAGLINE = "Launch AI with confidence";
+/** Human problem headline for the home marketing surface. */
+export const APP_HUMAN_HEADLINE = "Is your AI system ready for production?";
+export const APP_BENEFIT_LINE =
+  "Eight dimensions, deterministic scores, and hard gates the model can't talk its way past.";
 export const APP_DESCRIPTION =
   "Guided assessment for whether an AI feature is ready for production — eight dimensions, deterministic scores, hard gates the model can't talk its way past, and an OpenAI advisory narrative. Advisory only, not a certification.";
 export const APP_URL = "https://readiness.weidong-shi.com";
@@ -9,6 +14,8 @@ export const APP_SERIES_LABEL = "AI in Action · App #3";
 /** Shared launch line — model vs architecture. */
 export const APP_TRUST_LINE =
   "The model creates capability. Architecture creates trust.";
+export const APP_PRIMARY_CTA_LABEL = "Start assessment";
+export const APP_STORY_CTA_LABEL = "Read the story";
 
 /** Personal site hub that links to this app and other projects. */
 export const SITE_HOME_URL = "https://weidong-shi.com";
