@@ -354,19 +354,28 @@ body > * {
 
 .ui-field {
   width: 100%;
-  border: 1px solid var(--border);
+  min-height: 2.75rem; /* 44px tap target */
+  border: 1.5px solid var(--border-strong);
   border-radius: 0.5rem;
   background: var(--card);
   color: var(--foreground);
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 0.75rem;
   font-size: 0.875rem;
   outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .ui-field:focus-visible {
   border-color: var(--accent);
   outline: 2px solid var(--focus);
   outline-offset: 1px;
+}
+
+textarea.ui-field {
+  min-height: 5.5rem;
+  resize: vertical;
 }
 
 .ui-btn {
@@ -419,10 +428,11 @@ body > * {
   cursor: pointer;
   align-items: flex-start;
   gap: 0.75rem;
-  border: 1px solid var(--border);
+  min-height: 2.75rem; /* 44px tap target */
+  border: 1.5px solid var(--border-strong);
   border-radius: 0.5rem;
   background: var(--card);
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 0.75rem;
   font-size: 0.875rem;
   transition:
     border-color 0.15s,
@@ -620,5 +630,20 @@ body > * {
 @media (prefers-reduced-motion: reduce) {
   .skeleton {
     animation: none;
+  }
+}
+
+/* Score radar — soft enter; reduced-motion stays static via JS */
+.score-radar svg {
+  overflow: visible;
+}
+.score-radar-data {
+  transition:
+    opacity 0.45s var(--ease, ease),
+    fill-opacity 0.45s var(--ease, ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .score-radar-data {
+    transition: none;
   }
 }

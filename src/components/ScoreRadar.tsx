@@ -7,9 +7,9 @@ type RadarDimension = {
   band?: Band;
 };
 
-const SIZE = 260;
+const SIZE = 280;
 const CENTER = SIZE / 2;
-const RADIUS = 92;
+const RADIUS = 88;
 const RINGS = [25, 50, 75, 100];
 
 function point(index: number, count: number, fraction: number) {
@@ -30,9 +30,8 @@ function polygon(count: number, fraction: number, valueAt?: (i: number) => numbe
 }
 
 /**
- * Dependency-free SVG radar of dimension scores (0-100). Purely presentational
- * and static, so it needs no motion handling. Falls back to nothing when there
- * are too few axes to form a polygon.
+ * Dependency-free SVG radar of dimension scores (0-100).
+ * Presentational and static (reduced-motion safe). Tabular score labels at each axis.
  */
 export function ScoreRadar({ dimensions }: { dimensions: RadarDimension[] }) {
   const count = dimensions.length;
@@ -45,30 +44,29 @@ export function ScoreRadar({ dimensions }: { dimensions: RadarDimension[] }) {
     .join(", ");
 
   return (
-    <figure className="m-0 flex flex-col items-center">
+    <figure className="score-radar m-0 flex flex-col items-center">
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         width="100%"
-        className="max-w-[280px]"
+        className="max-w-[300px]"
         role="img"
         aria-label={`Dimension score radar. ${summary}.`}
       >
-        {/* grid rings */}
         {RINGS.map((ring) => (
           <polygon
             key={ring}
             points={polygon(count, ring / 100)}
             fill="none"
-            stroke="var(--border)"
-            strokeWidth={1}
-            opacity={ring === 100 ? 0.9 : 0.5}
+            stroke="var(--border-strong)"
+            strokeWidth={ring === 100 ? 1.25 : 1}
+            opacity={ring === 100 ? 0.95 : 0.55}
           />
         ))}
 
-        {/* axes + labels */}
         {dimensions.map((dim, i) => {
           const outer = point(i, count, 1);
-          const label = point(i, count, 1.16);
+          const label = point(i, count, 1.22);
+          const scorePos = point(i, count, 1.38);
           return (
             <g key={dim.dimensionId}>
               <line
@@ -76,9 +74,9 @@ export function ScoreRadar({ dimensions }: { dimensions: RadarDimension[] }) {
                 y1={CENTER}
                 x2={outer.x}
                 y2={outer.y}
-                stroke="var(--border)"
+                stroke="var(--border-strong)"
                 strokeWidth={1}
-                opacity={0.5}
+                opacity={0.55}
               />
               <text
                 x={label.x}
@@ -86,21 +84,33 @@ export function ScoreRadar({ dimensions }: { dimensions: RadarDimension[] }) {
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fontSize={11}
-                fill="var(--muted)"
+                fontWeight={600}
+                fill="var(--foreground)"
               >
                 {dim.dimensionId}
+              </text>
+              <text
+                x={scorePos.x}
+                y={scorePos.y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontSize={10}
+                fill="var(--muted)"
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                {Math.round(dim.score)}
               </text>
             </g>
           );
         })}
 
-        {/* data polygon */}
         <polygon
+          className="score-radar-data"
           points={dataPoints}
           fill="var(--accent)"
-          fillOpacity={0.18}
+          fillOpacity={0.2}
           stroke="var(--accent)"
-          strokeWidth={2}
+          strokeWidth={2.25}
         />
         {dimensions.map((dim, i) => {
           const p = point(i, count, clamp(dim.score));
@@ -109,8 +119,10 @@ export function ScoreRadar({ dimensions }: { dimensions: RadarDimension[] }) {
               key={dim.dimensionId}
               cx={p.x}
               cy={p.y}
-              r={2.5}
+              r={3}
               fill="var(--accent)"
+              stroke="var(--card)"
+              strokeWidth={1.5}
             />
           );
         })}
