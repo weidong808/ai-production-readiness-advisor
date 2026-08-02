@@ -181,7 +181,7 @@ export function AppFooter() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-2 border-t border-[var(--border)] pt-5 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-2 border-t border-[var(--border)] pt-5 pb-[max(0px,env(safe-area-inset-bottom,0px))] text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>{ADVISORY_DISCLAIMER}</p>
           <p className="font-mono tracking-wide uppercase">
             © {year} {SITE_BRAND_NAME} · {SITE_SERIES_NAME}

@@ -37,7 +37,7 @@ export default function HomePage() {
           {APP_SERIES_LABEL}
         </p>
         <h1
-          className="ra-rise-delay mt-2 text-3xl leading-tight tracking-tight text-[var(--foreground)] sm:text-4xl"
+          className="ra-rise-delay mt-2 text-3xl leading-tight tracking-tight text-balance text-[var(--foreground)] sm:text-4xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
           {APP_NAME}
